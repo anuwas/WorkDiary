@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <head th:insert="fragments/headerfiles :: headerfiles">
+        
+    </head>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <body id="page-top">
+        <!-- Navigation-->
+        <div th:insert="fragments/header :: header"></div>
+        <!-- Header-->
+       
+        <!-- About section-->
+        <section id="about">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                       <form action="#" th:action="@{/savetask}" method="post" th:object="${diaryTask}">
+							  <div class="form-group">
+							    <label for="taskSummary">Task Summary</label>
+							    <textarea class="form-control" th:field="*{taskSummary}" id="taskSummary" rows="3"></textarea>
+							    <small id="taskHelp" class="form-text text-muted">Please insert your task here.</small>
+							  </div>
+							  <div class="input-group date">
+							    <input type="text" class="form-control" id="datepicker" th:field="*{taskDate}">
+							    <div class="input-group-addon">
+							        <span class="glyphicon glyphicon-th"></span>
+							    </div>
+							</div>
+							  <div class="form-group">
+							    <label for="taskDescriptoin">Task Descriptiopn</label>
+							    <textarea class="form-control" th:field="*{taskDescriptoin}" id="taskDescriptoin" rows="3"></textarea>
+							    <small></small>
+							  </div>
+							  <div class="form-group">
+							    <label for="exampleFormControlSelect1">Example select</label>
+							    <select class="form-control" th:field="*{taskStatus}" id="exampleFormControlSelect1">
+							      <option th:each="p : ${listTaskStatus}" th:value="${p}" th:text="${p}" />
+							    </select>
+							    <small></small>
+							  </div>
+							  </br>
+							  <button type="submit" class="btn btn-primary">Submit</button>
+							</form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer-->
+        <div th:insert="fragments/footer :: footer"></div>
+
+    </body>
+  
+    <script type="text/javascript">
+    $( function() {
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+      } );
+        </script>
+</html>

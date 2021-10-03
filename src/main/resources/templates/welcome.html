@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <head th:insert="fragments/headerfiles :: headerfiles">
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <div th:insert="fragments/header :: header"></div>
+        <!-- Header-->
+        <header class="bg-primary bg-gradient text-white">
+            <div class="container px-4 text-center">
+            </div>
+        </header>
+        <!-- About section-->
+        <section id="about">
+        
+            <div class="container px-1">
+					<table class="table">
+					  <thead class="thead-light">
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Summary</th>
+					      <th scope="col">Status</th>
+					      <th scope="col">Action</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr th:each="task : ${currentActiveTask}" >
+					      <td th:text="${task.id}"></td>
+					      <td th:text="${task.taskSummary}"></td>
+					      <td th:text="${task.taskStatus}"></td>
+					      <td><a href="#">Edit</a></td>
+					    </tr>
+					  </tbody>
+					</table>
+            </div>
+        </section>
+        <!-- Services section-->
+        <section class="bg-light" id="services">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2>Services we offer</h2>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact section-->
+        <section id="contact">
+            <div class="container px-4">
+                <div class="row gx-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2>Contact us</h2>
+                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <!-- <div th:inset="fragments/footer :: footer">&copy; 2016 The Static Templates</div> -->
+        <div th:insert="fragments/footer :: footer"></div>
+    </body>
+</html>

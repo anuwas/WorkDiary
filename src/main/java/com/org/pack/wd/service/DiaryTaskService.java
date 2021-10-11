@@ -21,8 +21,19 @@ public class DiaryTaskService {
 	public List<DiaryTask> getAllActiveCurrentTask(){
 		Date date = new Date();  
 		LocalDateTime myDateObj = LocalDateTime.now();
-		List<String> activeTaskStatusIn = Arrays.asList("Pending","Inprogress");
-		List<DiaryTask> allCurrentActiveTask = diraryTaskRepository.findAllDiaryTaskByTaskDateAndTaskStatusIn(date, activeTaskStatusIn);
+		List<String> closedTaskIn = Arrays.asList("Done","Closed");
+		List<DiaryTask> allCurrentActiveTask = diraryTaskRepository.findAllDiaryTaskByTaskDateAndTaskStatusNotIn(date, closedTaskIn);
 		return allCurrentActiveTask;
 	}
+	
+	public List<DiaryTask> getAllBacklogPendingTask(){
+		Date date = new Date();  
+		LocalDateTime myDateObj = LocalDateTime.now();
+		List<String> closedTaskIn = Arrays.asList("Done","Closed");
+		List<DiaryTask> allCurrentActiveTask = diraryTaskRepository.findAllDiaryTaskByTaskDateBeforeAndTaskStatusNotIn(date, closedTaskIn);
+		return allCurrentActiveTask;
+	}
+	
+	
+	
 }

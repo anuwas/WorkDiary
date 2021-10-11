@@ -41,6 +41,9 @@ public class DiaryTask {
 	@Column(name = "TASK_STATUS")
 	private String taskStatus;
 	
+	@Column(name = "TASK_PRIORITY")
+	private String taskPriority;
+	
 		
 	@Column(name = "CREATED_DATE")
 	@CreationTimestamp

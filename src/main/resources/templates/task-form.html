@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Bla Bla Some Title')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+
+			<form action="#" th:action="@{/savetask}" method="post" th:object="${diaryTask}">
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-description"> Add/Edit new task </p>
+                    <div class="form-group">
+                        <label for="taskSummary">Task Summary</label>
+                        <textarea class="form-control" th:field="*{taskSummary}" id="taskSummary" rows="2"></textarea>
+                      </div>
+                    <div class="form-group">
+                        <label for="taskDescriptoin">Task Description</label>
+                        <textarea class="form-control" th:field="*{taskDescriptoin}" id="taskDescriptoin" rows="2"></textarea>
+                      </div>
+                    <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Date of Birth</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="datepicker" readonly="readonly" th:field="*{taskDate}" placeholder="yyyy-mm-dd" />
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="card-body">
+                   
+                     <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Country</label>
+                            <div class="col-sm-9">
+                              <select class="form-control" th:field="*{taskStatus}" id="taskStatusDDL">
+                                <option th:each="p : ${listTaskStatus}" th:value="${p}" th:text="${p}" />
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Country</label>
+                            <div class="col-sm-9">
+                              <select class="form-control" th:field="*{taskPriority}" id="taskPriority">
+                                <option th:each="p : ${taskPriorityList}" th:value="${p}" th:text="${p}" />
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <button type="submit" class="btn btn-success mr-2">Submit</button>
+                          <button class="btn btn-light">Cancel</button>
+                  </div>
+                </div>
+              </div>  
+              </form>      
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    $( function() {
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+      } );
+        </script>
+</html>

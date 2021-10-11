@@ -32,7 +32,26 @@ public class WelcomeController {
 	        List<DiaryTask> activeTaskList = diaryTaskService.getAllActiveCurrentTask();
 	        System.out.println(activeTaskList);
 	        model.addAttribute("currentActiveTask", activeTaskList);
-	        return "welcome"; //view
+	        
+	        DiaryTask diaryTaskObject = new DiaryTask();
+	        model.addAttribute("diaryTask", diaryTaskObject);
+	        
+	        List<String> listTaskStatus = Arrays.asList("Pending", "Inprogress","OnHold","Closed");
+	        List<String> taskPriorityList = Arrays.asList("Medium", "High","Low");
+	        model.addAttribute("listTaskStatus", listTaskStatus);
+	        model.addAttribute("taskPriorityList", taskPriorityList);
+	        
+	        return "index"; //view
+	    }
+	    
+	    @GetMapping("/tables")
+	    public String tableView(Model model) {
+	    	return "basic-table";
+	    }
+	    
+	    @GetMapping("/forms")
+	    public String formsView(Model model) {
+	    	return "basic_elements";
 	    }
 	    
 	    @GetMapping("/hello")

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Bla Bla Some Title')"></div>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Task Manager')"></div>
   </head>
   <body>
     <div class="container-scroller">
@@ -16,8 +16,7 @@
               <div class="col-lg-12 stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Table with contextual classes</h4>
-                    <p class="card-description"> Add class <code>.table-{color}</code> </p>
+                    <h4 class="card-title">Current Task</h4>
                     <table class="table table-bordered">
                       <thead>
                         <tr>
@@ -44,8 +43,7 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Bordered table</h4>
-                    <p class="card-description"> Add class <code>.table-bordered</code> </p>
+                    <h4 class="card-title">Pending Task</h4>
                     <table class="table table-bordered">
                       <thead>
                         <tr>

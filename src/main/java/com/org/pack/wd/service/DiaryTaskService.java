@@ -34,6 +34,14 @@ public class DiaryTaskService {
 		return allCurrentActiveTask;
 	}
 	
+	public List<DiaryTask> getAllClosedCurrentTask(){
+		Date date = new Date();  
+		LocalDateTime myDateObj = LocalDateTime.now();
+		List<String> closedTaskIn = Arrays.asList("Done","Closed");
+		List<DiaryTask> allCurrentActiveTask = diraryTaskRepository.findAllDiaryTaskByTaskDateAndTaskStatusIn(date, closedTaskIn);
+		return allCurrentActiveTask;
+	}
+	
 	
 	
 }

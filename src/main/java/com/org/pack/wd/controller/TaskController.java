@@ -28,9 +28,11 @@ public class TaskController {
 	@GetMapping("/current-task")
 	public String currentTask(Model model) {
 		List<DiaryTask> activeTaskList = diaryTaskService.getAllActiveCurrentTask();
+		List<DiaryTask> closedTaskList = diaryTaskService.getAllClosedCurrentTask();
 		List<DiaryTask> backlogTaskList = diaryTaskService.getAllBacklogPendingTask();
 		model.addAttribute("currentActiveTask", activeTaskList);
 		model.addAttribute("backlogActiveTask", backlogTaskList);
+		model.addAttribute("currentClosedTask", closedTaskList);
 		return "current-task";
 	}
 	

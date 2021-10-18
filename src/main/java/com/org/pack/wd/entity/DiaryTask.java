@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,8 +46,13 @@ public class DiaryTask {
 	private String taskPriority;
 	
 		
-	@Column(name = "CREATED_DATE")
+	@Column(name = "CREATED_DATE",insertable=true,updatable=false)
 	@CreationTimestamp
 	private Timestamp createdDate;
+	
+	
+	@Column(name = "MODIFIED_DATE",insertable=false,updatable=true)
+	@UpdateTimestamp
+	private Timestamp modifiedDate;
 	
 }

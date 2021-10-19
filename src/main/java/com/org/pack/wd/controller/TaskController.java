@@ -36,6 +36,13 @@ public class TaskController {
 		return "current-task";
 	}
 	
+	@GetMapping("/upcoming-task")
+	public String upComingTask(Model model) {
+		List<DiaryTask> upComingTaskList = diaryTaskService.getAllUpComingTask();
+		model.addAttribute("upComingTaskList", upComingTaskList);
+		return "upcoming-task";
+	}
+	
 	@GetMapping("/task-form")
 	public String taskForm(Model model) {
 		DiaryTask diaryTaskObject = new DiaryTask();

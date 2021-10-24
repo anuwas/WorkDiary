@@ -42,7 +42,7 @@ public class DiaryTaskController {
 	@GetMapping("/allDiaryTasks")
 	public ResponseEntity<List<DiaryTask>> getAllTutorials() {
 		try {
-			List<DiaryTask> taskDiaryList = diraryTaskRepository.findAll();
+			List<DiaryTask> taskDiaryList = (List<DiaryTask>) diraryTaskRepository.findAll();
 			
 
 			return new ResponseEntity<>(taskDiaryList, HttpStatus.OK);

@@ -40,20 +40,22 @@
                      <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Country</label>
+                            <label class="col-sm-3 col-form-label">Ststus</label>
                             <div class="col-sm-9">
                               <select class="form-control" th:field="*{taskStatus}" id="taskStatusDDL">
                                 <option th:each="p : ${listTaskStatus}" th:value="${p}" th:text="${p}" />
+                                
                               </select>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Country</label>
+                            <label class="col-sm-3 col-form-label">Priority</label>
                             <div class="col-sm-9">
                               <select class="form-control" th:field="*{taskPriority}" id="taskPriority">
-                                <option th:each="p : ${taskPriorityList}" th:value="${p}" th:text="${p}" />
+                                <!-- <option th:each="p : ${taskPriorityList}" th:value="${p}" th:text="${p}" /> -->
+                                <option th:each="entry : ${taskPriorityMap.entrySet()}" th:value="${entry.key}" th:text="${entry.value}"/>
                               </select>
                             </div>
                           </div>

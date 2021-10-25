@@ -45,14 +45,14 @@
 							</span>
                           </td>
                           <td th:switch="${task.taskPriority}"> 
-                          	<span th:case="'High'" class="text-danger" >
-   								<span th:text="${task.taskPriority}"></span>
+                          	<span th:case="'1'" class="text-danger" >
+   								<span th:text="High"></span>
 							</span>
-							<span th:case="'Medium'" class="text-success" >
-   								<span th:text="${task.taskPriority}"></span>
+							<span th:case="'2'" class="text-success" >
+   								<span th:text="Medium"></span>
 							</span>
-							<span th:case="'Low'" class="text-success" >
-   								<span th:text="${task.taskPriority}"></span>
+							<span th:case="'3'" >
+   								<span th:text="Low"></span>
 							</span>
                           </td>
                           <td> <a class="btn btn-primary" th:href="@{'task-edit/'+ ${task.id}}" role="button">Edit</a> </td>

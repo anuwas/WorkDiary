@@ -30,7 +30,7 @@ public class DiaryTaskService {
 		Date date = new Date();  
 		LocalDateTime myDateObj = LocalDateTime.now();
 		List<String> closedTaskIn = Arrays.asList("Done","Closed");
-		List<DiaryTask> allCurrentActiveTask = diraryTaskRepository.findAllDiaryTaskByTaskDateAndTaskStatusNotIn(date, closedTaskIn);
+		List<DiaryTask> allCurrentActiveTask = diraryTaskRepository.findAllDiaryTaskByTaskDateAndTaskStatusNotInOrderByTaskPriorityAsc(date, closedTaskIn);
 		return allCurrentActiveTask;
 	}
 	
@@ -38,7 +38,7 @@ public class DiaryTaskService {
 		Date date = new Date();  
 		//LocalDateTime myDateObj = LocalDateTime.now();
 		List<String> closedTaskIn = Arrays.asList("Done","Closed");
-		List<DiaryTask> allCurrentActiveTask = diraryTaskRepository.findAllDiaryTaskByTaskDateBeforeAndTaskStatusNotIn(date, closedTaskIn);
+		List<DiaryTask> allCurrentActiveTask = diraryTaskRepository.findAllDiaryTaskByTaskDateBeforeAndTaskStatusNotInOrderByTaskPriorityAsc(date, closedTaskIn);
 		return allCurrentActiveTask;
 	}
 	

@@ -1,7 +1,9 @@
 package com.org.pack.wd.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.org.pack.wd.entity.DiaryTask;
 import com.org.pack.wd.repository.DiraryTaskRepository;
 import com.org.pack.wd.service.DiaryTaskService;
+import com.org.pack.wd.util.ConstantProperties;
 
 @Controller
 public class TaskController {
@@ -53,9 +56,9 @@ public class TaskController {
 		DiaryTask diaryTaskObject = new DiaryTask();
         model.addAttribute("diaryTask", diaryTaskObject);
         List<String> listTaskStatus = Arrays.asList("Pending", "Inprogress","OnHold","Closed");
-        List<String> taskPriorityList = Arrays.asList("Medium", "High","Low");
+        Map<Integer,String> taskPriorityMap = ConstantProperties.TASK_PRIORITY_MAP;
         model.addAttribute("listTaskStatus", listTaskStatus);
-        model.addAttribute("taskPriorityList", taskPriorityList);
+        model.addAttribute("taskPriorityMap", taskPriorityMap);
 		return "task-form";
 	}
 	
@@ -76,9 +79,9 @@ public class TaskController {
 	     model.addAttribute("diaryTask", diaryTaskObject.get());
 	        
 	     List<String> listTaskStatus = Arrays.asList("Pending", "Inprogress","OnHold","Closed");
-	     List<String> taskPriorityList = Arrays.asList("Medium", "High","Low");
+	     Map<Integer,String> taskPriorityMap = ConstantProperties.TASK_PRIORITY_MAP;
+	     model.addAttribute("taskPriorityMap", taskPriorityMap);
 	     model.addAttribute("listTaskStatus", listTaskStatus);
-	     model.addAttribute("taskPriorityList", taskPriorityList);
 	        
 	     return "task-edit"; //view
 	    }

@@ -15,12 +15,12 @@ import com.org.pack.wd.entity.DiaryTask;
 
 @Repository
 public interface DiraryTaskRepository extends PagingAndSortingRepository<DiaryTask,Long>{
-	public List<DiaryTask> findAllDiaryTaskByTaskDateAndTaskStatusNotIn(Date taskDate,List<String> taskStatus);
+	public List<DiaryTask> findAllDiaryTaskByTaskDateAndTaskStatusNotInOrderByTaskPriorityAsc(Date taskDate,List<String> taskStatus);
 	
 	@Query(value="SELECT * FROM DIARY_TASK t WHERE TRUNC(t.MODIFIED_DATE)= :taskDate AND t.TASK_STATUS IN :taskStatus",nativeQuery = true)
 	public List<DiaryTask> findAllCurrentClosedTask(@Param("taskDate") String taskDate,@Param("taskStatus") Collection<String> taskStatus);
 	//public List<DiaryTask> findAllDiaryTaskByTaskDateAndTaskStatusIn(Date taskDate,List<String> taskStatus);
-	public List<DiaryTask> findAllDiaryTaskByTaskDateBeforeAndTaskStatusNotIn(Date taskDate,List<String> taskStatus);
+	public List<DiaryTask> findAllDiaryTaskByTaskDateBeforeAndTaskStatusNotInOrderByTaskPriorityAsc(Date taskDate,List<String> taskStatus);
 	public List<DiaryTask> findAllDiaryTaskByTaskDateAfterAndTaskStatusNotInOrderByTaskDateAsc(Date taskDate,List<String> taskStatus);
 	public List<DiaryTask> findAllDiaryTaskByTaskStatusInOrderByTaskDateDesc(List<String> taskStatus,Pageable pageable);
 }

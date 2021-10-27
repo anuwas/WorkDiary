@@ -29,7 +29,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="task : ${upComingTaskList}">
+                        <tr th:each="task : ${upComingTaskList}" th:class="${task.taskPriority}=='1' ? 'table-warning' : ''">
                           <td th:text="${task.id}"> 1 </td>
                           <td th:text="${task.taskSummary}" class="text-wrap">  </td>
                           <td th:text="${task.taskDate}"></td>

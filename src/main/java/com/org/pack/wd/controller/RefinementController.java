@@ -6,6 +6,7 @@ package com.org.pack.wd.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -44,7 +46,7 @@ public class RefinementController {
 		model.addAttribute("refinementsList", refinementsList);
 		session.setAttribute("currentApplicationName", applicationName);
 		model.addAttribute("page",page);
-		return "refinement";
+		return "refinement/refinement";
 	}
 	
 	@PostMapping("/saverefinement")
@@ -52,13 +54,27 @@ public class RefinementController {
 		try {
 			String currentApplication = (String) session.getAttribute("currentApplicationName");
 			refinements.setApplicationName(currentApplication);
-			Date date = new Date();
-			refinements.setRefinementDate(date);
 			refinementsRepository.save(refinements);
 			return "redirect:/refinement/"+refinements.getApplicationName()+"/0";
 		} catch (Exception e) {
 			return "task-form";
 		}
 	}
+	
+	@GetMapping("/refinement-edit/{id}")
+	public String editRefinement(Model model,@PathVariable long id) {
+		Optional<Refinements> refinementsObject = null;
+		refinementsObject = refinementsRepository.findById(id);
+	     model.addAttribute("refinementsObject", refinementsObject.get());
+	     return "refinement/refinement-edit";
+	}
+	
+	 @PostMapping("/refinement-update/{id}")
+	    public String taskManagerUpdate(Model model,@PathVariable long id,@ModelAttribute("refinementsObject") Refinements refinementsObject) {
+		 
+		 refinementsObject.setId(id);
+		 refinementsRepository.save(refinementsObject);
+		 return "redirect:/refinement/"+refinementsObject.getApplicationName()+"/0";
+	    }
 	
 }

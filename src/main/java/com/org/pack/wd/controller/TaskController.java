@@ -41,14 +41,14 @@ public class TaskController {
 		model.addAttribute("currentActiveTask", activeTaskList);
 		model.addAttribute("backlogActiveTask", backlogTaskList);
 		model.addAttribute("currentClosedTask", closedTaskList);
-		return "current-task";
+		return "tasks/current-task";
 	}
 	
 	@GetMapping("/upcoming-task")
 	public String upComingTask(Model model) {
 		List<DiaryTask> upComingTaskList = diaryTaskService.getAllUpComingTask();
 		model.addAttribute("upComingTaskList", upComingTaskList);
-		return "upcoming-task";
+		return "tasks/upcoming-task";
 	}
 	
 	@GetMapping("/task-form")
@@ -59,7 +59,7 @@ public class TaskController {
         Map<Integer,String> taskPriorityMap = ConstantProperties.TASK_PRIORITY_MAP;
         model.addAttribute("listTaskStatus", listTaskStatus);
         model.addAttribute("taskPriorityMap", taskPriorityMap);
-		return "task-form";
+		return "tasks/task-form";
 	}
 	
 	@PostMapping("/savetask")
@@ -68,7 +68,7 @@ public class TaskController {
 			diraryTaskRepository.save(diaryTask);
 			return "redirect:/current-task";
 		} catch (Exception e) {
-			return "task-form";
+			return "tasks/task-form";
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class TaskController {
 	     model.addAttribute("taskPriorityMap", taskPriorityMap);
 	     model.addAttribute("listTaskStatus", listTaskStatus);
 	        
-	     return "task-edit"; //view
+	     return "tasks/task-edit"; //view
 	    }
 	 
 	 @PostMapping("/task-update/{id}")
@@ -99,7 +99,7 @@ public class TaskController {
 		  public String allClosedTask(Model  model,@PathVariable int page) { 
 			  List<DiaryTask> allClosedTaskList =  diaryTaskService.getAllClosedTask(page);
 		  model.addAttribute("allClosedTaskList", allClosedTaskList);
-		  model.addAttribute("page", page); return "closed-task"; }
+		  model.addAttribute("page", page); return "tasks/closed-task"; }
 		 
 	 
 		/*

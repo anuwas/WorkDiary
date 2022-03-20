@@ -32,18 +32,20 @@
             </div>
           </div>
           <div th:replace="fragments/footer :: footer"></div>
-          <!-- <script>
-                    tinymce.init({
-                        selector: '#refinementMinutes',
-                        height: 300,
-                        plugins: 'link lists media code',
-                        toolbar: 'alignleft aligncenter alignright alignjustify | formatselect | bullist numlist | outdent indent | link code',
-                        toolbar_mode: 'floating',
-                        tinycomments_author: 'Brian Carey'     
-                    });
-              </script> -->
+          <script>
+				    tinymce.init({
+				      selector: '#refinementMinutes',
+				      height: 300,
+				      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+				      //toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+				      toolbar: 'alignleft aligncenter alignright alignjustify | formatselect | bullist numlist | outdent indent | link code',
+				      toolbar_mode: 'floating',
+				      tinycomments_mode: 'embedded',
+				      tinycomments_author: 'Anuwas B',
+				   });
+  			</script>
               
-              <script>
+              <!-- <script>
 				    tinymce.init({
 				      selector: '#refinementMinutes',
 				      height: 300,
@@ -54,7 +56,7 @@
 				      tinycomments_mode: 'embedded',
 				      tinycomments_author: 'Anuwas B',
 				   });
-  			</script>
+  			</script> -->
         </div>
       </div>
     </div>

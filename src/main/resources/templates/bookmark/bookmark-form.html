@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Add New Task')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+
+			<form action="#" th:action="@{/save-bookmark}" method="post" th:object="${bookMark}">
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-description"> Add/Edit new task </p>
+                    <div class="form-group">
+                        <label for="taskSummary">Bookmark Title</label>
+                        <textarea class="form-control" th:field="*{bookMarkTitle}" id="bookMarkTitle" rows="2"></textarea>
+                      </div>
+                    <div class="form-group">
+                        <label for="taskDescriptoin">Bookmark Description</label>
+                        <textarea class="form-control" th:field="*{bookMarkDescription}" id="bookMarkDescription" rows="2"></textarea>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                   
+                     <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="form-group">
+                        	<label for="taskDescriptoin">Bookmark TAG</label>
+                        	 <input type="text" class="form-control" th:field="*{bookMarkTag}" id="bookMarkTag" placeholder="Enter TAG">
+                      		</div>
+                          </div>
+                        </div>
+                      </div>
+                    <button type="submit" class="btn btn-success mr-2">Submit</button>
+                          <button type="reset" class="btn btn-light">Cancel</button>
+                  </div>
+                </div>
+              </div>  
+              </form>      
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    $( function() {
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+      } );
+        </script>
+</html>

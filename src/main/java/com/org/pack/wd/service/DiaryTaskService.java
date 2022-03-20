@@ -64,11 +64,12 @@ public class DiaryTaskService {
 	}
 	
 	
-	  public List<DiaryTask> getAllClosedTask(int pageNumber){ List<String>
-	  closedTaskIn = Arrays.asList("Done","Closed"); Pageable pageWithElement =
-	  PageRequest.of(pageNumber, 50); List<DiaryTask> allClosedTask =
-	  diraryTaskRepository.findAllDiaryTaskByTaskStatusInOrderByTaskDateDesc(
-	  closedTaskIn,pageWithElement); return allClosedTask; }
+	  public List<DiaryTask> getAllClosedTask(int pageNumber){ 
+		  List<String>  closedTaskIn = Arrays.asList("Done","Closed"); 
+		  Pageable pageWithElement =  PageRequest.of(pageNumber, 50); 
+		  List<DiaryTask> allClosedTask =  diraryTaskRepository.findAllDiaryTaskByTaskStatusInOrderByTaskDateDesc(closedTaskIn,pageWithElement); 
+		  return allClosedTask; 
+	  }
 	 
 	
 	/*

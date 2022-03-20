@@ -98,8 +98,10 @@ public class TaskController {
 		  @GetMapping("/all-closed-task/{page}") 
 		  public String allClosedTask(Model  model,@PathVariable int page) { 
 			  List<DiaryTask> allClosedTaskList =  diaryTaskService.getAllClosedTask(page);
-		  model.addAttribute("allClosedTaskList", allClosedTaskList);
-		  model.addAttribute("page", page); return "tasks/closed-task"; }
+			  model.addAttribute("allClosedTaskList", allClosedTaskList);
+			  model.addAttribute("page", page); 
+			  return "tasks/closed-task"; 
+		  }
 		 
 	 
 		/*

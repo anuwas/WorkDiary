@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Book Mark')"></div>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                     <h4 class="card-title">Closed Task - (<span th:text="${allAvtiveBookMarkList.size()}"></span>)</h4> 
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th> # </th>
+                          <th> Summary </th>
+                          <th> Description </th>
+                          <th> Created Date </th>
+                          <th> TAG </th>
+                          <th> <a class="btn btn-primary" href="/create-new-bookmark" role="button">Add</a> </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="task : ${allAvtiveBookMarkList}">
+                          <td th:text="${task.id}"> 1 </td>
+                          <td th:text="${task.bookMarkTitle}" class="text-wrap">  </td>
+                          <td th:text="${task.bookMarkDescription}" class="text-wrap">  </td>
+                          <td th:text="${#dates.format(task.createdDate, 'dd-MMM-yyyy')}"></td>
+                          <td th:text="${task.bookMarkTag}" class="text-wrap">  </td>
+                          <td> <a class="btn btn-primary" th:href="@{'/task-edit/'+ ${task.id}}" role="button">Edit</a> </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

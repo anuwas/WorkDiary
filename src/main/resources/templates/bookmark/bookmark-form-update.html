@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Add New Bookmark')"></div>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Update Bookmark')"></div>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
@@ -13,7 +13,7 @@
           <div class="content-wrapper">
             <div class="row">
 
-			<form action="#" th:action="@{/save-bookmark}" method="post" th:object="${bookMark}">
+			<form action="#" th:action="@{/bookmark-update/{id}(id=${bookMark.id})}"  method="post" th:object="${bookMark}">
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -35,6 +35,14 @@
                             <div class="form-group">
                         	<label for="taskDescriptoin">Bookmark TAG</label>
                         	 <input type="text" class="form-control" th:field="*{bookMarkTag}" id="bookMarkTag" placeholder="Enter TAG">
+                      		</div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="form-group">
+                        	<label for="taskDescriptoin">Active/Inactive</label>
+                        	 <input type="text" class="form-control" th:field="*{bookMarkActive}" id="bookMarkActive">
                       		</div>
                           </div>
                         </div>

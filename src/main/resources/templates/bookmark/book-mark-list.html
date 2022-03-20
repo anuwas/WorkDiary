@@ -16,7 +16,7 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                     <h4 class="card-title">Closed Task - (<span th:text="${allAvtiveBookMarkList.size()}"></span>)</h4> 
+                     <h4 class="card-title">Book Marks - (<span th:text="${allAvtiveBookMarkList.size()}"></span>)</h4> 
                     <table class="table table-bordered">
                       <thead>
                         <tr>
@@ -35,7 +35,7 @@
                           <td th:text="${task.bookMarkDescription}" class="text-wrap">  </td>
                           <td th:text="${#dates.format(task.createdDate, 'dd-MMM-yyyy')}"></td>
                           <td th:text="${task.bookMarkTag}" class="text-wrap">  </td>
-                          <td> <a class="btn btn-primary" th:href="@{'/task-edit/'+ ${task.id}}" role="button">Edit</a> </td>
+                          <td> <a class="btn btn-primary" th:href="@{'/edit-bookmark/'+ ${task.id}}" role="button">Edit</a> </td>
                         </tr>
                       </tbody>
                     </table>

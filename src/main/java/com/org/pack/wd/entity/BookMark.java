@@ -34,7 +34,7 @@ public class BookMark {
 	@Column(name = "BOOK_MARK_DESCRIPTION",columnDefinition = "TEXT")
 	private String bookMarkDescription;
 	
-	@Column(name = "BOOK_MARK_ACTIVE",columnDefinition = "varchar(50)")
+	@Column(name = "BOOK_MARK_ACTIVE",columnDefinition = "TEXT")
 	private String bookMarkActive;
 	
 	@Column(name = "CREATED_DATE",insertable=true,updatable=false)

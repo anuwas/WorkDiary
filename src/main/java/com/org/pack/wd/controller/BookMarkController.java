@@ -3,11 +3,13 @@ package com.org.pack.wd.controller;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -51,6 +53,23 @@ public class BookMarkController {
 				return "bookmark/bookmark-form";
 			}
 		}
+		
+		@GetMapping("/edit-bookmark/{id}")
+	    public String taskManagerEdit(Model model,@PathVariable long id) {
+		 Optional<BookMark> diaryTaskObject = null;
+		 diaryTaskObject = bookMarkRepository.findById(id);
+	     model.addAttribute("bookMark", diaryTaskObject.get());    
+	        
+	     return "bookmark/bookmark-form-update"; //view
+	    }
+		
+		@PostMapping("/bookmark-update/{id}")
+	    public String taskManagerUpdate(Model model,@PathVariable long id,@ModelAttribute("bookMark") BookMark bookMark) {
+		 
+			bookMark.setId(id);
+			bookMarkRepository.save(bookMark);
+		 return "redirect:/edit-bookmark/"+id;
+	    }
 	
 	
 

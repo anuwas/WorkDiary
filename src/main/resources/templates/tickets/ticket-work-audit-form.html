@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Add New Ticket')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+
+			<form action="#" th:action="@{/tickets/saveaudit/{id}(id=${ticketObjectID})}" method="post" th:object="${newTicketWorkAudit}">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Work Audits</h4>
+                      
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                      		<label class="col-sm-2 col-form-label">workActivity</label>
+                      		<div class="col-sm-10">
+                      			<textarea class="form-control" th:field="*{workActivity}" id="ticketDescription" rows="2"></textarea>
+                      		</div>
+                    	</div>
+                       </div>
+                      </div>
+                      
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Created Date</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="workDate" readonly="readonly" th:field="*{workDate}" placeholder="yyyy-mm-dd" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div style="float: right;">
+						  <button type="reset" class="btn btn-light">Cancel</button>
+						  <button type="submit" class="btn btn-success mr-2" style="width: 200px;">Submit</button>						  
+					  </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                      		<label class="col-sm-3 col-form-label">Workers</label>
+                      		<div class="col-sm-9">
+                      			<!--<input type="text" class="form-control form-control-lg" th:field="*{ticketWorker}" id="ticketWorker">-->
+                      			<select class="form-control" th:field="*{worker}" id="ticketWorker" multiple>
+                                <option th:each="p : ${ticketWorkersList}" th:value="${p}" th:text="${p}" />
+                              </select>
+                      		</div>
+                    	</div>
+                       </div>
+                      </div>
+                      
+                      <div class="row">
+						  <div class="col-md-12">
+                      <ul class="timeline">
+                      <li class="timeline-item" th:each="section : ${allExistingAudit}">
+                        <p class="timeline-content" ><a href="#" th:utext="${section.workDate}"></a> <span th:text="${section.worker}"></span></p>
+                        <p class="event-time" th:text="${section.workActivity}"></p>
+                      </li>
+                    
+                    </ul>
+                    </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              </form>      
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    $( function() {
+
+        
+        $( "#workDate" ).datepicker({
+    		//changeMonth: true,
+    		//changeYear: true,
+    		dateFormat: "yy-mm-dd"
+		});
+        
+      } );
+        </script>
+</html>

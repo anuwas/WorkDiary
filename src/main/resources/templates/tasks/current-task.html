@@ -28,7 +28,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="task : ${currentActiveTask}" th:class="${task.taskPriority}=='1' ? 'table-warning' : ''">
+                        <tr th:each="task : ${currentActiveTask}" th:class="'table-p'+${task.taskPriority}">
                           <td th:text="${task.id}"> 1 </td>
                           <td th:text="${task.taskSummary}" class="text-wrap">  </td>
                           <td th:switch="${task.taskStatus}"> 
@@ -75,7 +75,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="task : ${backlogActiveTask}" th:class="${task.taskPriority}=='1' ? 'table-warning' : ''">
+                        <!--<tr th:each="task : ${backlogActiveTask}" th:class="${task.taskPriority}=='1' ? 'table-warning' : ''">-->
+							<tr th:each="task : ${backlogActiveTask}" th:class="'table-p'+${task.taskPriority}">
                           <td th:text="${task.id}"> 1 </td>
                           <td th:text="${task.taskSummary}" class="text-wrap">  </td>
                           <td th:switch="${task.taskStatus}"> 

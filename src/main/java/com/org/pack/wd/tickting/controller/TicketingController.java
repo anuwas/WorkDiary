@@ -57,8 +57,8 @@ public class TicketingController {
         List<String> ticketTypeList = ticketingService.getAllTicketTypeNames();
         List<String> ticketPrirityList = Arrays.asList("P5","P4","P3","P2","P1");
         List<String> applicaitonList = ticketingService.getAllApplicationName();
-        List<String> applicaitonCategoryList = Arrays.asList("Admin Portal","External Portal");
-        List<String> defectAreaList = Arrays.asList("UI","Backend","DB","AWS");
+        List<String> applicaitonCategoryList = ticketingService.getAllTicketAppCategoryName();
+        List<String> defectAreaList = ticketingService.getAllTicketDefectAreaName();
         List<String> workerList = ticketingService.getAllWorkersName();
         Map<Integer,String> taskPriorityMap = ConstantProperties.TASK_PRIORITY_MAP;
         model.addAttribute("ticketStatusList", ticketStatusList);
@@ -89,8 +89,8 @@ public class TicketingController {
         List<String> ticketTypeList = ticketingService.getAllTicketTypeNames();
         List<String> ticketPrirityList = Arrays.asList("P5","P4","P3","P2","P1");
         List<String> applicaitonList = ticketingService.getAllApplicationName();
-        List<String> applicaitonCategoryList = Arrays.asList("Admin Portal","External Portal");
-        List<String> defectAreaList = Arrays.asList("UI","Backend","DB","AWS");
+        List<String> applicaitonCategoryList = ticketingService.getAllTicketAppCategoryName();
+        List<String> defectAreaList = ticketingService.getAllTicketDefectAreaName();
         List<String> workerList = ticketingService.getAllWorkersName();
         Map<Integer,String> taskPriorityMap = ConstantProperties.TASK_PRIORITY_MAP;
         model.addAttribute("ticketStatusList", ticketStatusList);

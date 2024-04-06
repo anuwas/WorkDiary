@@ -104,20 +104,30 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Defect Area</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-4 col-form-label">Defect Area</label>
+                            <div class="col-sm-8">
                               <select class="form-control" th:field="*{defectArea}" id="defectAreaDDL">
                                 <option th:each="p : ${defectAreaList}" th:value="${p}" th:text="${p}" />
                               </select>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Linked Ticket</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-5 col-form-label">Environment</label>
+                            <div class="col-sm-7">
+                              <select class="form-control" th:field="*{ticketEnvironment}" id="ticketEnvironmentDDL">
+                                <option th:each="p : ${envrionementList}" th:value="${p}" th:text="${p}" />
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Linked </label>
+                            <div class="col-sm-8">
                               <input type="text" class="form-control" th:field="*{linkedTicket}" id="linkedTicket"/>
                             </div>
                           </div>

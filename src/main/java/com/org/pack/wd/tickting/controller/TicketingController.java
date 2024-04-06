@@ -60,6 +60,7 @@ public class TicketingController {
         List<String> applicaitonCategoryList = ticketingService.getAllTicketAppCategoryName();
         List<String> defectAreaList = ticketingService.getAllTicketDefectAreaName();
         List<String> workerList = ticketingService.getAllWorkersName();
+        List<String> envrionementList = ticketingService.getAllTicketEnvironmentName();
         Map<Integer,String> taskPriorityMap = ConstantProperties.TASK_PRIORITY_MAP;
         model.addAttribute("ticketStatusList", ticketStatusList);
         model.addAttribute("ticketTypeList", ticketTypeList);
@@ -69,6 +70,7 @@ public class TicketingController {
         model.addAttribute("defectAreaList", defectAreaList);
         model.addAttribute("ticketCloseDefaultCalue", "2024-01-01");
         model.addAttribute("ticketWorkersList", workerList);
+        model.addAttribute("envrionementList", envrionementList);
         
         
 		return "tickets/ticket-form";
@@ -92,6 +94,7 @@ public class TicketingController {
         List<String> applicaitonCategoryList = ticketingService.getAllTicketAppCategoryName();
         List<String> defectAreaList = ticketingService.getAllTicketDefectAreaName();
         List<String> workerList = ticketingService.getAllWorkersName();
+        List<String> envrionementList = ticketingService.getAllTicketEnvironmentName();
         Map<Integer,String> taskPriorityMap = ConstantProperties.TASK_PRIORITY_MAP;
         model.addAttribute("ticketStatusList", ticketStatusList);
         model.addAttribute("ticketTypeList", ticketTypeList);
@@ -101,6 +104,8 @@ public class TicketingController {
         model.addAttribute("defectAreaList", defectAreaList);
         model.addAttribute("ticketCloseDefaultCalue", "2024-01-01");
         model.addAttribute("ticketWorkersList", workerList);
+        model.addAttribute("envrionementList", envrionementList);
+        
         if(ticketObject.get().getTicketWorker()!=null) {
         	model.addAttribute("ticketWorkersListSelected", ticketObject.get().getTicketWorker());
         }else {

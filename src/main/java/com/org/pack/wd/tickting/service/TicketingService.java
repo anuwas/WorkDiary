@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.org.pack.wd.tickting.entity.Applications;
 import com.org.pack.wd.tickting.entity.TicketAppCategory;
 import com.org.pack.wd.tickting.entity.TicketDefectArea;
+import com.org.pack.wd.tickting.entity.TicketEnvironment;
 import com.org.pack.wd.tickting.entity.TicketWorker;
 import com.org.pack.wd.tickting.entity.Tickets;
 import com.org.pack.wd.tickting.entity.Ticketstatus;
@@ -16,6 +17,7 @@ import com.org.pack.wd.tickting.entity.Tickettype;
 import com.org.pack.wd.tickting.repository.ApplicationsRepository;
 import com.org.pack.wd.tickting.repository.TicketAppCategoryRepository;
 import com.org.pack.wd.tickting.repository.TicketDefectAreaRepository;
+import com.org.pack.wd.tickting.repository.TicketEnvironmentRepository;
 import com.org.pack.wd.tickting.repository.TicketWorkerRepository;
 import com.org.pack.wd.tickting.repository.TicketsRepository;
 import com.org.pack.wd.tickting.repository.TicketstatusRepository;
@@ -44,6 +46,9 @@ public class TicketingService {
 	
 	@Autowired
 	TicketDefectAreaRepository ticketDefectAreaRepository;
+	
+	@Autowired
+	TicketEnvironmentRepository ticketEnvironmentRepository;
 	
 	public List<Tickets> getAllTickets(){
 		return (List<Tickets>) ticketsRepository.findAll();
@@ -80,6 +85,11 @@ public class TicketingService {
 	public List<String> getAllTicketDefectAreaName(){
 		return ticketDefectAreaRepository.findAll().stream()
 				.map(TicketDefectArea::getDefectArea).collect(Collectors.toList());
+	}
+	
+	public List<String> getAllTicketEnvironmentName(){
+		return ticketEnvironmentRepository.findAll().stream()
+				.map(TicketEnvironment::getEnvironmentName).collect(Collectors.toList());
 	}
 
 }

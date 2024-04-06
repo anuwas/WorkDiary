@@ -72,6 +72,9 @@ public class Tickets {
 	@Column(name = "TICKET_WORKER")
 	private String ticketWorker;
 	
+	@Column(name = "TICKET_ENVIRONMENT")
+	private String ticketEnvironment;
+	
 	@Column(name = "TICKET_CREATED_DATE")
 	private Date ticketCreatedDate;
 	

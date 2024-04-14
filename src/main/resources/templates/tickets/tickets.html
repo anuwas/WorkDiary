@@ -82,10 +82,10 @@
                         <div class="col-md-3">
                           <div class="form-group row">
                             <div class="col-sm-9">
-                              <!--<select class="form-control">
-                                <option>Male</option>
-                                <option>Female</option>
-                              </select>-->
+                              <select class="form-control" th:name="ticketEnvironment" id="ticketEnvironmentDDL">
+								  <option value="All">--Environment--</option>
+                                <option th:each="p : ${ticketEnvironmentList}" th:value="${p}" th:text="${p}"   th:selected="${p==ticketEnvironment}"/>
+                              </select>
                             </div>
                           </div>
                         </div>
@@ -122,11 +122,11 @@
                           <th> # </th>
                           <th> Ticket Number </th>
                           <th> Ticket Type </th>
-                          <th> Ticket Status </th>
-                          <th> Ticket Priority </th>
+                          <th> Status </th>
+                          <th> Priority </th>
                           <th> Application </th>
-                          <th> Progress </th>
-                          <th> Created Date </th>
+                          <th> Env </th>
+                          <th> Created On </th>
                           <th> <a class="btn btn-primary" href="/tickets/ticket-form" role="button">Add</a> </th>
                         </tr>
                       </thead>
@@ -139,12 +139,7 @@
                           <td th:text="${ticket.ticketStatus}"></td>
                           <td th:text="${ticket.ticketPriority}"></td>
                           <td th:text="${ticket.applicaiton}"></td>
-                           
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
+                          <td th:text="${ticket.ticketEnvironment}"></td>
                           <td th:text="${ticket.ticketCreatedDate}">  </td>
                           <td >
 						<a class="btn btn-primary" th:href="@{'tickets/ticket-form/'+ ${ticket.id}}" role="button">Edit</a>

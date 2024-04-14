@@ -153,7 +153,8 @@ public class TicketingController {
 			  @RequestParam(value = "ticketStatus", required = false) String ticketStatus,
 			  @RequestParam(value = "applicaiton", required = false) String applicaiton,
 			  @RequestParam(value = "ticketCreatedDate", required = false) String ticketCreatedDate,
-			  @RequestParam(value = "ticketClosedDate", required = false) String ticketClosedDate)	
+			  @RequestParam(value = "ticketClosedDate", required = false) String ticketClosedDate,
+			  @RequestParam(value = "ticketEnvironment", required = false) String ticketEnvironment)	
 	{
 		int size = 50;
 	    try {
@@ -165,7 +166,7 @@ public class TicketingController {
 	        pageTuts = ticketsRepository.findAll(paging);
 	      } else {
 	        //pageTuts = ticketsRepository.findByTicketStatusContainingIgnoreCase("Active", paging);
-	    	  pageTuts = ticketingJPACriteriaHelper.retriveTicketsBySearchandSort(ticketNumber,ticketType, ticketStatus, ticketPriority,applicaiton,paging);
+	    	  pageTuts = ticketingJPACriteriaHelper.retriveTicketsBySearchandSort(ticketNumber,ticketType, ticketStatus, ticketPriority,applicaiton,ticketEnvironment,paging);
 	        model.addAttribute("keyword", keyword);
 	      }
 	      
@@ -176,6 +177,7 @@ public class TicketingController {
 	      model.addAttribute("applicaiton", applicaiton);
 	      model.addAttribute("ticketCreatedDate", ticketCreatedDate);
 	      model.addAttribute("ticketClosedDate", ticketClosedDate);
+	      model.addAttribute("ticketEnvironment", ticketEnvironment);
 
 	      tutorials = pageTuts.getContent();
 
@@ -189,10 +191,12 @@ public class TicketingController {
 	      List<String> ticketPrirityList = Arrays.asList("P5","P4","P3","P2","P1");
 	      List<String> applicaitonList = ticketingService.getAllApplicationName();
 	      List<String> ticketStatusList = ticketingService.getAllTicketStatusName();
+	      List<String> ticketEnvironmentList = ticketingService.getAllTicketEnvironmentName();
 	      model.addAttribute("ticketTypeList", ticketTypeList);
 	      model.addAttribute("ticketPrirityList", ticketPrirityList);
 	      model.addAttribute("applicaitonList", applicaitonList);
 	      model.addAttribute("ticketStatusList", ticketStatusList);
+	      model.addAttribute("ticketEnvironmentList", ticketEnvironmentList);
 	      model.addAttribute("keyword", "search");
 	      
 	    } catch (Exception e) {

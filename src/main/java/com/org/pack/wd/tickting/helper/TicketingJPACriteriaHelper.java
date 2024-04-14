@@ -23,7 +23,7 @@ public class TicketingJPACriteriaHelper {
 	@Autowired
 	EntityManager em;
 	
-	public Page<Tickets> retriveTicketsBySearchandSort(long ticketNumber,String ticketType,String ticketStatus,String ticketPriority,String applicaiton,Pageable pageable){
+	public Page<Tickets> retriveTicketsBySearchandSort(long ticketNumber,String ticketType,String ticketStatus,String ticketPriority,String applicaiton,String ticketEnvironment,Pageable pageable){
 		CriteriaBuilder builder =  em.getCriteriaBuilder();
 		CriteriaQuery<Tickets> criteria = builder.createQuery(Tickets.class);
 		Root<Tickets> supportItemRoot = criteria.from(Tickets.class);
@@ -46,6 +46,9 @@ public class TicketingJPACriteriaHelper {
 		  if (!applicaiton.equals("All")) {
 		  predicates.add(builder.equal(supportItemRoot.get("applicaiton"),   applicaiton)); 
 		  }
+		  if (!ticketEnvironment.equals("All")) {
+			  predicates.add(builder.equal(supportItemRoot.get("ticketEnvironment"),   ticketEnvironment)); 
+		}
 		 
 		 
 		 criteria.where(builder.and(predicates.toArray( new Predicate[predicates.size()])));

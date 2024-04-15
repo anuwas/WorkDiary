@@ -13,7 +13,7 @@
           <div class="content-wrapper">
             <div class="row">
 
-			<form action="#" th:action="@{/tickets/saveticket}" method="post" th:object="${ticktObject}">
+			<form action="#" id="ticket-form" th:action="@{/tickets/saveticket}" method="post" th:object="${ticktObject}">
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
@@ -23,7 +23,7 @@
                           <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Ticket Number</label>
                             <div class="col-sm-8">
-                              <input type="text" th:field="*{serviceWeekName}" id="serviceWeekName" class="form-control" />
+                              <input type="text" th:field="*{ticketNumber}" id="ticketNumber" class="form-control" />
                             </div>
                           </div>
                         </div>
@@ -250,6 +250,20 @@
     		dateFormat: "yy-mm-dd"
 		});
         
+        
       } );
+      
+      $( document ).ready(function() {
+		  /*
+    $("#ticket-form").submit(function(){
+		var created_date = $("ticketCreatedDate").value();
+		if(created_date==null){
+			alert("Please select crated date");
+			return false
+		}
+		
+	})
+	*/
+});
         </script>
 </html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Operations')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+  </head>
+  <body>
+	  
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+			<div class="row">
+				<div class="col-md-12 d-flex align-items-stretch grid-margin">
+                <div class="row flex-grow">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Active Operations</h4>
+                        <ul class="timeline">
+                      <li class="timeline-item" th:each="activeOperation : ${listAllOperation}">
+                        <p class="timeline-content"><a th:href="'/operation/'+${activeOperation.operation_id}"  th:text="${activeOperation.operationName}">Ben Tossell</a> <span th:text="${activeOperation.operationName}"></span></p>
+                      </li>
+                    </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">&nbsp;</div>
+                  <div class="col-12 stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Create new Operations</h4>
+                        <form action="#" th:action="@{/savenewoperation}" method="post" th:object="${operationObject}">
+                      <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" th:field="*{operationName}" id="operationName" placeholder="Operation Name">
+                      </div>                      
+                      <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" th:field="*{operationDescription}" id="operationDescription" rows="2"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-success mr-2">Submit</button>
+                      <button class="btn btn-light">Cancel</button>
+                    </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <div class="col-md-12 d-flex align-items-stretch grid-margin">
+                <div class="row flex-grow">
+                  
+                <!--
+                  <div class="col-12 stretch-card">
+                    <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between pb-3">
+                      <h4 class="card-title mb-0">Closed Operations</h4>
+                    </div>
+                    <ul class="timeline">
+                      <li class="timeline-item" th:each="closedOperation : ${listAllOperation}">
+                        <p class="timeline-content"><a th:href="'/service-activity/'+${closedOperation.operation_id}+'/'+${closedOperation.operationName}"  th:text="${closedOperation.operationName}">Ben Tossell</a> <span th:text="${closedOperation.operationName}"></span></p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                  </div>
+                  -->
+                  
+                </div>
+              </div>
+            </div>
+            
+            
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

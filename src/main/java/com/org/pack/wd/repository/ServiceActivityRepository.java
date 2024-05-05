@@ -18,7 +18,7 @@ public interface ServiceActivityRepository extends PagingAndSortingRepository<Se
 	List<Object[]> findAllServiceActvityWithMonthYear();
 	*/
 	
-	@Query("select new com.org.pack.wd.dto.ActivityYearMonth(serviceYearName,serviceMonthName) from ServiceActivity group by serviceYearName,serviceMonthName")
+	@Query("select new com.org.pack.wd.dto.ActivityYearMonth(serviceYearName,serviceMonthName) from ServiceActivity group by serviceYearName,serviceMonthName,serviceMonth,serviceMonth order by serviceYear DESC,serviceMonth DESC")
 	List<ActivityYearMonth> findAllServiceActvityWithMonthYear();
 
 	

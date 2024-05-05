@@ -382,7 +382,8 @@
   background: linear-gradient(to top, #5768f3, #1c45ef);
   font-family: "roboto", sans-serif;
   padding: 0;
-  width: 270px;
+  /*width: 270px;*/
+  width: 250px;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -602,7 +603,8 @@
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
-  width: calc(100% - 270px);
+  /*width: calc(100% - 270px);*/
+  width: calc(100% - 250px);
   min-height: calc(100vh - 63px);
   display: flex;
   flex-direction: column; }
@@ -613,7 +615,7 @@
 
 .content-wrapper {
   background: #F3F3F3;
-  padding: 1.5rem 1.7rem;
+  padding: 1.2rem 1.2rem;
   width: 100%;
   flex-grow: 1; }
 

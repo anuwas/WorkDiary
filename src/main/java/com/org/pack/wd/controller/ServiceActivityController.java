@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.org.pack.wd.dto.ActivityYearMonth;
 import com.org.pack.wd.entity.ServiceActivity;
 import com.org.pack.wd.repository.ServiceActivityRepository;
+import com.org.pack.wd.util.ConstantProperties;
 
 @Controller
 public class ServiceActivityController {
@@ -41,8 +42,12 @@ public class ServiceActivityController {
 		try {
 			String yearName = (String) session.getAttribute("yearName");
 			String monthName = (String) session.getAttribute("monthName");
+			int monthIndex = ConstantProperties.MONTH_NAME_INDEX_MAP.get(monthName);
 			serviceActivity.setServiceYearName(yearName);
 			serviceActivity.setServiceMonthName(monthName);
+			serviceActivity.setServiceMonth(monthIndex);
+			int serviceYear = Integer.parseInt((String) session.getAttribute("yearName")) ;
+			serviceActivity.setServiceYear(serviceYear);
 			serviceActivityRepository.save(serviceActivity);
 			return "redirect:/service-activity/"+yearName+"/"+monthName;
 		} catch (Exception e) {

@@ -20,7 +20,7 @@ import com.org.pack.wd.service.DiaryTaskService;
 public class WelcomeController {
 
 	 @Value("${welcome.message}")
-	    private String message;
+	 private String message;
 	 
 	 @Autowired
 	 DiaryTaskService diaryTaskService;

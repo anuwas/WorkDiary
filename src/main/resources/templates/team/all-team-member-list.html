@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='All Members')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+  </head>
+  <body>
+	  
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+			                <div>
+					<form  th:action="@{/tickets}">
+						<div class="row">
+                        <div class="col-md-2">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" th:name="ticketNumber" th:value="${ticketNumber}" placeholder="Ticket Number"/>
+                              <input type="hidden" class="form-control" th:name="keyword" th:value="${keyword}" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <select class="form-control" th:name="ticketType"  id="ticketTypeDDL">
+								  <option value="All">--Ticket Type--</option>
+                                <option th:each="p : ${ticketTypeList}" th:value="${p}" th:text="${p}" th:selected="${p==ticketType}"/>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group row">
+                            <div class="col-sm-9">
+                             <select class="form-control" th:name="applicaiton"  id="applicaitonDDL">
+								 <option value="All">--Application--</option>
+                                <option th:each="p : ${applicaitonList}" th:value="${p}" th:text="${p}" th:selected="${p==applicaiton}"/>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <div class="col-sm-12">
+                              <select class="form-control" th:name="ticketStatus"  id="ticketStatusDDL">
+								  <option value="All">--Ticket Status--</option>
+                                <option th:each="p : ${ticketStatusList}" th:value="${p}" th:text="${p}" th:selected="${p==ticketStatus}"/>
+                              </select>
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group row">
+                            <div class="col-sm-10">
+                              <select class="form-control" th:name="ticketPriority" id="ticketPriorityDDL">
+								  <option value="All">--Priority--</option>
+                                <option th:each="p : ${ticketPrirityList}" th:value="${p}" th:text="${p}"   th:selected="${p==ticketPriority}"/>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-group row">
+                            <div class="col-sm-6">
+                            <input type="text" class="form-control" th:name="ticketCreatedDate" th:value="*{ticketCreatedDate}" id="ticketCreatedDate"  readonly="readonly"  placeholder="Created Date" />
+                            </div>
+                            <div class="col-sm-6">
+                              <input type="text" class="form-control" th:name="ticketClosedDate" th:value="*{ticketClosedDate}" id="ticketClosedDate"  readonly="readonly" placeholder="Closed Date" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group row">
+                            <div class="col-sm-9">
+                              <select class="form-control" th:name="ticketEnvironment" id="ticketEnvironmentDDL">
+								  <option value="All">--Environment--</option>
+                                <option th:each="p : ${ticketEnvironmentList}" th:value="${p}" th:text="${p}"   th:selected="${p==ticketEnvironment}"/>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group row">
+                            <div class="col-sm-9">
+                             <!-- <select class="form-control">
+                                <option>Male</option>
+                                <option>Female</option>
+                              </select>-->
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <div style="float: right;">
+						  		<button type="reset" class="btn btn-light">Reset</button>
+						  		<button type="submit" class="btn btn-success mr-2" >Search</button>						  
+					  		</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+					</form>
+					</div>
+			<div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+
+                  <!--<div class="card-body">--><div>
+                    <table class="table table-bordered table-hover table-striped">
+                      <thead>
+                        <tr >
+                          <th> Name </th>
+                          <th> EMP ID </th>
+                          <th> CUST ID </th>
+                          <th> ORG DEPT </th>
+                          <th> Proj Squd </th>
+                          <th> Skill </th>
+                          <th> Phone </th>
+                          <th> <a class="btn btn-primary" href="/tickets/ticket-form" role="button">Add</a> </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="member : ${allActiveTeamMemeber}">
+                          <td th:text="${member.fullName}"></td>
+                          <td th:text="${member.organizationEmpId}"></td>
+                          <td th:text="${member.customerEmpId}"></td>
+                          <td th:text="${member.organizationDepartment}"></td>
+                          <td th:text="${member.projectSquad}"></td>
+                          <td th:text="${member.skillset}"></td>
+                          <td th:text="${member.phoneNo}">  </td>
+                          <td >
+						<a class="btn btn-primary" th:href="@{'tickets/ticket-form/'+ ${member.teamMemberId}}" role="button">Edit</a>
+                          <a class="btn btn-primary" th:href="@{'member-appraisal-detail/'+ ${member.teamMemberId}+'/'+${year}}" role="button">Log</a>
+                          </td>
+                        </tr>                     
+                        
+                      </tbody>
+                    </table>
+                    
+                  </div>
+                </div>
+              </div>     
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+    <script type="text/javascript">
+    $( function() {
+		var currentDate = new Date();
+		
+         $( "#ticketCreatedDate" ).datepicker({
+    		dateFormat: "yy-mm-dd"
+		});
+        $( "#ticketClosedDate" ).datepicker({
+    		//changeMonth: true,
+    		//changeYear: true,
+    		dateFormat: "yy-mm-dd"
+		});
+
+        
+      } );
+        </script>
+</html>

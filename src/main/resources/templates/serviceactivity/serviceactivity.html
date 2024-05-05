@@ -14,9 +14,7 @@
           <div class="content-wrapper">
             <div class="row">
 
-              <div class="col-lg-12 grid-margin stretch-card">
-
-              </div>
+              <!--<div class="col-lg-12 grid-margin stretch-card">   </div>-->
               <div class="col-lg-12 grid-margin stretch-card" th:each="serviceActivityObj : ${serviceActivityList}">
                 <div class="card">
                   <div class="card-body">
@@ -29,30 +27,30 @@
                   </div>
                 </div>
               </div>
-              
-                              <div class="card">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
                   <div class="card-body">
                        <form action="#" th:action="@{/saveserviceactivity}" method="post" th:object="${serviceActivityObject}">
 						   <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group row">
-                      		<div class="col-sm-9">
-								  <label for="taskSummary">Service Title/Week</label>
-                      			<input type="text" class="form-control form-control-lg" th:field="*{serviceWeekName}">
-                      		</div>
-                    	</div>
-                       </div>
-                      </div>
-							  <div class="form-group">
-							    <label for="taskSummary">Service Detail</label>
-							    <textarea class="form-control" th:field="*{serviceActivityDetail}" id="serviceActivityDetail" rows="10"></textarea>
-							  </div>
-							  <button type="submit" class="btn btn-primary">Submit</button>
-							</form> 
+	                        <div class="col-md-12">
+	                          <div class="form-group row">
+	                      		<div class="col-sm-9">
+									  <label for="taskSummary">Service Title/Week</label>
+	                      			<input type="text" class="form-control form-control-lg" th:field="*{serviceWeekName}">
+	                      		</div>
+	                    	</div>
+	                       </div>
+                      	</div>
+						  <div class="form-group">
+						    <label for="taskSummary">Service Detail</label>
+						    <textarea class="form-control" th:field="*{serviceActivityDetail}" id="serviceActivityDetail" rows="10"></textarea>
+						  </div>
+						  <button type="submit" class="btn btn-primary">Submit</button>
+						</form> 
                   </div>
                 </div>
               
-              
+              </div>
             </div>
           </div>
           <div th:replace="fragments/footer :: footer"></div>

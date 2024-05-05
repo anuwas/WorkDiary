@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Edit Task')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tiny.cloud/1/xb35xk73hgyckinp46g6ivh20vtxgb0soa2tn1e22n7cc4iu/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+
+			<form action="#" th:action="@{/member-appraisal-detail-update/{teammemapprid}(teammemapprid=${teamMemberAppraisalObject.teamMemberAppraisalId})}"  method="post" th:object="${teamMemberAppraisalObject}">
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+					<div class="card-body">
+                    <p class="card-description"> Add/Edit new task </p>
+                     <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Financial Year</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control form-control-lg" th:field="*{financialYear}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Assessment Session</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control form-control-lg" th:field="*{assessmentSession}">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    
+                  </div>
+                  <div class="card-body">
+                   
+                    <div class="form-group">
+                        <label for="taskSummary">Things that gose well</label>
+                        <textarea class="form-control" th:field="*{goesWell}" id="goesWell" rows="2"></textarea>
+                      </div>
+                    <div class="form-group">
+                        <label for="taskDescriptoin">Things that gose not well</label>
+                        <textarea class="form-control" th:field="*{goesNotWell}" id="goesNotWell" rows="2"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="taskDescriptoin">Improvement Areas</label>
+                        <textarea class="form-control" th:field="*{improvementAreas}" id="improvementAreas" rows="2"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="taskDescriptoin">Delivery Statstics</label>
+                        <textarea class="form-control" th:field="*{deliveryStat}" id="deliveryStat" rows="2"></textarea>
+                      </div>
+                       <div class="form-group">
+                        <label for="taskDescriptoin">Leave Stastics</label>
+                        <textarea class="form-control" th:field="*{leaveStat}" id="leaveStat" rows="2"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="taskDescriptoin">Comments</label>
+                        <textarea class="form-control" th:field="*{comments}" id="comments" rows="2"></textarea>
+                      </div>
+                        <button type="submit" class="btn btn-success mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </div>
+                  
+                </div>
+              </div>  
+              </form>      
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+          <!--
+          <script>
+				    tinymce.init({
+				      selector: '#goesWell',
+				      height: 400,
+				      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+				      //toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+				      toolbar: 'alignleft aligncenter alignright alignjustify | formatselect | bullist numlist | outdent indent | link code',
+				      toolbar_mode: 'floating',
+				      tinycomments_mode: 'embedded',
+				      tinycomments_author: 'Anuwas B',
+				   });
+  			</script>
+  			-->
+  			<script>
+				    tinymce.init({
+				      selector: 'textarea',
+				      height: 400,
+				      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+				      toolbar: 'alignleft aligncenter alignright alignjustify | formatselect | bullist numlist | outdent indent | link code',
+				      toolbar_mode: 'floating',
+				    });
+				  </script>
+        </div>
+      </div>
+    </div>
+  </body>
+            
+</html>

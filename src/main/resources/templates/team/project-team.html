@@ -123,29 +123,21 @@
                           <table class="table table-striped table-hover">
                             <thead>
                               <tr>
-                                <th>Invoice ID</th>
-                                <th>Customer</th>
-                                <th>Status</th>
-                                <th>Due Date</th>
-                                <th>Amount</th>
+                                <th>Name</th>
+                                <th>Phone No</th>
+                                <th>Emp ID</th>
+                                <th>Designation</th>
+                                <th>Location</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>INV-87239</td>
-                                <td>Viola Ford</td>
-                                <td>Paid</td>
-                                <td>20 Jan 2019</td>
-                                <td>$755</td>
-                              </tr>
-                              <tr>
-                                <td>INV-87239</td>
-                                <td>Dylan Waters</td>
-                                <td>Unpaid</td>
-                                <td>23 Feb 2019</td>
-                                <td>$800</td>
-                              </tr>
-                             
+                              <tr th:each="member : ${allActiveTeamMemeber}">
+                                <td th:text="${member.fullName}"></td>
+                                <td th:text="${member.phoneNo}"></td>
+                                <td th:text="${member.organizationEmpId}"></td>
+                                <td th:text="${member.organizationDesignation}"></td>
+                                <td th:text="${member.location}"></td>
+                              </tr>                             
                             </tbody>
                           </table>
                         </div>

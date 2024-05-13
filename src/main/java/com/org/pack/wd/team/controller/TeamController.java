@@ -29,7 +29,8 @@ public class TeamController {
 	@GetMapping("/project-and-team")
 	public String getProjectTeam(Model model) {
 	
-				
+		List<TeamMember> allActiveTeamMemeber = teamMemberRepository.findAllByStatus("Active");
+		model.addAttribute("allActiveTeamMemeber", allActiveTeamMemeber);		
 		return "team/project-team";
 	}
 	

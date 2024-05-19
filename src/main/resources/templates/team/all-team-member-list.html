@@ -135,7 +135,7 @@
                           <td th:text="${member.projectSquad}"></td>
                           <td th:text="${member.skillset}"></td>
                           <td >
-						<a th:href="@{'tickets/ticket-form/'+ ${member.teamMemberId}}" ><i class="fa fa-edit fa-lg"></i></a>&nbsp;
+						<a th:href="@{'team-member-edit/'+ ${member.teamMemberId}}" ><i class="fa fa-edit fa-lg"></i></a>&nbsp;
                           <a th:href="@{'member-appraisal-detail/'+ ${member.teamMemberId}+'/'+${year}}" role="button"><i class="fa fa-info fa-lg"></i></a>
                           
                           </td>

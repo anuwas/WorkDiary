@@ -1,5 +1,6 @@
 package com.org.pack.wd.team.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,27 @@ public class TeamController {
 		model.addAttribute("year",String.valueOf(DiaryUtil.getCurrentYear()));
 		
 		return "team/all-team-member-list";
+	}
+	
+	@GetMapping("/team-member-edit/{memberid}")
+	public String getTeamMemberEditForm(Model model,@PathVariable long memberid) {
+	
+		Optional<TeamMember> teamMember = teamMemberRepository.findById(memberid);
+		List listTaskStatus = Arrays.asList("Active","Inactive");
+		model.addAttribute("teamMember", teamMember.get());
+		model.addAttribute("memberid", memberid);
+		model.addAttribute("listTaskStatus", listTaskStatus);
+		
+		
+		return "team/team-member-edit-form";
+	}
+	
+	@PostMapping("/team-member-update/{memberid}")
+	public String updateTeamMember(TeamMember teamMember,Model model,@PathVariable long memberid) {
+		teamMember.setTeamMemberId(memberid);
+		teamMemberRepository.save(teamMember);
+		
+		return "redirect:/team-member-edit/"+memberid;
 	}
 	
 	@GetMapping("/member-appraisal-detail/{memberid}/{year}")

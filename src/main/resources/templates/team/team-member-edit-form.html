@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Update Team Member')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+
+			<form action="#" th:action="@{/team-member-update/{memberid}(memberid=${teamMember.teamMemberId})}"  method="post" th:object="${teamMember}">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Update Team Member info</h4>
+                    <form class="form-sample">
+                      <div class="row">
+                        <div class="col-md-10">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Member Full Name</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" id="fullName" th:field="*{fullName}"/>
+                            </div>
+                          </div>
+                        </div>                                          
+                      </div>
+                      
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Customer EMP ID</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" id="customerEmpId" th:field="*{customerEmpId}" />
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Organization EMP ID</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" id="organizationEmpId" th:field="*{organizationEmpId}" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-10">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Assigned Projects</label>
+                            <div class="col-sm-9">
+                              <textarea class="form-control" th:field="*{assignedProject}" id="assignedProject" rows="2"></textarea>
+                            </div>
+                          </div>
+                        </div>                                            
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Project Squad</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" id="projectSquad" th:field="*{projectSquad}" />
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Organization Designation</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" id="organizationDesignation" th:field="*{organizationDesignation}" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Organization Department</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" id="organizationDepartment" th:field="*{organizationDepartment}" />
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Organization Proect ID</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" id="organizationProjectId" th:field="*{organizationProjectId}" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-10">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Skillset</label>
+                            <div class="col-sm-9">
+                              <textarea class="form-control" th:field="*{skillset}" id="skillset" rows="2"></textarea>
+                            </div>
+                          </div>
+                        </div>                                            
+                      </div>
+                       <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Phone Number</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" id="phoneNo" th:field="*{phoneNo}" />
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Location</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" id="location" th:field="*{location}" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-10">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Other Info</label>
+                            <div class="col-sm-9">
+                              <textarea class="form-control" th:field="*{otherInfo}" id="otherInfo" rows="2"></textarea>
+                            </div>
+                          </div>
+                        </div>                                            
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Status</label>
+                            <div class="col-sm-7">
+                              <select class="form-control" th:field="*{status}" id="taskStatusDDL">
+                                <option th:each="p : ${listTaskStatus}" th:value="${p}" th:text="${p}" />
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label"></label>
+                            <div class="col-sm-7">
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="position:absolute;right: 100px;">
+						  <button type="submit" class="btn btn-success mr-2">Submit</button>
+                          <button type="reset" class="btn btn-light">Cancel</button>
+                          <a class="btn btn-primary" href="/all-active-team-member" role="button">Back</a>
+						  
+					  </div>
+					  <div>&nbsp;</div>                     
+                     
+                    </form>
+                  </div>
+                </div>
+              </div>
+              </form>      
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    $( function() {
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+      } );
+        </script>
+</html>

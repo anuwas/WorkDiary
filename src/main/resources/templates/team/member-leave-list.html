@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Member Leave List')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+  </head>
+  <body>
+	  
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+		<div class="content-wrapper">
+            <!-- Page Title Header Starts-->
+            <!-- Page Title Header Ends-->
+             <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="row">
+                        <div class="col-md-4">
+                            <div ><label class="form-check-label"> Name </label></div>
+                            <div ><label class="form-check-label"> Total Leave </label></div>
+                        </div>
+                        <div class="col-md-8">
+                         	<div ><label class="form-check-label" th:text="${memberFullName}">  </label></div>
+                            <div ><label class="form-check-label" th:text="${ListCount}">  </label> </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div >
+                          <div class="table-responsive">
+                          <table class="table table-striped table-hover">
+                            <thead>
+                              <tr >
+                                <th>Leave Date</th>
+                                <th>Leave Type</th>
+                                <th>Applied Date</th>
+                                <th>Comment</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr th:each="leave : ${allTakenLeave}">
+								  <td th:text="${#dates.format(leave.leaveDate, 'dd-MMM-yyyy')}">INV-87239</td>
+                                <!--<td th:text="${leave.leaveDate}">INV-87239</td>-->
+                                <td th:text="${leave.leaveType}">Viola Ford</td>
+                                <!--<td th:text="${leave.createdDate}">Paid</td>-->
+                                <td th:text="${#dates.format(leave.createdDate, 'dd-MMM-yyyy hh:mm')}">INV-87239</td>
+                                <td th:text="${leave.comment}">20 Jan 2019</td>
+                              </tr>
+                                                           
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="row">
+                  
+
+
+                  
+                  
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-md-12 grid-margin">
+ 
+                  </div>
+                  <div class="col-md-12 grid-margin">
+
+                  </div>
+                  <div>
+					  <a class="btn btn-success mr-2" href="/project-and-team" role="button">Back</a>
+				  </div>
+                  
+                
+                </div>
+              </div>
+            </div>
+<!--            <div class="row">
+              <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title mb-0">Recent Events</h4>
+                    <div class="d-flex py-2 border-bottom">
+                      <div class="wrapper">
+                        <small class="text-muted">Mar 14, 2019</small>
+                        <p class="font-weight-semibold text-gray mb-0">Change in Directors</p>
+                      </div>
+                      <small class="text-muted ml-auto">Edit event</small>
+                    </div>
+                    <div class="d-flex py-2 border-bottom">
+                      <div class="wrapper">
+                        <small class="text-muted">Mar 14, 2019</small>
+                        <p class="font-weight-semibold text-gray mb-0">Other Events</p>
+                      </div>
+                      <small class="text-muted ml-auto">Edit event</small>
+                    </div>
+                    <div class="d-flex py-2 border-bottom">
+                      <div class="wrapper">
+                        <small class="text-muted">Mar 14, 2019</small>
+                        <p class="font-weight-semibold text-gray mb-0">Quarterly Report</p>
+                      </div>
+                      <small class="text-muted ml-auto">Edit event</small>
+                    </div>
+                    <div class="d-flex pt-2">
+                      <div class="wrapper">
+                        <small class="text-muted">Mar 14, 2019</small>
+                        <p class="font-weight-semibold text-gray mb-0">Change in Directors</p>
+                      </div>
+                      <small class="text-muted ml-auto">Edit event</small>
+                    </div>
+                    <a class="d-block mt-5" href="#">Show all</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between pb-3">
+                      <h4 class="card-title mb-0">Activities</h4>
+                      <p class="mb-0 text-muted">20 finished, 5 remaining</p>
+                    </div>
+                    <ul class="timeline">
+                      <li class="timeline-item">
+                        <p class="timeline-content"><a href="#">Ben Tossell</a> assign you a task</p>
+                        <p class="event-time">Just now</p>
+                      </li>
+                      <li class="timeline-item">
+                        <p class="timeline-content"><a href="#">Ben Tossell</a> assign you a task</p>
+                        <p class="event-time">Just now</p>
+                      </li>
+                      <li class="timeline-item">
+                        <p class="timeline-content"><a href="#">Ben Tossell</a> assign you a task</p>
+                        <p class="event-time">Just now</p>
+                      </li>
+                      <li class="timeline-item">
+                        <p class="timeline-content"><a href="#">Ben Tossell</a> assign you a task</p>
+                        <p class="event-time">Just now</p>
+                      </li>
+                      <li class="timeline-item">
+                        <p class="timeline-content"><a href="#">Ben Tossell</a> assign you a task</p>
+                        <p class="event-time">Just now</p>
+                      </li>
+                    </ul>
+                    <a class="d-block mt-3" href="#">Show all</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title mb-0">People Also Watch</h4>
+                    <div class="table-responsive">
+                      <table class="table table-stretched">
+                        <thead>
+                          <tr>
+                            <th>Symbol</th>
+                            <th>Last Price</th>
+                            <th>Change</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <p class="mb-1 text-dark font-weight-medium">NFLX</p><small class="font-weight-medium">Netflix, Inc.</small>
+                            </td>
+                            <td class="font-weight-medium">$250.00</td>
+                            <td class="text-success font-weight-medium">+12.64</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p class="mb-1 text-dark font-weight-medium">TSLA</p><small class="font-weight-medium">Tesla, Inc.</small>
+                            </td>
+                            <td class="font-weight-medium">$458.00</td>
+                            <td class="text-danger font-weight-medium">-14.53</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p class="mb-1 text-dark font-weight-medium">GOOG</p><small class="font-weight-medium">Alphabet, Inc.</small>
+                            </td>
+                            <td class="font-weight-medium">$250.00</td>
+                            <td class="text-danger font-weight-medium">+12.64</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p class="mb-1 text-dark font-weight-medium">AMZN</p><small class="font-weight-medium">Amazon.com, Inc.</small>
+                            </td>
+                            <td class="font-weight-medium">$546.00</td>
+                            <td class="text-success font-weight-medium">+24.34</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <a class="d-block mt-3" href="/all-active-team-member">Show all</a>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+    <script type="text/javascript">
+    $( function() {
+		var currentDate = new Date();
+		
+         $( "#ticketCreatedDate" ).datepicker({
+    		dateFormat: "yy-mm-dd"
+		});
+        $( "#ticketClosedDate" ).datepicker({
+    		//changeMonth: true,
+    		//changeYear: true,
+    		dateFormat: "yy-mm-dd"
+		});
+
+        
+      } );
+        </script>
+</html>

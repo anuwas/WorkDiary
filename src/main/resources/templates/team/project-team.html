@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Project & Team</title>
-    <link rel="stylesheet" href="css/shared/style.css">
-    <link rel="stylesheet" href="css/demo_1/style.css">
+   <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Project & Team')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
     <div class="container-scroller">
@@ -127,7 +124,7 @@
                                 <th>Phone No</th>
                                 <th>Emp ID</th>
                                 <th>Designation</th>
-                                <th>Location</th>
+                                <th>Action</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -136,7 +133,11 @@
                                 <td th:text="${member.phoneNo}"></td>
                                 <td th:text="${member.organizationEmpId}"></td>
                                 <td th:text="${member.organizationDesignation}"></td>
-                                <td th:text="${member.location}"></td>
+                                <td >
+									<a th:href="@{'member-leave-history/'+ ${member.teamMemberId}}" ><i class="fa fa-times-circle fa-lg"></i></a>&nbsp;
+									<a th:href="@{'team-member-edit/'+ ${member.teamMemberId}}" ><i class="fa fa-edit fa-lg"></i></a>&nbsp;
+                          <a th:href="@{'member-appraisal-detail/'+ ${member.teamMemberId}+'/'+${year}}" role="button"><i class="fa fa-info fa-lg"></i></a>
+								</td>
                               </tr>                             
                             </tbody>
                           </table>
@@ -166,12 +167,34 @@
                 <div class="row">
                   <div class="col-md-12 grid-margin">
                     <div class="card">
-                      <div class="card-body">
-                        <div class="row">
-                          
-                        </div>
-                       
+                   <div class="card-body">
+                    <h4 class="card-title">Submit Leave</h4>
+                    <form class="forms-sample" th:action="@{/save-team-member-leave}" method="post" th:object="${teamMemberLeave}">
+                      <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <select class="form-control form-control-lg" id="teamMemberDDL" th:field="*{teamMember}">
+                        <option value="">-Select-</option>
+                        <option th:each="p : ${teamMemberNameIDMap}" th:value="${p.key}" th:text="${p.value}" />
+                      </select>
                       </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Leave Type</label>
+                        <input type="text" class="form-control" id="leaveType" th:field="*{leaveType}" placeholder="Leave Type">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword4">Date</label>
+                        <input type="text" class="form-control" th:field="*{leaveDate}" id="leaveDate" placeholder="Date">
+                      </div>                     
+                     
+                      <div class="form-group">
+                        <label for="exampleTextarea1">Comment</label>
+                        <textarea class="form-control" id="comment" th:field="*{comment}" rows="2"></textarea>
+                      </div>
+                      <button class="btn btn-light">Cancel</button>
+                      <button type="submit" class="btn btn-success mr-2">Submit</button>
+                      
+                    </form>
+                  </div>
                     </div>
                   </div>
                   <div class="col-md-12 grid-margin">
@@ -220,6 +243,12 @@
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <div th:replace="fragments/footer :: footer"></div>
+          <script type="text/javascript">
+     $( function() {
+       
+        $( "#leaveDate" ).datepicker({ dateFormat: 'yy-mm-dd' });
+      } ); 
+        </script>
         </div>
       </div>
     </div>

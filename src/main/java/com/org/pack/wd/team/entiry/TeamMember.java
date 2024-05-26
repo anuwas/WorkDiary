@@ -74,5 +74,8 @@ public class TeamMember {
 	
 	@OneToMany(mappedBy="teamMember")
     private List<TeamMemberAppraisal> teamMemberAppraisal;
+	
+	@OneToMany(mappedBy="teamMember")
+    private List<TeamMemberLeave> teamMemberLeave;
 
 }

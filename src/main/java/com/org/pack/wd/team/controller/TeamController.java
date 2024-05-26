@@ -2,7 +2,9 @@ package com.org.pack.wd.team.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.org.pack.wd.operation.entity.OperationAudit;
 import com.org.pack.wd.team.entiry.TeamMember;
 import com.org.pack.wd.team.entiry.TeamMemberAppraisal;
+import com.org.pack.wd.team.entiry.TeamMemberLeave;
 import com.org.pack.wd.team.repository.TeamMemberAppraisalRepository;
+import com.org.pack.wd.team.repository.TeamMemberLeaveRepository;
 import com.org.pack.wd.team.repository.TeamMemberRepository;
 import com.org.pack.wd.util.DiaryUtil;
 
@@ -27,11 +31,19 @@ public class TeamController {
 	@Autowired
 	TeamMemberAppraisalRepository teamMemberAppraisalRepository;
 	
+	@Autowired
+	TeamMemberLeaveRepository teamMemberLeaveRepository;
+	
 	@GetMapping("/project-and-team")
 	public String getProjectTeam(Model model) {
 	
 		List<TeamMember> allActiveTeamMemeber = teamMemberRepository.findAllByStatus("Active");
-		model.addAttribute("allActiveTeamMemeber", allActiveTeamMemeber);		
+		model.addAttribute("allActiveTeamMemeber", allActiveTeamMemeber);	
+		Map<Long,String> teamMemberNameIDMap = allActiveTeamMemeber.stream().collect(
+				Collectors.toMap(TeamMember::getTeamMemberId, TeamMember::getFullName));
+		model.addAttribute("year",String.valueOf(DiaryUtil.getCurrentYear()));
+		model.addAttribute("teamMemberLeave", new TeamMemberLeave());
+		model.addAttribute("teamMemberNameIDMap", teamMemberNameIDMap);
 		return "team/project-team";
 	}
 	
@@ -99,6 +111,30 @@ public class TeamController {
 		apprisalObject.setComments(teamMemberAppraisal.getComments());
 		teamMemberAppraisalRepository.save(apprisalObject);
 		return "redirect:/member-appraisal-detail/"+apprisalObject.getTeamMember().getTeamMemberId()+"/"+apprisalObject.getFinancialYear();
+	}
+	
+	@PostMapping("/save-team-member-leave")
+	public String saveTeamMemberLeave(TeamMemberLeave teamMemberLeave,Model model) {
+		teamMemberLeaveRepository.save(teamMemberLeave);
+		String financialYear = String.valueOf(DiaryUtil.getCurrentYear());
+		TeamMember currentTeamMember = teamMemberRepository.findById(teamMemberLeave.getTeamMember().getTeamMemberId()).get();
+		TeamMemberAppraisal teamMemberAprisal = teamMemberAppraisalRepository.findByTeamMemberAndFinancialYear(currentTeamMember, financialYear);
+		int updatedLeaveCount = teamMemberAprisal.getLeaveCount()+1;
+		teamMemberAprisal.setLeaveCount(updatedLeaveCount);
+		teamMemberAppraisalRepository.save(teamMemberAprisal);
+		return "redirect:/project-and-team";
+	}
+	
+	@GetMapping("/member-leave-history/{memberid}")
+	public String getTeamMemberLeaveHistory(Model model,@PathVariable long memberid) {
+		Optional<TeamMember> teamMember = teamMemberRepository.findById(memberid);
+		List<TeamMemberLeave> getAllLeave = teamMemberLeaveRepository.findAllByTeamMemberOrderByCreatedDateDesc(teamMember.get());
+		String financialYear = String.valueOf(DiaryUtil.getCurrentYear());
+		TeamMemberAppraisal teamMemberAprisal = teamMemberAppraisalRepository.findByTeamMemberAndFinancialYear(teamMember.get(), financialYear);
+		model.addAttribute("allTakenLeave", getAllLeave);
+		model.addAttribute("memberFullName", teamMember.get().getFullName());
+		model.addAttribute("ListCount", teamMemberAprisal.getLeaveCount());
+		return "team/member-leave-list";
 	}
 
 }

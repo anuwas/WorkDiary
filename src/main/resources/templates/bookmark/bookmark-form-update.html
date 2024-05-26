@@ -3,6 +3,7 @@
   <head>
     <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Update Bookmark')"></div>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tiny.cloud/1/xb35xk73hgyckinp46g6ivh20vtxgb0soa2tn1e22n7cc4iu/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   </head>
   <body>
     <div class="container-scroller">
@@ -20,11 +21,12 @@
                     <p class="card-description"> Add/Edit new Book Mark </p>
                     <div class="form-group">
                         <label for="taskSummary">Bookmark Title</label>
-                        <textarea class="form-control" th:field="*{bookMarkTitle}" id="bookMarkTitle" rows="2"></textarea>
+                        <input type="text" th:field="*{bookMarkTitle}" id="bookMarkTitle" class="form-control" />
+                        <!--<textarea class="form-control" th:field="*{bookMarkTitle}" id="bookMarkTitle" rows="2"></textarea>-->
                       </div>
                     <div class="form-group">
                         <label for="taskDescriptoin">Bookmark Description</label>
-                        <textarea class="form-control" th:field="*{bookMarkDescription}" id="bookMarkDescription" rows="2"></textarea>
+                        <textarea class="form-control" th:field="*{bookMarkDescription}" id="bookMarkDescription" rows="15"></textarea>
                       </div>
                   </div>
                   <div class="card-body">
@@ -42,7 +44,10 @@
                           <div class="form-group row">
                             <div class="form-group">
                         	<label for="taskDescriptoin">Active/Inactive</label>
-                        	 <input type="text" class="form-control" th:field="*{bookMarkActive}" id="bookMarkActive">
+                        	 <!--<input type="text" class="form-control" th:field="*{bookMarkActive}" id="bookMarkActive">-->
+                        	 <select class="form-control" th:field="*{bookMarkActive}" id="bookMarkActiveDDL">
+                                <option th:each="p : ${bookMarkActiveList}" th:value="${p}" th:text="${p}" />
+                              </select>
                       		</div>
                           </div>
                         </div>
@@ -58,6 +63,18 @@
           <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
           <div th:replace="fragments/footer :: footer"></div>
+                    <script>
+				    tinymce.init({
+				      selector: '#bookMarkDescription',
+				      height: 500,
+				      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+				      //toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+				      toolbar: 'alignleft aligncenter alignright alignjustify | formatselect | bullist numlist | outdent indent | link code',
+				      toolbar_mode: 'floating',
+				      tinycomments_mode: 'embedded',
+				      tinycomments_author: 'Anuwas B',
+				   });
+  			</script>
         </div>
       </div>
     </div>

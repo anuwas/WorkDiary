@@ -58,7 +58,9 @@ public class BookMarkController {
 	    public String taskManagerEdit(Model model,@PathVariable long id) {
 		 Optional<BookMark> diaryTaskObject = null;
 		 diaryTaskObject = bookMarkRepository.findById(id);
-	     model.addAttribute("bookMark", diaryTaskObject.get());    
+	     model.addAttribute("bookMark", diaryTaskObject.get());
+	     List<String> bookMarkActiveList = Arrays.asList("Active","Inactive");
+	     model.addAttribute("bookMarkActiveList", bookMarkActiveList);
 	        
 	     return "bookmark/bookmark-form-update"; //view
 	    }

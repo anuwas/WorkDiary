@@ -55,6 +55,9 @@ public class TeamMemberAppraisal {
 	@Column(name = "LEAVE_STAT",columnDefinition = "TEXT") // Leave statistics
 	private String leaveStat;
 	
+	@Column(name = "LEAVE_COUNT") // Leave statistics
+	private int leaveCount;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TEAM_MEMBER_ID", nullable=false)
     private TeamMember teamMember;

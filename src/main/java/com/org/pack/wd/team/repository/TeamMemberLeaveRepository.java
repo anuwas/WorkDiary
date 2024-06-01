@@ -1,5 +1,6 @@
 package com.org.pack.wd.team.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,7 @@ import com.org.pack.wd.team.entiry.TeamMemberLeave;
 @Repository
 public interface TeamMemberLeaveRepository extends JpaRepository<TeamMemberLeave,Long>{
 	List<TeamMemberLeave> findAllByTeamMemberOrderByCreatedDateDesc(TeamMember teamMember);
+	
+	List<TeamMemberLeave> findAllByLeaveDate(Date leaveDate);
+	List<TeamMemberLeave> findAllByLeaveDateGreaterThanOrderByLeaveDateAsc(Date leaveDate);
 }

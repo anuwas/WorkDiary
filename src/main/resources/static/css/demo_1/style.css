@@ -383,7 +383,7 @@
   font-family: "roboto", sans-serif;
   padding: 0;
   /*width: 270px;*/
-  width: 250px;
+  width: 235px;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -615,7 +615,8 @@
 
 .content-wrapper {
   background: #F3F3F3;
-  padding: 1.2rem 1.2rem;
+  /*padding: 1.2rem 1.2rem;*/
+  padding: 0.75rem 0.75rem;
   width: 100%;
   flex-grow: 1; }
 

@@ -42,6 +42,13 @@ public class TeamController {
 		Map<Long,String> teamMemberNameIDMap = allActiveTeamMemeber.stream().collect(
 				Collectors.toMap(TeamMember::getTeamMemberId, TeamMember::getFullName));
 		model.addAttribute("year",String.valueOf(DiaryUtil.getCurrentYear()));
+		List<TeamMemberLeave> currentDateLeave = teamMemberLeaveRepository.findAllByLeaveDate(DiaryUtil.getCurrentDate());
+		List<TeamMemberLeave> upComingLeave = teamMemberLeaveRepository.findAllByLeaveDateGreaterThanOrderByLeaveDateAsc(DiaryUtil.getCurrentDate());
+		if(upComingLeave.size()>=3) {
+			upComingLeave = upComingLeave.subList(0, 3);
+		}
+		model.addAttribute("currentDateLeave", currentDateLeave);
+		model.addAttribute("upComingLeave", upComingLeave);
 		model.addAttribute("teamMemberLeave", new TeamMemberLeave());
 		model.addAttribute("teamMemberNameIDMap", teamMemberNameIDMap);
 		return "team/project-team";
@@ -109,6 +116,11 @@ public class TeamController {
 		apprisalObject.setDeliveryStat(teamMemberAppraisal.getDeliveryStat());
 		apprisalObject.setLeaveStat(teamMemberAppraisal.getLeaveStat());
 		apprisalObject.setComments(teamMemberAppraisal.getComments());
+		apprisalObject.setPR(teamMemberAppraisal.getPR());
+		apprisalObject.setCR(teamMemberAppraisal.getCR());
+		apprisalObject.setKA(teamMemberAppraisal.getKA());
+		apprisalObject.setTool(teamMemberAppraisal.getTool());
+		apprisalObject.setRca(teamMemberAppraisal.getRca());
 		teamMemberAppraisalRepository.save(apprisalObject);
 		return "redirect:/member-appraisal-detail/"+apprisalObject.getTeamMember().getTeamMemberId()+"/"+apprisalObject.getFinancialYear();
 	}

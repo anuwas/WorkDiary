@@ -37,7 +37,49 @@
                           </div>
                         </div>
                       </div>
-                    
+                      <div class="row">
+                        <div class="col-md-2">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">PR</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control form-control-lg" th:field="*{PR}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">CR</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control form-control-lg" th:field="*{CR}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">KA</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control form-control-lg" th:field="*{KA}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Tool</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control form-control-lg" th:field="*{tool}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">RCA</label>
+                            <div class="col-sm-7">
+                              <input type="text" class="form-control form-control-lg" th:field="*{rca}">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                                          
                   </div>
                   <div class="card-body">
                    
@@ -46,23 +88,23 @@
                         <textarea class="form-control" th:field="*{goesWell}" id="goesWell" rows="2"></textarea>
                       </div>
                     <div class="form-group">
-                        <label for="taskDescriptoin">Things that gose not well</label>
+                        <label for="taskDescriptoin" class="card-title text-primary">Things that gose not well</label>
                         <textarea class="form-control" th:field="*{goesNotWell}" id="goesNotWell" rows="2"></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="taskDescriptoin">Improvement Areas</label>
+                        <label for="taskDescriptoin" class="card-title text-primary">Improvement Areas</label>
                         <textarea class="form-control" th:field="*{improvementAreas}" id="improvementAreas" rows="2"></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="taskDescriptoin">Delivery Statstics</label>
+                        <label for="taskDescriptoin" class="card-title text-primary">Delivery Statstics</label>
                         <textarea class="form-control" th:field="*{deliveryStat}" id="deliveryStat" rows="2"></textarea>
                       </div>
                        <div class="form-group">
-                        <label for="taskDescriptoin">Leave Stastics</label>
+                        <label for="taskDescriptoin" class="card-title text-primary">Leave Stastics</label>
                         <textarea class="form-control" th:field="*{leaveStat}" id="leaveStat" rows="2"></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="taskDescriptoin">Comments</label>
+                        <label for="taskDescriptoin" class="card-title text-primary">Comments</label>
                         <textarea class="form-control" th:field="*{comments}" id="comments" rows="2"></textarea>
                       </div>
                         <button type="submit" class="btn btn-primary">Submit</button>

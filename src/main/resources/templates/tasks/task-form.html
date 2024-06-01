@@ -3,6 +3,7 @@
   <head>
     <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Add New Task')"></div>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tiny.cloud/1/xb35xk73hgyckinp46g6ivh20vtxgb0soa2tn1e22n7cc4iu/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   </head>
   <body>
     <div class="container-scroller">
@@ -20,7 +21,7 @@
                     <p class="card-description"> Add/Edit new task </p>
                     <div class="form-group">
                         <label for="taskSummary">Task Summary</label>
-                        <textarea class="form-control" th:field="*{taskSummary}" id="taskSummary" rows="2"></textarea>
+                        <textarea class="form-control" th:field="*{taskSummary}" id="taskSummary" rows="1"></textarea>
                       </div>
                     <div class="form-group">
                         <label for="taskDescriptoin">Task Description</label>
@@ -82,4 +83,16 @@
         $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
       } );
         </script>
+        <script>
+				    tinymce.init({
+				      selector: '#taskDescriptoin',
+				      height: 200,
+				      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+				      //toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+				      toolbar: 'alignleft aligncenter alignright alignjustify | formatselect | bullist numlist | outdent indent | link code',
+				      toolbar_mode: 'floating',
+				      tinycomments_mode: 'embedded',
+				      tinycomments_author: 'Anuwas B',
+				   });
+  			</script>
 </html>

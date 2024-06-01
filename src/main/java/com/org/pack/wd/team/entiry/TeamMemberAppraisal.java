@@ -55,8 +55,23 @@ public class TeamMemberAppraisal {
 	@Column(name = "LEAVE_STAT",columnDefinition = "TEXT") // Leave statistics
 	private String leaveStat;
 	
-	@Column(name = "LEAVE_COUNT") // Leave statistics
+	@Column(name = "LEAVE_COUNT",columnDefinition = "integer default 0") // Leave Count
 	private int leaveCount;
+	
+	@Column(name = "PR",columnDefinition = "integer default 0") // number of PR
+	private int PR;
+	
+	@Column(name = "CR",columnDefinition = "integer default 0") // number of CR
+	private int CR;
+	
+	@Column(name = "TOOL",columnDefinition = "integer default 0") // number of Tool
+	private int tool;
+	
+	@Column(name = "RCA",columnDefinition = "integer default 0") // number of RCA
+	private int rca;
+	
+	@Column(name = "KA",columnDefinition = "integer default 0") // number of KA
+	private int KA;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="TEAM_MEMBER_ID", nullable=false)

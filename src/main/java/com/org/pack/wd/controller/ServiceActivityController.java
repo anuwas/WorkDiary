@@ -55,6 +55,24 @@ public class ServiceActivityController {
 		}
 	}
 	
+	@PostMapping("/saveserviceactivity-from")
+	public String createNewServiceActivityFrom(ServiceActivity serviceActivity,Model model) {
+		try {
+			//String yearName = (String) session.getAttribute("yearName");
+			//String monthName = (String) session.getAttribute("monthName");
+			int monthIndex = ConstantProperties.MONTH_NAME_INDEX_MAP.get(serviceActivity.getServiceMonthName());
+			//serviceActivity.setServiceYearName(yearName);
+			//serviceActivity.setServiceMonthName(monthName);
+			serviceActivity.setServiceMonth(monthIndex);
+			int serviceYear = Integer.parseInt((String) serviceActivity.getServiceYearName()) ;
+			serviceActivity.setServiceYear(serviceYear);
+			serviceActivityRepository.save(serviceActivity);
+			return "redirect:/service-activity/"+serviceActivity.getServiceYearName()+"/"+serviceActivity.getServiceMonthName();
+		} catch (Exception e) {
+			return "task-form";
+		}
+	}
+	
 	@GetMapping("/service-activity-edit/{id}")
 	public String editServiceActivity(Model model,@PathVariable long id) {
 		Optional<ServiceActivity> serviceActivityObject = null;
@@ -78,6 +96,8 @@ public class ServiceActivityController {
 			List<ActivityYearMonth> listServiceActivityYearMonth = serviceActivityRepository.findAllServiceActvityWithMonthYear();
 			model.addAttribute("listServiceActivityYearMonth", listServiceActivityYearMonth);
 			//System.out.println(listServiceActivityYearMonth);
+			ServiceActivity serviceActivityObject = new ServiceActivity();
+			model.addAttribute("serviceActivityObject", serviceActivityObject);
 			return "serviceactivity/all-service-activities";
 		}
 

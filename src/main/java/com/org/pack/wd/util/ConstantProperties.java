@@ -21,7 +21,7 @@ public class ConstantProperties {
 		MONTH_NAME_INDEX_MAP.put("March", 3);
 		MONTH_NAME_INDEX_MAP.put("April", 4);
 		MONTH_NAME_INDEX_MAP.put("May", 5);
-		MONTH_NAME_INDEX_MAP.put("Jun", 6);
+		MONTH_NAME_INDEX_MAP.put("June", 6);
 		MONTH_NAME_INDEX_MAP.put("July", 7);
 		MONTH_NAME_INDEX_MAP.put("August", 8);
 		MONTH_NAME_INDEX_MAP.put("September", 9);

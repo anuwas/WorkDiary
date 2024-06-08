@@ -185,8 +185,11 @@
                   <div class="col-md-12 grid-margin">
                     <div class="card">
                    <div class="card-body">
+					   <div class="d-flex justify-content-between">
                     <h4 class="card-title">Submit Leave</h4>
-                    <form class="forms-sample" th:action="@{/save-team-member-leave}" method="post" th:object="${teamMemberLeave}">
+                    <a href="/member-all-leave-history"><small>Show All Leave</small></a>
+                    </div>
+                    <form  th:action="@{/save-team-member-leave}" method="post" th:object="${teamMemberLeave}">
                       <div class="form-group">
                         <label for="exampleInputName1">Name</label>
                         <select class="form-control form-control-lg" id="teamMemberDDL" th:field="*{teamMember}">
@@ -200,7 +203,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword4">Date</label>
-                        <input type="text" class="form-control" th:field="*{leaveDate}" id="leaveDate" placeholder="Date">
+                        <input type="text" class="form-control" th:field="*{leaveDate}" id="leaveDate" placeholder="yyyy-mm-dd">
                       </div>                     
                      
                       <div class="form-group">
@@ -263,7 +266,9 @@
           <script type="text/javascript">
      $( function() {
        
-        $( "#leaveDate" ).datepicker({ dateFormat: 'yy-mm-dd' });
+        //$( "#leaveDate" ).datepicker({ dateFormat: 'yy-mm-dd' });
+         $( "#leaveDate" ).datepicker();
+        $( "#leaveDate" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
       } ); 
         </script>
         </div>

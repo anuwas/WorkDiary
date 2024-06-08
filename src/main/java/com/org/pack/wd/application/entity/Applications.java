@@ -1,4 +1,4 @@
-package com.org.pack.wd.tickting.entity;
+package com.org.pack.wd.application.entity;
 
 
 import javax.persistence.Column;
@@ -11,10 +11,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "APPLICATIONS")
-@Setter
-@Getter
+
 public class Applications {
 	
 	@Id
@@ -47,6 +44,5 @@ public class Applications {
 	
 	@Column(name = "RUNBOOK",columnDefinition = "TEXT")
 	private String runbook;
-
 
 }

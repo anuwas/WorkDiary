@@ -1,5 +1,6 @@
 package com.org.pack.wd.team.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -7,19 +8,24 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.org.pack.wd.operation.entity.OperationAudit;
 import com.org.pack.wd.team.entiry.TeamMember;
 import com.org.pack.wd.team.entiry.TeamMemberAppraisal;
 import com.org.pack.wd.team.entiry.TeamMemberLeave;
 import com.org.pack.wd.team.repository.TeamMemberAppraisalRepository;
 import com.org.pack.wd.team.repository.TeamMemberLeaveRepository;
 import com.org.pack.wd.team.repository.TeamMemberRepository;
+import com.org.pack.wd.tickting.entity.Tickets;
 import com.org.pack.wd.util.DiaryUtil;
 
 @Controller
@@ -147,6 +153,22 @@ public class TeamController {
 		model.addAttribute("memberFullName", teamMember.get().getFullName());
 		model.addAttribute("ListCount", teamMemberAprisal.getLeaveCount());
 		return "team/member-leave-list";
+	}
+	
+	@GetMapping("/member-all-leave-history")
+	public String getTeamMemberAllLeveHistory(Model model,@RequestParam(defaultValue = "1") int page) {
+		List<TeamMemberLeave> teamLeaveList = new ArrayList<>();
+		int size = 50;
+		Pageable paging = PageRequest.of(page - 1, size,Sort.by("leaveDate").descending());
+		Page<TeamMemberLeave> pageTuts = teamMemberLeaveRepository.findAll(paging);
+		teamLeaveList = pageTuts.getContent();
+
+	      model.addAttribute("allTeamMemberLeaveList", teamLeaveList);
+	      model.addAttribute("currentPage", pageTuts.getNumber() + 1);
+	      model.addAttribute("totalItems", pageTuts.getTotalElements());
+	      model.addAttribute("totalPages", pageTuts.getTotalPages());
+	      model.addAttribute("pageSize", size);
+		return "team/all-leave-list";
 	}
 
 }

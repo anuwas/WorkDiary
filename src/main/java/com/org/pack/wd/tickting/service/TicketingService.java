@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.org.pack.wd.tickting.entity.Applications;
+import com.org.pack.wd.application.entity.Applications;
+import com.org.pack.wd.application.repository.ApplicationsRepository;
 import com.org.pack.wd.tickting.entity.TicketAppCategory;
 import com.org.pack.wd.tickting.entity.TicketDefectArea;
 import com.org.pack.wd.tickting.entity.TicketEnvironment;
@@ -14,7 +15,6 @@ import com.org.pack.wd.tickting.entity.TicketWorker;
 import com.org.pack.wd.tickting.entity.Tickets;
 import com.org.pack.wd.tickting.entity.Ticketstatus;
 import com.org.pack.wd.tickting.entity.Tickettype;
-import com.org.pack.wd.tickting.repository.ApplicationsRepository;
 import com.org.pack.wd.tickting.repository.TicketAppCategoryRepository;
 import com.org.pack.wd.tickting.repository.TicketDefectAreaRepository;
 import com.org.pack.wd.tickting.repository.TicketEnvironmentRepository;

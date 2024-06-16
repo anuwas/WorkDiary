@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.org.pack.wd.application.entity.Applications;
+import com.org.pack.wd.application.repository.ApplicationsRepository;
 import com.org.pack.wd.team.entiry.TeamMember;
 import com.org.pack.wd.team.entiry.TeamMemberAppraisal;
 import com.org.pack.wd.team.entiry.TeamMemberLeave;
 import com.org.pack.wd.team.repository.TeamMemberAppraisalRepository;
 import com.org.pack.wd.team.repository.TeamMemberLeaveRepository;
 import com.org.pack.wd.team.repository.TeamMemberRepository;
-import com.org.pack.wd.tickting.entity.Tickets;
 import com.org.pack.wd.util.DiaryUtil;
 
 @Controller
@@ -36,6 +37,9 @@ public class TeamController {
 	
 	@Autowired
 	TeamMemberAppraisalRepository teamMemberAppraisalRepository;
+	
+	@Autowired
+	ApplicationsRepository applicationsRepository;
 	
 	@Autowired
 	TeamMemberLeaveRepository teamMemberLeaveRepository;
@@ -53,10 +57,14 @@ public class TeamController {
 		if(upComingLeave.size()>=3) {
 			upComingLeave = upComingLeave.subList(0, 3);
 		}
+		
+		List<Applications> allApplications = applicationsRepository.findAll();
+		
 		model.addAttribute("currentDateLeave", currentDateLeave);
 		model.addAttribute("upComingLeave", upComingLeave);
 		model.addAttribute("teamMemberLeave", new TeamMemberLeave());
 		model.addAttribute("teamMemberNameIDMap", teamMemberNameIDMap);
+		model.addAttribute("allApplications", allApplications);
 		return "team/project-team";
 	}
 	

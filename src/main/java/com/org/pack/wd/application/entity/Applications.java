@@ -11,7 +11,10 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-
+@Entity
+@Table(name = "APPLICATIONS")
+@Setter
+@Getter
 public class Applications {
 	
 	@Id
@@ -33,6 +36,9 @@ public class Applications {
 	@Column(name = "MODULES")
 	private String modules;
 	
+	@Column(name = "SERIES") // summer or winter  or all
+	private String series;
+	
 	@Column(name = "INTERFACES",columnDefinition = "TEXT")
 	private String interfaces;
 	
@@ -44,5 +50,9 @@ public class Applications {
 	
 	@Column(name = "RUNBOOK",columnDefinition = "TEXT")
 	private String runbook;
+	
+	@Column(name = "APPSTATUS")
+	private String appStatus;
+
 
 }

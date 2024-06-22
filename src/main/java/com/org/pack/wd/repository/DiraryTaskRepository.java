@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +23,6 @@ public interface DiraryTaskRepository extends PagingAndSortingRepository<DiaryTa
 	//public List<DiaryTask> findAllDiaryTaskByTaskDateAndTaskStatusIn(Date taskDate,List<String> taskStatus);
 	public List<DiaryTask> findAllDiaryTaskByTaskDateBeforeAndTaskStatusNotInOrderByTaskPriorityAsc(Date taskDate,List<String> taskStatus);
 	public List<DiaryTask> findAllDiaryTaskByTaskDateAfterAndTaskStatusNotInOrderByTaskDateAsc(Date taskDate,List<String> taskStatus);
-	public List<DiaryTask> findAllDiaryTaskByTaskStatusInOrderByTaskDateDesc(List<String> taskStatus,Pageable pageable);
+	//public List<DiaryTask> findAllDiaryTaskByTaskStatusInOrderByTaskDateDesc(List<String> taskStatus,Pageable pageable);
+	Page<DiaryTask> findAllDiaryTaskByTaskStatusInOrderByTaskDateDesc(List<String> taskStatus,Pageable pageable);
 }

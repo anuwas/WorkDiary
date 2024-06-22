@@ -3,16 +3,13 @@ package com.org.pack.wd.service;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -67,7 +64,8 @@ public class DiaryTaskService {
 	  public List<DiaryTask> getAllClosedTask(int pageNumber){ 
 		  List<String>  closedTaskIn = Arrays.asList("Done","Closed"); 
 		  Pageable pageWithElement =  PageRequest.of(pageNumber, 50); 
-		  List<DiaryTask> allClosedTask =  diraryTaskRepository.findAllDiaryTaskByTaskStatusInOrderByTaskDateDesc(closedTaskIn,pageWithElement); 
+		  //List<DiaryTask> allClosedTask =  diraryTaskRepository.findAllDiaryTaskByTaskStatusInOrderByTaskDateDesc(closedTaskIn,pageWithElement);
+		  List<DiaryTask> allClosedTask = new ArrayList<>();
 		  return allClosedTask; 
 	  }
 	 

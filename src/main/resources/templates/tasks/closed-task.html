@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='UpComing Task Manager')"></div>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Closed Tasks ')"></div>
   </head>
   <body>
     <div class="container-scroller">
@@ -49,6 +49,34 @@
                         </tr>
                       </tbody>
                     </table>
+                                        <div style="margin-top: 2px;">Total Record : <span th:text="${totalItems}"></span>
+                    <nav aria-label="Pagination" th:if="${totalPages > 0}">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+      <a th:replace="fragments/closedtaskpaiging :: closedtaskpaiging(1, '<<', 'First Page')"></a>
+    </li>
+    <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+      <a th:replace="fragments/closedtaskpaiging :: closedtaskpaiging(${currentPage - 1}, 'Prev', 'Previous Page')"></a>
+    </li>
+    <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+      <a class="page-link" href="#">...</a>
+    </li>
+    <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+      th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+      <a th:replace="fragments/closedtaskpaiging :: closedtaskpaiging(${page}, ${page}, 'Page ' + ${page})"></a>
+    </li>
+    <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+      <a class="page-link" href="#">...</a>
+    </li>
+    <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+      <a th:replace="fragments/closedtaskpaiging :: closedtaskpaiging(${currentPage + 1},'Next', 'Next Page')"></a>
+    </li>
+    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+      <a th:replace="fragments/closedtaskpaiging :: closedtaskpaiging(${totalPages}, '>>', 'Last Page')"></a>
+    </li>
+  </ul>
+</nav>
+</div>
                   </div>
                 </div>
               </div>

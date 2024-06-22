@@ -75,6 +75,9 @@ public class Tickets {
 	@Column(name = "TICKET_ENVIRONMENT")
 	private String ticketEnvironment;
 	
+	@Column(name = "TICKET_TAG",columnDefinition = "TEXT")
+	private String ticketTag;
+	
 	@Column(name = "TICKET_CREATED_DATE")
 	private Date ticketCreatedDate;
 	

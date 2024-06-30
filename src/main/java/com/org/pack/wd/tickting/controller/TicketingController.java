@@ -152,8 +152,8 @@ public class TicketingController {
 			  @RequestParam(value = "ticketType", required = false) String ticketType,
 			  @RequestParam(value = "ticketStatus", required = false) String ticketStatus,
 			  @RequestParam(value = "applicaiton", required = false) String applicaiton,
-			  @RequestParam(value = "ticketCreatedDate", required = false) String ticketCreatedDate,
-			  @RequestParam(value = "ticketClosedDate", required = false) String ticketClosedDate,
+			  @RequestParam(value = "ticketCreatedFromDate", required = false) String ticketCreatedFromDate,
+			  @RequestParam(value = "ticketCreatedToDate", required = false) String ticketCreatedToDate,
 			  @RequestParam(value = "ticketEnvironment", required = false) String ticketEnvironment)	
 	{
 		int size = 50;
@@ -166,7 +166,7 @@ public class TicketingController {
 	        pageTuts = ticketsRepository.findAll(paging);
 	      } else {
 	        //pageTuts = ticketsRepository.findByTicketStatusContainingIgnoreCase("Active", paging);
-	    	  pageTuts = ticketingJPACriteriaHelper.retriveTicketsBySearchandSort(ticketNumber,ticketType, ticketStatus, ticketPriority,applicaiton,ticketEnvironment,paging);
+	    	  pageTuts = ticketingJPACriteriaHelper.retriveTicketsBySearchandSort(ticketNumber,ticketType, ticketStatus, ticketPriority,applicaiton,ticketEnvironment,ticketCreatedFromDate,ticketCreatedToDate,paging);
 	        model.addAttribute("keyword", keyword);
 	      }
 	      
@@ -175,8 +175,8 @@ public class TicketingController {
 	      model.addAttribute("ticketType", ticketType);
 	      model.addAttribute("ticketStatus", ticketStatus);
 	      model.addAttribute("applicaiton", applicaiton);
-	      model.addAttribute("ticketCreatedDate", ticketCreatedDate);
-	      model.addAttribute("ticketClosedDate", ticketClosedDate);
+	      model.addAttribute("ticketCreatedFromDate", ticketCreatedFromDate);
+	      model.addAttribute("ticketCreatedToDate", ticketCreatedToDate);
 	      model.addAttribute("ticketEnvironment", ticketEnvironment);
 
 	      tutorials = pageTuts.getContent();

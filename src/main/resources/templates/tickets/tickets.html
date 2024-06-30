@@ -72,10 +72,10 @@
                         <div class="col-md-3">
                           <div class="form-group row">
                             <div class="col-sm-6">
-                            <input type="text" class="form-control" th:name="ticketCreatedDate" th:value="*{ticketCreatedDate}" id="ticketCreatedDate"  readonly="readonly"  placeholder="Created Date" />
+                            <input type="text" class="form-control" th:name="ticketCreatedFromDate"  id="ticketCreatedFromDate" th:value="${ticketCreatedFromDate}"  readonly="readonly"  placeholder="Created From" />
                             </div>
                             <div class="col-sm-6">
-                              <input type="text" class="form-control" th:name="ticketClosedDate" th:value="*{ticketClosedDate}" id="ticketClosedDate"  readonly="readonly" placeholder="Closed Date" />
+                              <input type="text" class="form-control" th:name="ticketCreatedToDate"  id="ticketCreatedToDate"  th:value="${ticketCreatedToDate}" readonly="readonly" placeholder="Created To" />
                             </div>
                           </div>
                         </div>
@@ -116,7 +116,7 @@
                 <div class="card">
 
                   <!--<div class="card-body">--><div>
-                    <table class="table table-bordered table-hover table-striped">
+                    <table class="table table-bordered table-hover">
                       <thead>
                         <tr >
                           <th> # </th>
@@ -201,10 +201,10 @@
     $( function() {
 		var currentDate = new Date();
 		
-         $( "#ticketCreatedDate" ).datepicker({
+         $( "#ticketCreatedFromDate" ).datepicker({
     		dateFormat: "yy-mm-dd"
 		});
-        $( "#ticketClosedDate" ).datepicker({
+        $( "#ticketCreatedToDate" ).datepicker({
     		//changeMonth: true,
     		//changeYear: true,
     		dateFormat: "yy-mm-dd"

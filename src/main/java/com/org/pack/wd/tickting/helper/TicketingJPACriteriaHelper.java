@@ -1,7 +1,13 @@
 package com.org.pack.wd.tickting.helper;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -23,7 +29,7 @@ public class TicketingJPACriteriaHelper {
 	@Autowired
 	EntityManager em;
 	
-	public Page<Tickets> retriveTicketsBySearchandSort(long ticketNumber,String ticketType,String ticketStatus,String ticketPriority,String applicaiton,String ticketEnvironment,Pageable pageable){
+	public Page<Tickets> retriveTicketsBySearchandSort(long ticketNumber,String ticketType,String ticketStatus,String ticketPriority,String applicaiton,String ticketEnvironment,String ticketCreatedDate, String ticketClosedDate,Pageable pageable) throws ParseException{
 		CriteriaBuilder builder =  em.getCriteriaBuilder();
 		CriteriaQuery<Tickets> criteria = builder.createQuery(Tickets.class);
 		Root<Tickets> supportItemRoot = criteria.from(Tickets.class);
@@ -49,9 +55,28 @@ public class TicketingJPACriteriaHelper {
 		  if (!ticketEnvironment.equals("All")) {
 			  predicates.add(builder.equal(supportItemRoot.get("ticketEnvironment"),   ticketEnvironment)); 
 		}
-		 
+		  /*
+		  if (!ticketCreatedDate.equals("")) {
+			 
+			  SimpleDateFormat myformatter = new SimpleDateFormat("yyyy-MM-dd");
+			  java.util.Date date = myformatter.parse(ticketCreatedDate);
+			  
+			  predicates.add(builder.greaterThanOrEqualTo(supportItemRoot.get("ticketCreatedDate"), date));
+		}*/
+		  
+	
+		if (!ticketCreatedDate.equals("") && !ticketClosedDate.equals("")) {
+			 
+			  SimpleDateFormat myformatter = new SimpleDateFormat("yyyy-MM-dd");
+			  java.util.Date fromDate = myformatter.parse(ticketCreatedDate);
+			  java.util.Date toDate = myformatter.parse(ticketClosedDate);			  
+			  predicates.add(builder.between(supportItemRoot.get("ticketCreatedDate"), fromDate, toDate)); 
+		}
+		
 		 
 		 criteria.where(builder.and(predicates.toArray( new Predicate[predicates.size()])));
+		 
+		 
 
 	        criteria.orderBy(builder.desc(supportItemRoot.get("createdDate")));
 	        List<Tickets> result = em.createQuery(criteria).setFirstResult((int) pageable.getOffset()).setMaxResults(pageable.getPageSize()).getResultList();

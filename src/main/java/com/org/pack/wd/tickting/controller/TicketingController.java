@@ -85,7 +85,7 @@ public class TicketingController {
 		
 		String str="2015-03-31";  
 	    Date date=Date.valueOf(str);//converting string into sql date  
-	    ticketObject.get().setTicketClosedDate(date);
+	    ticketObject.get().setTicketClosedDate(ticketObject.get().getTicketCreatedDate());
         model.addAttribute("ticktObject", ticketObject.get());
         List<String> ticketStatusList = ticketingService.getAllTicketStatusName();
         List<String> ticketTypeList = ticketingService.getAllTicketTypeNames();
@@ -142,6 +142,23 @@ public class TicketingController {
 	}
 	*/
 	
+	
+	@GetMapping("/open-tickets")
+	public String getAllOpenTickets(Model model,
+			@RequestParam(required = false) String keyword,
+			  @RequestParam(defaultValue = "1") int page,
+			  @RequestParam(value = "ticketNumber", required = false,defaultValue = "0") long ticketNumber,
+			  @RequestParam(value = "ticketPriority", required = false) String ticketPriority,
+			  @RequestParam(value = "ticketType", required = false) String ticketType,
+			  @RequestParam(value = "ticketStatus", required = false) String ticketStatus,
+			  @RequestParam(value = "applicaiton", required = false) String applicaiton,
+			  @RequestParam(value = "ticketEnvironment", required = false) String ticketEnvironment)
+	{
+		List<Tickets> allOpenTickets = ticketingJPACriteriaHelper.retriveOpenTicketsBySearchandSort(ticketType, ticketStatus, ticketPriority, applicaiton, ticketEnvironment);
+		model.addAttribute("allTicketList", allOpenTickets);
+		return "tickets/open-tickets";
+	}
+	
 	@GetMapping("/tickets")
 	  public String getAll(
 			  Model model, 
@@ -158,7 +175,7 @@ public class TicketingController {
 	{
 		int size = 50;
 	    try {
-	      List<Tickets> tutorials = new ArrayList<Tickets>();
+	      List<Tickets> ticketLists = new ArrayList<Tickets>();
 	      Pageable paging = PageRequest.of(page - 1, size,Sort.by("createdDate").descending());
 
 	      Page<Tickets> pageTuts;
@@ -166,7 +183,7 @@ public class TicketingController {
 	        pageTuts = ticketsRepository.findAll(paging);
 	      } else {
 	        //pageTuts = ticketsRepository.findByTicketStatusContainingIgnoreCase("Active", paging);
-	    	  pageTuts = ticketingJPACriteriaHelper.retriveTicketsBySearchandSort(ticketNumber,ticketType, ticketStatus, ticketPriority,applicaiton,ticketEnvironment,ticketCreatedFromDate,ticketCreatedToDate,paging);
+	    	  pageTuts = ticketingJPACriteriaHelper.retrivePageTicketsBySearchandSort(ticketNumber,ticketType, ticketStatus, ticketPriority,applicaiton,ticketEnvironment,ticketCreatedFromDate,ticketCreatedToDate,paging);
 	        model.addAttribute("keyword", keyword);
 	      }
 	      
@@ -179,9 +196,9 @@ public class TicketingController {
 	      model.addAttribute("ticketCreatedToDate", ticketCreatedToDate);
 	      model.addAttribute("ticketEnvironment", ticketEnvironment);
 
-	      tutorials = pageTuts.getContent();
+	      ticketLists = pageTuts.getContent();
 
-	      model.addAttribute("allTicketList", tutorials);
+	      model.addAttribute("allTicketList", ticketLists);
 	      model.addAttribute("currentPage", pageTuts.getNumber() + 1);
 	      model.addAttribute("totalItems", pageTuts.getTotalElements());
 	      model.addAttribute("totalPages", pageTuts.getTotalPages());

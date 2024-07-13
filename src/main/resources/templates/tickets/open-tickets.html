@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='All Ticket')"></div>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Open Tickets')"></div>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
   </head>
@@ -20,7 +20,7 @@
                         <div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" th:name="ticketNumber" th:value="${ticketNumber}" placeholder="Ticket Number"/>
+                              <input type="text" class="form-control"  placeholder="Ticket Number"/>
                               <input type="hidden" class="form-control" th:name="keyword" th:value="${keyword}" />
                             </div>
                           </div>
@@ -128,7 +128,7 @@
                           <th> ENV </th>
                           <th> Created On </th>
                           <th> <a class="btn btn-primary" href="/tickets/ticket-form" role="button">Add</a>
-                          <a class="btn btn-primary" href="/open-tickets" role="button">OT</a>
+                          <a class="btn btn-primary" href="/tickets" role="button">All</a>
                           <!--<span class="label pull-right">
                     	<a href="#modal" data-toggle="modal" class="btn btn-xs btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                     </span>-->
@@ -162,40 +162,12 @@
                         
                       </tbody>
                     </table>
-                    <div style="margin-top: 2px;">Total Record : <span th:text="${totalItems}"></span>
-                    <nav aria-label="Pagination" th:if="${totalPages > 0}">
-  <ul class="pagination justify-content-center">
-    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-      <a th:replace="fragments/paging :: paging(1, '<<', 'First Page')"></a>
-    </li>
-    <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
-      <a th:replace="fragments/paging :: paging(${currentPage - 1}, 'Prev', 'Previous Page')"></a>
-    </li>
-    <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
-      <a class="page-link" href="#">...</a>
-    </li>
-    <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
-      th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
-      <a th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>
-    </li>
-    <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
-      <a class="page-link" href="#">...</a>
-    </li>
-    <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
-      <a th:replace="fragments/paging :: paging(${currentPage + 1},'Next', 'Next Page')"></a>
-    </li>
-    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
-      <a th:replace="fragments/paging :: paging(${totalPages}, '>>', 'Last Page')"></a>
-    </li>
-  </ul>
-</nav>
-</div>
+                    <div style="margin-top: 2px;">Total Record : <span th:text="${allTicketList.size}"></span>
+                    
+					</div>
                   </div>
                 </div>
               </div> 
-              
-
-
               
             </div>
           </div>

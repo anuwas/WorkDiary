@@ -32,7 +32,7 @@
                             <label class="col-sm-4 col-form-label">Ticket Priority</label>
                             <div class="col-sm-8">
                               <select class="form-control" th:field="*{ticketPriority}" id="ticketPriorityDDL">
-								  <option value="-1">--Select--</option>
+								  <option value="P4">P4</option>
                                 <option th:each="p : ${ticketPrirityList}" th:value="${p}" th:text="${p}" />
                               </select>
                             </div>
@@ -87,6 +87,7 @@
                             <label class="col-sm-3 col-form-label">Application</label>
                             <div class="col-sm-9">
                              <select class="form-control" th:field="*{applicaiton}" id="applicaitonDDL">
+								 <option value="-1">--Select Application--</option>
                                 <option th:each="p : ${applicaitonList}" th:value="${p}" th:text="${p}" />
                               </select>
                             </div>
@@ -259,6 +260,15 @@
     		//changeYear: true,
     		dateFormat: "yy-mm-dd"
 		});
+		
+		$("#ticket-form").submit(function(){
+			var ticekt_created_date = $('#ticketCreatedDate').val();
+			if(ticekt_created_date==''){
+				$('#ticketCreatedDate').focus();
+				alert('Please insert created date')
+				return false;
+			}
+		})
         
         
       } );

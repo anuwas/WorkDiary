@@ -382,8 +382,9 @@
   background: linear-gradient(to top, #5768f3, #1c45ef);
   font-family: "roboto", sans-serif;
   padding: 0;
-  /*width: 270px;*/
-  width: 235px;
+  /*width: 270px;
+  width: 235px;*/
+  width: 210px;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -603,8 +604,9 @@
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
-  /*width: calc(100% - 270px);*/
-  width: calc(100% - 250px);
+  /*width: calc(100% - 270px);
+  width: calc(100% - 250px);*/
+  width: calc(100% - 210px);
   min-height: calc(100vh - 63px);
   display: flex;
   flex-direction: column; }

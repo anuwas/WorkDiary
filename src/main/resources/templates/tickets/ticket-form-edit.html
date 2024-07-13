@@ -242,7 +242,8 @@
             
         
         var ticketStatus = $('#ticketStatusDDL').val();
-        if(ticketStatus=='Closed'){
+        
+        if(ticketStatus=='Closed' || ticketStatus=='Resolved' || ticketStatus=='Fulfilled'){
 			$("#ticketClosedDate").css("display", "block"); 
 		}else{
 			$("#ticketClosedDate").css("display", "none"); 
@@ -250,7 +251,7 @@
         
         $('#ticketStatusDDL').click(function(){ 
 			var value = this.value;
-    		if(value=='Closed'){
+    		if(value=='Closed' || value=='Resolved' || value=='Fulfilled'){
 				$("#ticketClosedDate").css("display", "block"); 
 			}else{
 				$("#ticketClosedDate").css("display", "none"); 

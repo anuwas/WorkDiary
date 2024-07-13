@@ -29,7 +29,7 @@ public class TicketingJPACriteriaHelper {
 	@Autowired
 	EntityManager em;
 	
-	public Page<Tickets> retriveTicketsBySearchandSort(long ticketNumber,String ticketType,String ticketStatus,String ticketPriority,String applicaiton,String ticketEnvironment,String ticketCreatedDate, String ticketClosedDate,Pageable pageable) throws ParseException{
+	public Page<Tickets> retrivePageTicketsBySearchandSort(long ticketNumber,String ticketType,String ticketStatus,String ticketPriority,String applicaiton,String ticketEnvironment,String ticketCreatedDate, String ticketClosedDate,Pageable pageable) throws ParseException{
 		CriteriaBuilder builder =  em.getCriteriaBuilder();
 		CriteriaQuery<Tickets> criteria = builder.createQuery(Tickets.class);
 		Root<Tickets> supportItemRoot = criteria.from(Tickets.class);
@@ -91,6 +91,42 @@ public class TicketingJPACriteriaHelper {
 	        Page<Tickets> result1 = new PageImpl<>(result, pageable, count);
 	        return result1;
 
+	}
+	
+	public List<Tickets> retriveOpenTicketsBySearchandSort(String ticketType,String ticketStatus,String ticketPriority,String applicaiton,String ticketEnvironment){
+		CriteriaBuilder builder =  em.getCriteriaBuilder();
+		CriteriaQuery<Tickets> criteria = builder.createQuery(Tickets.class);
+		Root<Tickets> supportItemRoot = criteria.from(Tickets.class);
+		 List<Predicate> predicates = new ArrayList<Predicate>();
+		 
+		 predicates.add(builder.not(supportItemRoot.get("ticketStatus").in("Closed","Resolved","Fulfilled"))); 
+		 
+		 
+		/*
+		 if (!ticketType.equals("All")) {
+			  predicates.add(builder.equal(supportItemRoot.get("ticketType"), ticketType)); 
+		}
+		 if (!ticketStatus.equals("All")) {
+			  predicates.add(builder.equal(supportItemRoot.get("ticketStatus"), ticketStatus)); 
+		}
+		 if (!ticketPriority.equals("All")) {
+			  predicates.add(builder.equal(supportItemRoot.get("ticketPriority"), ticketPriority)); 
+		}
+		 
+		  if (!applicaiton.equals("All")) {
+		  predicates.add(builder.equal(supportItemRoot.get("applicaiton"),   applicaiton)); 
+		  }
+		  if (!ticketEnvironment.equals("All")) {
+			  predicates.add(builder.equal(supportItemRoot.get("ticketEnvironment"),   ticketEnvironment)); 
+		}
+		*/
+		  criteria.where(builder.and(predicates.toArray( new Predicate[predicates.size()])));
+			 
+			 
+
+	        criteria.orderBy(builder.desc(supportItemRoot.get("createdDate")));
+	        List<Tickets> result = em.createQuery(criteria).getResultList();
+	        return result;
 	}
 
 }

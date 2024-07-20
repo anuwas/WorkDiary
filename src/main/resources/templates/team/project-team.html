@@ -94,7 +94,7 @@
                                 <th>Name</th>
                                 <th>Phone No</th>
                                 <th>Emp ID</th>
-                                <th>Designation</th>
+                                <th>Cust ID</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -103,7 +103,7 @@
                                 <td th:text="${member.fullName}"></td>
                                 <td th:text="${member.phoneNo}"></td>
                                 <td th:text="${member.organizationEmpId}"></td>
-                                <td th:text="${member.organizationDesignation}"></td>
+                                <td th:text="${member.customerEmpId}"></td>
                                 <td >
 									<a th:href="@{'member-leave-history/'+ ${member.teamMemberId}}" ><i class="fa fa-times-circle fa-lg"></i></a>&nbsp;
 									<a th:href="@{'team-member-edit/'+ ${member.teamMemberId}}" ><i class="fa fa-edit fa-lg"></i></a>&nbsp;

@@ -1444,7 +1444,63 @@ pre {
   .table-hover .table-danger:hover > td,
   .table-hover .table-danger:hover > th {
     background-color: #ffbbb7; }
-    
+
+.table-ticket-Active,
+.table-ticket-Active > th,
+.table-ticket-Active > td {
+  background-color: #ffd3d0; }
+
+.table-ticket-Active th,
+.table-ticket-Active td,
+.table-ticket-Active thead th,
+.table-ticket-Active tbody + tbody {
+  border-color: #ffada8; }
+  
+.table-ticket-WFC,
+.table-ticket-WFC > th,
+.table-ticket-WFC > td {
+  background-color: #d0ffdc; }
+
+.table-ticket-WFC th,
+.table-ticket-WFC td,
+.table-ticket-WFC thead th,
+.table-ticket-WFC tbody + tbody {
+  border-color: #d0ffdc; }
+  
+.table-ticket-Fulfilled,
+.table-ticket-Fulfilled > th,
+.table-ticket-Fulfilled > td {
+  background-color: #cdcccc; }
+
+.table-ticket-Fulfilled th,
+.table-ticket-Fulfilled td,
+.table-ticket-Fulfilled thead th,
+.table-ticket-Fulfilled tbody + tbody {
+  border-color: #cdcccc; }
+  
+.table-ticket-Closed,
+.table-ticket-Closed > th,
+.table-ticket-Closed > td {
+  background-color: #cdcccc; }
+
+.table-ticket-Closed th,
+.table-ticket-Closed td,
+.table-ticket-Closed thead th,
+.table-ticket-Closed tbody + tbody {
+  border-color: #cdcccc; }  
+  
+  
+.table-ticket-Resolved,
+.table-ticket-Resolved > th,
+.table-ticket-Resolved > td {
+  background-color: #cdcccc; }
+
+.table-ticket-Resolved th,
+.table-ticket-Resolved td,
+.table-ticket-Resolved thead th,
+.table-ticket-Resolved tbody + tbody {
+  border-color: #cdcccc; }    
+      
 .table-p1,
 .table-p1 > th,
 .table-p1 > td {

@@ -120,7 +120,7 @@
                       <thead>
                         <tr >
                           <th> Name </th>
-                          <th> CUST ID </th>
+                          <th> Desig </th>
                           <th> ORG DEPT </th>
                           <th> Proj Squd </th>
                           <th> Skill </th>
@@ -130,7 +130,7 @@
                       <tbody>
                         <tr th:each="member : ${allActiveTeamMemeber}">
                           <td th:text="${member.fullName}"></td>
-                          <td th:text="${member.customerEmpId}"></td>
+                          <td th:text="${member.organizationDesignation}"></td>
                           <td th:text="${member.organizationDepartment}"></td>
                           <td th:text="${member.projectSquad}"></td>
                           <td th:text="${member.skillset}"></td>

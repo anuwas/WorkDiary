@@ -136,8 +136,8 @@
                         </tr>
                       </thead>
                       <tbody>
-						  <th:block th:each="ticket : ${allTicketList}">
-                        <tr >
+						  <th:block th:each="ticket : ${allTicketList}" >
+                        <tr th:class="'table-ticket-'+${ticket.ticketStatus}">
                           <td th:text="${ticket.id}"></td>
                           <td th:text="${ticket.ticketNumber}"></td>
                           <td th:text="${ticket.ticketType}"></td>

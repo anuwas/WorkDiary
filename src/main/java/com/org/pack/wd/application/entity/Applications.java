@@ -53,6 +53,9 @@ public class Applications {
 	
 	@Column(name = "APPSTATUS")
 	private String appStatus;
+	
+	@Column(name = "ASSIGNED_RESOURCES",columnDefinition = "TEXT")
+	private String assignedResources;
 
 
 }

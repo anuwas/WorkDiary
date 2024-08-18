@@ -127,14 +127,14 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="member : ${allApplications}">
-                          <td th:text="${member.applicationName}"></td>
-                          <td th:text="${member.applicaitonAbbreviation}"></td>
-                          <td th:text="${member.businessStream}"></td>
-                          <td th:text="${member.technology}"></td>
+                        <tr th:each="app : ${allApplications}">
+                          <td th:text="${app.applicationName}"></td>
+                          <td th:text="${app.applicaitonAbbreviation}"></td>
+                          <td th:text="${app.businessStream}"></td>
+                          <td th:text="${app.technology}"></td>
                           <td >
-						<a th:href="@{'team-member-edit/'+ ${member.id}}" ><i class="fa fa-edit fa-lg"></i></a>&nbsp;
-                          <a th:href="@{'member-appraisal-detail/'+ ${member.id}+'/'+${year}}" role="button"><i class="fa fa-info fa-lg"></i></a>
+						<a th:href="@{'application-edit/'+ ${app.id}}" ><i class="fa fa-edit fa-lg"></i></a>&nbsp;
+                          <a th:href="@{'member-appraisal-detail/'+ ${app.id}+'/'+${year}}" role="button"><i class="fa fa-info fa-lg"></i></a>
                           
                           </td>
                         </tr>                     

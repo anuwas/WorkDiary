@@ -1342,6 +1342,24 @@ pre {
   .table-hover .table-p2:hover > td,
   .table-hover .table-p2:hover > th {
     background-color: #ffe9b8; }    
+    
+
+.table-future-leave,
+.table-future-leave > th,
+.table-future-leave > td {
+  background-color: #ffe9b8; }
+
+.table-future-leave th,
+.table-future-leave td,
+.table-future-leave thead th,
+.table-future-leavetbody + tbody {
+  border-color: #ffe9b8; }
+
+.table-hover .table-future-leave:hover {
+  background-color: #ffe9b8; }
+  .table-hover .table-future-leave:hover > td,
+  .table-hover .table-future-leave:hover > th {
+    background-color: #ffe9b8; }     
 
 .table-secondary,
 .table-secondary > th,

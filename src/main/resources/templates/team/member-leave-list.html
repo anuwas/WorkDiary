@@ -51,7 +51,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr th:each="leave : ${allTakenLeave}">
+                              <tr th:each="leave : ${allTakenLeave}" th:class="${@pastPresentFutureDateChecks.getLeaveDates(leave.leaveDate)}">
 								  <td th:text="${#dates.format(leave.leaveDate, 'dd-MMM-yyyy')}">INV-87239</td>
                                 <!--<td th:text="${leave.leaveDate}">INV-87239</td>-->
                                 <td th:text="${leave.leaveType}">Viola Ford</td>

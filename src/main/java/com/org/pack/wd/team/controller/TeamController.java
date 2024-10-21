@@ -1,5 +1,6 @@
 package com.org.pack.wd.team.controller;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -154,7 +155,11 @@ public class TeamController {
 	@GetMapping("/member-leave-history/{memberid}")
 	public String getTeamMemberLeaveHistory(Model model,@PathVariable long memberid) {
 		Optional<TeamMember> teamMember = teamMemberRepository.findById(memberid);
-		List<TeamMemberLeave> getAllLeave = teamMemberLeaveRepository.findAllByTeamMemberOrderByCreatedDateDesc(teamMember.get());
+		
+		
+		
+		List<TeamMemberLeave> getAllLeave = teamMemberLeaveRepository.findAllByTeamMemberAndLeaveDateBetweenOrderByCreatedDateDesc(teamMember.get(),DiaryUtil.getFirstDateOfYear(),DiaryUtil.getLastDateOfYear());
+		
 		String financialYear = String.valueOf(DiaryUtil.getCurrentYear());
 		TeamMemberAppraisal teamMemberAprisal = teamMemberAppraisalRepository.findByTeamMemberAndFinancialYear(teamMember.get(), financialYear);
 		model.addAttribute("allTakenLeave", getAllLeave);

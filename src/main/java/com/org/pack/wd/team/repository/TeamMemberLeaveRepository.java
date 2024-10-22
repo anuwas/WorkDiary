@@ -12,7 +12,7 @@ import com.org.pack.wd.team.entiry.TeamMemberLeave;
 
 @Repository
 public interface TeamMemberLeaveRepository extends JpaRepository<TeamMemberLeave,Long>{
-	List<TeamMemberLeave> findAllByTeamMemberAndLeaveDateBetweenOrderByCreatedDateDesc(TeamMember teamMember,Date startDate,Date endDate);
+	List<TeamMemberLeave> findAllByTeamMemberAndLeaveDateBetweenOrderByLeaveDateDesc(TeamMember teamMember,Date startDate,Date endDate);
 	
 	
 	List<TeamMemberLeave> findAllByLeaveDate(Date leaveDate);

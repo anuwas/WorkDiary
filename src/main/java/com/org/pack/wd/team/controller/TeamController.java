@@ -165,6 +165,7 @@ public class TeamController {
 		model.addAttribute("allTakenLeave", getAllLeave);
 		model.addAttribute("memberFullName", teamMember.get().getFullName());
 		model.addAttribute("ListCount", teamMemberAprisal.getLeaveCount());
+		model.addAttribute("memberid", memberid);
 		return "team/member-leave-list";
 	}
 	
@@ -182,6 +183,16 @@ public class TeamController {
 	      model.addAttribute("totalPages", pageTuts.getTotalPages());
 	      model.addAttribute("pageSize", size);
 		return "team/all-leave-list";
+	}
+	
+	@GetMapping("/member-leave-delete/{teammemberleaveid}/{memberid}")
+	public String deleteMemberLeave(Model model,@PathVariable long teammemberleaveid, @PathVariable long memberid) {
+	
+		teamMemberLeaveRepository.deleteById(teammemberleaveid);
+		if(memberid==0) {
+			return "redirect:/member-all-leave-history";
+		}
+		return "redirect:/member-leave-history/"+memberid;
 	}
 
 }

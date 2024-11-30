@@ -32,6 +32,7 @@
                                 <th>Leave Type</th>
                                 <th>Applied Date</th>
                                 <th>Comment</th>
+								<th>Action</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -43,6 +44,7 @@
                                 <!--<td th:text="${leave.createdDate}">Paid</td>-->
                                 <td th:text="${#dates.format(leave.createdDate, 'dd-MMM-yyyy hh:mm')}"></td>
                                 <td th:text="${leave.comment}"></td>
+								<td><a th:href="@{'member-leave-delete/'+ ${leave.teamMemberLeaveId} +'/0'}"><i class="fa fa-trash-o fa-lg"></i></a></td>
                               </tr>
                                                            
                             </tbody>

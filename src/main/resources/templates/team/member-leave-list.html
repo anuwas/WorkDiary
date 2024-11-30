@@ -48,16 +48,18 @@
                                 <th>Leave Type</th>
                                 <th>Applied Date</th>
                                 <th>Comment</th>
+								<th>Action</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr th:each="leave : ${allTakenLeave}" th:class="${@pastPresentFutureDateChecks.getLeaveDates(leave.leaveDate)}">
 								  <td th:text="${#dates.format(leave.leaveDate, 'dd-MMM-yyyy')}">INV-87239</td>
                                 <!--<td th:text="${leave.leaveDate}">INV-87239</td>-->
-                                <td th:text="${leave.leaveType}">Viola Ford</td>
+                                <td th:text="${leave.leaveType}"></td>
                                 <!--<td th:text="${leave.createdDate}">Paid</td>-->
                                 <td th:text="${#dates.format(leave.createdDate, 'dd-MMM-yyyy hh:mm')}">INV-87239</td>
-                                <td th:text="${leave.comment}">20 Jan 2019</td>
+                                <td th:text="${leave.comment}"></td>
+								<td> <a th:href="@{'/member-leave-delete/'+ ${leave.teamMemberLeaveId}+'/'+${memberid}}"><i class="fa fa-trash-o fa-lg"></i></a></td>
                               </tr>
                                                            
                             </tbody>

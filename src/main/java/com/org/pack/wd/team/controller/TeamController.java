@@ -142,6 +142,9 @@ public class TeamController {
 	
 	@PostMapping("/save-team-member-leave")
 	public String saveTeamMemberLeave(TeamMemberLeave teamMemberLeave,Model model) {
+		
+		int getCurrentYear = DiaryUtil.getCurrentYearFromDate(teamMemberLeave.getLeaveDate());
+		teamMemberLeave.setLeaveYear(getCurrentYear);
 		teamMemberLeaveRepository.save(teamMemberLeave);
 		String financialYear = String.valueOf(DiaryUtil.getCurrentYear());
 		TeamMember currentTeamMember = teamMemberRepository.findById(teamMemberLeave.getTeamMember().getTeamMemberId()).get();
@@ -152,13 +155,12 @@ public class TeamController {
 		return "redirect:/project-and-team";
 	}
 	
-	@GetMapping("/member-leave-history/{memberid}")
-	public String getTeamMemberLeaveHistory(Model model,@PathVariable long memberid) {
+	@GetMapping("/member-leave-history/{memberid}/{leaveyear}")
+	public String getTeamMemberLeaveHistory(Model model,@PathVariable int leaveyear,@PathVariable long memberid) {
 		Optional<TeamMember> teamMember = teamMemberRepository.findById(memberid);
 		
-		
-		
-		List<TeamMemberLeave> getAllLeave = teamMemberLeaveRepository.findAllByTeamMemberAndLeaveDateBetweenOrderByLeaveDateDesc(teamMember.get(),DiaryUtil.getFirstDateOfYear(),DiaryUtil.getLastDateOfYear());
+		//List<TeamMemberLeave> getAllLeave = teamMemberLeaveRepository.findAllByTeamMemberAndLeaveDateBetweenOrderByLeaveDateDesc(teamMember.get(),DiaryUtil.getFirstDateOfYear(),DiaryUtil.getLastDateOfYear());
+		List<TeamMemberLeave> getAllLeave = teamMemberLeaveRepository.findAllByTeamMemberAndLeaveYearOrderByLeaveDateDesc(teamMember.get(),leaveyear);
 		
 		String financialYear = String.valueOf(DiaryUtil.getCurrentYear());
 		TeamMemberAppraisal teamMemberAprisal = teamMemberAppraisalRepository.findByTeamMemberAndFinancialYear(teamMember.get(), financialYear);

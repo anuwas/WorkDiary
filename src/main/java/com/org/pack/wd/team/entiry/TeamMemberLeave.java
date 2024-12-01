@@ -33,6 +33,9 @@ public class TeamMemberLeave {
 	@Column(name = "LEAVE_DATE")
 	private Date leaveDate;
 	
+	@Column(name = "LEAVE_YEAR",columnDefinition = "integer default 0")
+	private int leaveYear;
+	
 	@Column(name = "LEAVE_TYPE")
 	private String leaveType;
 	

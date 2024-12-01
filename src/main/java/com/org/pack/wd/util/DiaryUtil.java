@@ -17,6 +17,11 @@ public class DiaryUtil {
 		return year;
 	}
 	
+	public static int getCurrentYearFromDate(java.sql.Date appliedDate) {
+		int year = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(appliedDate)).getYear();
+		return year;
+	}
+	
 	public static java.sql.Date getCurrentDate() {
 		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		return date;

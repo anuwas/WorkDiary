@@ -105,9 +105,9 @@
                                 <td th:text="${member.organizationEmpId}"></td>
                                 <td th:text="${member.customerEmpId}"></td>
                                 <td >
-									<a th:href="@{'member-leave-history/'+ ${member.teamMemberId}}" ><i class="fa fa-times-circle fa-lg"></i></a>&nbsp;
+									<a th:href="@{'member-leave-history/'+ ${member.teamMemberId}+'/'+${year}}" ><i class="fa fa-times-circle fa-lg"></i></a>&nbsp;
 									<a th:href="@{'team-member-edit/'+ ${member.teamMemberId}}" ><i class="fa fa-edit fa-lg"></i></a>&nbsp;
-                          <a th:href="@{'member-appraisal-detail/'+ ${member.teamMemberId}+'/'+${year}}" role="button"><i class="fa fa-info fa-lg"></i></a>
+                          			<a th:href="@{'member-appraisal-detail/'+ ${member.teamMemberId}+'/'+${year}}" role="button"><i class="fa fa-info fa-lg"></i></a>
 								</td>
                               </tr>                             
                             </tbody>

@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-md-8">
                          	<div ><label class="form-check-label" th:text="${memberFullName}">  </label></div>
-                            <div ><label class="form-check-label" th:text="${ListCount}">  </label> </div>
+                            <div ><label class="form-check-label" th:text="${ListCount}">  </label> <a th:href="@{'/refresh-member-leavecount/'+ ${leaveyear}+'/'+${memberid}}" style="margin-left: 30px;"><i class="fa fa-refresh fa-lg"></i></a></div>
                         </div>
                       </div>
                     </div>
@@ -59,7 +59,7 @@
                                 <!--<td th:text="${leave.createdDate}">Paid</td>-->
                                 <td th:text="${#dates.format(leave.createdDate, 'dd-MMM-yyyy hh:mm')}">INV-87239</td>
                                 <td th:text="${leave.comment}"></td>
-								<td> <a th:href="@{'/member-leave-delete/'+ ${leave.teamMemberLeaveId}+'/'+${memberid}}"><i class="fa fa-trash-o fa-lg"></i></a></td>
+								<td> <a th:href="@{'/member-leave-delete/'+ ${leave.teamMemberLeaveId}+'/'+${memberid}+'/'+${leaveyear}}"><i class="fa fa-trash-o fa-lg"></i></a></td>
                               </tr>
                                                            
                             </tbody>

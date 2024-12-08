@@ -158,16 +158,22 @@ public class TeamController {
 	@GetMapping("/member-leave-history/{memberid}/{leaveyear}")
 	public String getTeamMemberLeaveHistory(Model model,@PathVariable int leaveyear,@PathVariable long memberid) {
 		Optional<TeamMember> teamMember = teamMemberRepository.findById(memberid);
-		
+		int leaveCount = 0;
 		//List<TeamMemberLeave> getAllLeave = teamMemberLeaveRepository.findAllByTeamMemberAndLeaveDateBetweenOrderByLeaveDateDesc(teamMember.get(),DiaryUtil.getFirstDateOfYear(),DiaryUtil.getLastDateOfYear());
 		List<TeamMemberLeave> getAllLeave = teamMemberLeaveRepository.findAllByTeamMemberAndLeaveYearOrderByLeaveDateDesc(teamMember.get(),leaveyear);
 		
-		String financialYear = String.valueOf(DiaryUtil.getCurrentYear());
+		//String financialYear = String.valueOf(DiaryUtil.getCurrentYear());
+		String financialYear = String.valueOf(leaveyear);
 		TeamMemberAppraisal teamMemberAprisal = teamMemberAppraisalRepository.findByTeamMemberAndFinancialYear(teamMember.get(), financialYear);
+		Optional<TeamMemberAppraisal> optionalteamMemberAprisal = Optional.ofNullable(teamMemberAprisal);
+		if(optionalteamMemberAprisal.isPresent()) {
+			leaveCount = optionalteamMemberAprisal.get().getLeaveCount();
+		}
 		model.addAttribute("allTakenLeave", getAllLeave);
 		model.addAttribute("memberFullName", teamMember.get().getFullName());
-		model.addAttribute("ListCount", teamMemberAprisal.getLeaveCount());
+		model.addAttribute("ListCount", leaveCount);
 		model.addAttribute("memberid", memberid);
+		model.addAttribute("leaveyear", leaveyear);
 		return "team/member-leave-list";
 	}
 	
@@ -187,14 +193,33 @@ public class TeamController {
 		return "team/all-leave-list";
 	}
 	
-	@GetMapping("/member-leave-delete/{teammemberleaveid}/{memberid}")
-	public String deleteMemberLeave(Model model,@PathVariable long teammemberleaveid, @PathVariable long memberid) {
+	@GetMapping("/member-leave-delete/{teammemberleaveid}/{memberid}/{leaveyear}")
+	public String deleteMemberLeave(Model model,@PathVariable long teammemberleaveid, @PathVariable long memberid,@PathVariable long leaveyear) {
 	
 		teamMemberLeaveRepository.deleteById(teammemberleaveid);
 		if(memberid==0) {
 			return "redirect:/member-all-leave-history";
 		}
-		return "redirect:/member-leave-history/"+memberid;
+		return "redirect:/member-leave-history/"+memberid+"/"+leaveyear;
+	}
+	
+	@GetMapping("/refresh-member-leavecount/{leaveyear}/{memberid}")
+	public String refreshTeamMemeberLeaveCount(Model model,@PathVariable int leaveyear, @PathVariable long memberid) {
+	
+		TeamMember currentTeamMember = teamMemberRepository.findById(memberid).get();
+		int leaveCount = teamMemberLeaveRepository.countByTeamMemberAndLeaveYear(currentTeamMember,leaveyear);
+		
+		String financialYear = String.valueOf(leaveyear);
+		TeamMemberAppraisal teamMemberAprisal = teamMemberAppraisalRepository.findByTeamMemberAndFinancialYear(currentTeamMember, financialYear);
+		Optional<TeamMemberAppraisal> optionalObject = Optional.ofNullable(teamMemberAprisal);
+		if(optionalObject.isPresent()) {
+			//int updatedLeaveCount = teamMemberAprisal.getLeaveCount()+1;
+			optionalObject.get().setLeaveCount(leaveCount);
+			teamMemberAppraisalRepository.save(optionalObject.get());
+		}
+		
+		
+		return "redirect:/member-leave-history/"+memberid+"/"+leaveyear;
 	}
 
 }

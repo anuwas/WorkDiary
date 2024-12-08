@@ -18,4 +18,6 @@ public interface TeamMemberLeaveRepository extends JpaRepository<TeamMemberLeave
 	List<TeamMemberLeave> findAllByLeaveDate(Date leaveDate);
 	List<TeamMemberLeave> findAllByLeaveDateGreaterThanOrderByLeaveDateAsc(Date leaveDate);
 	
+	int countByTeamMemberAndLeaveYear(TeamMember teamMember,int leaveyear);
+	
 }

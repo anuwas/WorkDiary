@@ -26,6 +26,7 @@ import com.org.pack.wd.team.entiry.TeamMember;
 import com.org.pack.wd.team.entiry.TeamMemberAppraisal;
 import com.org.pack.wd.team.entiry.TeamMemberLeave;
 import com.org.pack.wd.team.repository.TeamMemberAppraisalRepository;
+import com.org.pack.wd.team.repository.TeamMemberCriterias;
 import com.org.pack.wd.team.repository.TeamMemberLeaveRepository;
 import com.org.pack.wd.team.repository.TeamMemberRepository;
 import com.org.pack.wd.util.DiaryUtil;
@@ -35,6 +36,9 @@ public class TeamController {
 	
 	@Autowired
 	TeamMemberRepository teamMemberRepository;
+	
+	@Autowired
+	TeamMemberCriterias teamMemberCriterias;
 	
 	@Autowired
 	TeamMemberAppraisalRepository teamMemberAppraisalRepository;
@@ -69,12 +73,31 @@ public class TeamController {
 		return "team/project-team";
 	}
 	
-	@GetMapping("/all-active-team-member")
-	public String getAllActiveTeamMember(Model model) {
+	@GetMapping("/all-team-member")
+	public String getAllActiveTeamMember(Model model,
+			@RequestParam(value = "status",defaultValue = "Active",required = false) String activeInactiveStatus,
+			@RequestParam(value = "skillset",defaultValue = "All", required = false) String skillsetRequest,
+			@RequestParam(value = "organizationDesignation",defaultValue = "All", required = false) String organizationDesignationRequest,
+			@RequestParam(value = "organizationDepartment",defaultValue = "All", required = false) String organizationDepartmentRequest) {
 	
-		List<TeamMember> allActiveTeamMemeber = teamMemberRepository.findAllByStatus("Active");
+		//List<TeamMember> allActiveTeamMemeber = teamMemberRepository.findAllByStatus("Active");
+		List<TeamMember> allActiveTeamMemeber = teamMemberCriterias.findAllBySearchCriteria(activeInactiveStatus,skillsetRequest,organizationDesignationRequest,organizationDepartmentRequest);
 		model.addAttribute("allActiveTeamMemeber", allActiveTeamMemeber);
 		model.addAttribute("year",String.valueOf(DiaryUtil.getCurrentYear()));
+		
+		List<String> memberStatusList = Arrays.asList("Active","Inactive");
+		model.addAttribute("memberStatusList", memberStatusList);
+		List<String> skillSetList = Arrays.asList("Java","ReactJs","NodeJs","DevOps","ReactNative","DB");
+		model.addAttribute("skillSetList", skillSetList);
+		List<String> designationList = Arrays.asList("SA","M","A","PAT","PA");
+		model.addAttribute("designationList", designationList);
+		List<String> organizationDepartmentList = Arrays.asList("ADM AVM UKI Delivery","DE EE UKI Delivery","DX Marketing and Content Svcs","DE EE UKI FSE Java Delivery");
+		model.addAttribute("organizationDepartmentList", organizationDepartmentList);
+		
+		model.addAttribute("status", activeInactiveStatus);
+		model.addAttribute("skillset", skillsetRequest);
+		model.addAttribute("organizationDesignation", organizationDesignationRequest);
+		model.addAttribute("organizationDepartment", organizationDepartmentRequest);
 		
 		return "team/all-team-member-list";
 	}

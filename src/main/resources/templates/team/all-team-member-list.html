@@ -15,22 +15,25 @@
           <div class="content-wrapper">
             <div class="row">
 			                <div>
-					<form  th:action="@{/tickets}">
+					<form  th:action="@{/all-team-member}">
 						<div class="row">
                         <div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" th:name="ticketNumber" th:value="${ticketNumber}" placeholder="Ticket Number"/>
-                              <input type="hidden" class="form-control" th:name="keyword" th:value="${keyword}" />
+								<select class="form-control" th:name="status"  id="statusDDL">
+									<option value="All">--Status--</option>
+								    <option th:each="p : ${memberStatusList}" th:value="${p}" th:text="${p}" th:selected="${p==status}"/>
+								  </select><!--
+                              <input type="hidden" class="form-control" th:name="keyword" th:value="${keyword}" />-->
                             </div>
                           </div>
                         </div>
                         <div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <select class="form-control" th:name="ticketType"  id="ticketTypeDDL">
-								  <option value="All">--Ticket Type--</option>
-                                <option th:each="p : ${ticketTypeList}" th:value="${p}" th:text="${p}" th:selected="${p==ticketType}"/>
+                              <select class="form-control" th:name="skillset"  id="skillsetDDL">
+								  <option value="All">--Skill--</option>
+                                <option th:each="p : ${skillSetList}" th:value="${p}" th:text="${p}" th:selected="${p==skillset}"/>
                               </select>
                             </div>
                           </div>
@@ -38,9 +41,9 @@
                         <div class="col-md-4">
                           <div class="form-group row">
                             <div class="col-sm-9">
-                             <select class="form-control" th:name="applicaiton"  id="applicaitonDDL">
-								 <option value="All">--Application--</option>
-                                <option th:each="p : ${applicaitonList}" th:value="${p}" th:text="${p}" th:selected="${p==applicaiton}"/>
+                             <select class="form-control" th:name="organizationDesignation"  id="organizationDesignationDDL">
+								 <option value="All">--Designation--</option>
+                                <option th:each="p : ${designationList}" th:value="${p}" th:text="${p}" th:selected="${p==organizationDesignation}"/>
                               </select>
                             </div>
                           </div>
@@ -49,9 +52,9 @@
                           <div class="form-group row">
                             <div class="col-sm-12">
                               <div class="col-sm-12">
-                              <select class="form-control" th:name="ticketStatus"  id="ticketStatusDDL">
-								  <option value="All">--Ticket Status--</option>
-                                <option th:each="p : ${ticketStatusList}" th:value="${p}" th:text="${p}" th:selected="${p==ticketStatus}"/>
+                              <select class="form-control" th:name="organizationDepartment"  id="organizationDepartmentDDL">
+								  <option value="All">--Practice--</option>
+                                <option th:each="p : ${organizationDepartmentList}" th:value="${p}" th:text="${p}" th:selected="${p==organizationDepartment}"/>
                               </select>
                             </div>
                             </div>
@@ -60,10 +63,10 @@
                         <div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-10">
-                              <select class="form-control" th:name="ticketPriority" id="ticketPriorityDDL">
+                             <!-- <select class="form-control" th:name="ticketPriority" id="ticketPriorityDDL">
 								  <option value="All">--Priority--</option>
                                 <option th:each="p : ${ticketPrirityList}" th:value="${p}" th:text="${p}"   th:selected="${p==ticketPriority}"/>
-                              </select>
+                              </select>-->
                             </div>
                           </div>
                         </div>
@@ -71,21 +74,21 @@
                       <div class="row">
                         <div class="col-md-3">
                           <div class="form-group row">
-                            <div class="col-sm-6">
+                           <!-- <div class="col-sm-6">
                             <input type="text" class="form-control" th:name="ticketCreatedDate" th:value="*{ticketCreatedDate}" id="ticketCreatedDate"  readonly="readonly"  placeholder="Created Date" />
                             </div>
                             <div class="col-sm-6">
                               <input type="text" class="form-control" th:name="ticketClosedDate" th:value="*{ticketClosedDate}" id="ticketClosedDate"  readonly="readonly" placeholder="Closed Date" />
-                            </div>
+                            </div>-->
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group row">
                             <div class="col-sm-9">
-                              <select class="form-control" th:name="ticketEnvironment" id="ticketEnvironmentDDL">
+                              <!--<select class="form-control" th:name="ticketEnvironment" id="ticketEnvironmentDDL">
 								  <option value="All">--Environment--</option>
                                 <option th:each="p : ${ticketEnvironmentList}" th:value="${p}" th:text="${p}"   th:selected="${p==ticketEnvironment}"/>
-                              </select>
+                              </select>-->
                             </div>
                           </div>
                         </div>

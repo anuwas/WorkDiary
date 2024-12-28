@@ -63,7 +63,7 @@ public class TeamController {
 			upComingLeave = upComingLeave.subList(0, 3);
 		}
 		
-		List<Applications> allApplications = applicationsRepository.findAll();
+		List<Applications> allApplications = applicationsRepository.findAllByAppStatus("Active");
 		
 		model.addAttribute("currentDateLeave", currentDateLeave);
 		model.addAttribute("upComingLeave", upComingLeave);

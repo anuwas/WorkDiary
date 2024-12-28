@@ -15,33 +15,35 @@
           <div class="content-wrapper">
             <div class="row">
 			                <div>
-					<form  th:action="@{/tickets}">
+					<form  th:action="@{/all-applications}">
 						<div class="row">
                         <div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" th:name="ticketNumber" th:value="${ticketNumber}" placeholder="Ticket Number"/>
-                              <input type="hidden" class="form-control" th:name="keyword" th:value="${keyword}" />
+								<select class="form-control" th:name="appStatus"  id="appStatusDDL">
+								  	<option value="All">--Status--</option>
+                                	<option th:each="p : ${appstatusList}" th:value="${p}" th:text="${p}" th:selected="${p==appStatus}"/>
+                              	</select>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-12">
-                              <select class="form-control" th:name="ticketType"  id="ticketTypeDDL">
-								  <option value="All">--Ticket Type--</option>
-                                <option th:each="p : ${ticketTypeList}" th:value="${p}" th:text="${p}" th:selected="${p==ticketType}"/>
+                              <select class="form-control" th:name="technology"  id="technologyDDL">
+								  <option value="All">--Technology--</option>
+                                <option th:each="p : ${technologyList}" th:value="${p}" th:text="${p}" th:selected="${p==technology}"/>
                               </select>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                           <div class="form-group row">
                             <div class="col-sm-9">
-                             <select class="form-control" th:name="applicaiton"  id="applicaitonDDL">
-								 <option value="All">--Application--</option>
-                                <option th:each="p : ${applicaitonList}" th:value="${p}" th:text="${p}" th:selected="${p==applicaiton}"/>
-                              </select>
+								<select class="form-control" th:name="interfaces" id="interfacesDDL">
+								  <option value="All">--Interfaces--</option>
+	                               <option th:each="p : ${interfaceList}" th:value="${p}" th:text="${p}"   th:selected="${p==interfaces}"/>
+	                             </select>
                             </div>
                           </div>
                         </div>
@@ -49,9 +51,9 @@
                           <div class="form-group row">
                             <div class="col-sm-12">
                               <div class="col-sm-12">
-                              <select class="form-control" th:name="ticketStatus"  id="ticketStatusDDL">
-								  <option value="All">--Ticket Status--</option>
-                                <option th:each="p : ${ticketStatusList}" th:value="${p}" th:text="${p}" th:selected="${p==ticketStatus}"/>
+                              <select class="form-control" th:name="series"  id="seriesDDL">
+								  <option value="All">--Series--</option>
+                                <option th:each="p : ${seriesList}" th:value="${p}" th:text="${p}" th:selected="${p==series}"/>
                               </select>
                             </div>
                             </div>
@@ -60,10 +62,10 @@
                         <div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-10">
-                              <select class="form-control" th:name="ticketPriority" id="ticketPriorityDDL">
-								  <option value="All">--Priority--</option>
-                                <option th:each="p : ${ticketPrirityList}" th:value="${p}" th:text="${p}"   th:selected="${p==ticketPriority}"/>
-                              </select>
+							  <select class="form-control" th:name="businessStream"  id="businessStreamDDL">
+  								 <option value="All">--Business Stream--</option>
+                                  <option th:each="p : ${businessStreamList}" th:value="${p}" th:text="${p}" th:selected="${p==businessStream}"/>
+                                </select>
                             </div>
                           </div>
                         </div>
@@ -72,20 +74,20 @@
                         <div class="col-md-3">
                           <div class="form-group row">
                             <div class="col-sm-6">
-                            <input type="text" class="form-control" th:name="ticketCreatedDate" th:value="*{ticketCreatedDate}" id="ticketCreatedDate"  readonly="readonly"  placeholder="Created Date" />
+                            <!--<input type="text" class="form-control" th:name="ticketCreatedDate" th:value="*{ticketCreatedDate}" id="ticketCreatedDate"  readonly="readonly"  placeholder="Created Date" />-->
                             </div>
                             <div class="col-sm-6">
-                              <input type="text" class="form-control" th:name="ticketClosedDate" th:value="*{ticketClosedDate}" id="ticketClosedDate"  readonly="readonly" placeholder="Closed Date" />
+                              <!--<input type="text" class="form-control" th:name="ticketClosedDate" th:value="*{ticketClosedDate}" id="ticketClosedDate"  readonly="readonly" placeholder="Closed Date" />-->
                             </div>
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group row">
                             <div class="col-sm-9">
-                              <select class="form-control" th:name="ticketEnvironment" id="ticketEnvironmentDDL">
+                              <!--<select class="form-control" th:name="ticketEnvironment" id="ticketEnvironmentDDL">
 								  <option value="All">--Environment--</option>
                                 <option th:each="p : ${ticketEnvironmentList}" th:value="${p}" th:text="${p}"   th:selected="${p==ticketEnvironment}"/>
-                              </select>
+                              </select>-->
                             </div>
                           </div>
                         </div>

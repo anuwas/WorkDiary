@@ -1,59 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Monthly Yearly Service Activities')"></div>
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-
+	<div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Monthly Yearly Service Activities')"></div>
+	   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
-	  
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper">
 		<div th:replace="fragments/_sidebar :: _sidebar"></div>
         <!-- partial -->
         <div class="main-panel">
-          <div class="content-wrapper">
-			<div class="row">
-              <div class="col-md-4 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between pb-3">
-                      <h4 class="card-title mb-0">Service Activities</h4>
-                    </div>
-                    <ul class="timeline">
-                      <li class="timeline-item" th:each="activityMonthYear : ${listServiceActivityYearMonth}">
-                        <p class="timeline-content"><a th:href="'/service-activity/'+${activityMonthYear.serviceYearName}+'/'+${activityMonthYear.serviceMonthName}"  th:text="${activityMonthYear.serviceMonthName}">Ben Tossell</a> <span th:text="${activityMonthYear.serviceYearName}"></span></p>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="content-wrapper">           
             <div class="row">
-            <div class="col-6 grid-margin stretch-card">
+              <div class="col-md-6">
+                <div class="row">    
+                  <div class="col-md-12 grid-margin">
                     <div class="card">
                       <div class="card-body">
-                        <form action="#" th:action="@{/saveserviceactivity-from}" method="post" th:object="${serviceActivityObject}">
-						   <div class="row">
-	                          <div class="form-group">
-									  <label for="taskSummary">Service Year Name</label>
-	                      			<input type="text" class="form-control form-control-lg" th:field="*{serviceYearName}">
-	                    	</div>
-	                    	 <div class="form-group">
-						    <label for="taskSummary">Service Month Name</label>
-	                      			<input type="text" class="form-control form-control-lg" th:field="*{serviceMonthName}">
-						  </div>
-                      	</div>
-						 
-						  <button type="submit" class="btn btn-primary">Submit</button>
-						</form> 
+						<div class="d-flex justify-content-between pb-3">
+	                      <h4 class="card-title mb-0">Service Activities</h4>
+	                    </div>
+						<ul class="timeline">
+	                      <li class="timeline-item" th:each="activityMonthYear : ${listServiceActivityYearMonth}">
+	                        <p class="timeline-content"><a th:href="'/service-activity/'+${activityMonthYear.serviceYearName}+'/'+${activityMonthYear.serviceMonthName}"  th:text="${activityMonthYear.serviceMonthName}">Ben Tossell</a> <span th:text="${activityMonthYear.serviceYearName}"></span></p>
+	                      </li>
+	                    </ul>                  
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12 grid-margin">
+                    <div class="card">
+                      <div class="card-body">
+                        <h1 class="card-title mb-4">Create New Service Activity</h1>
+                        <div class="row">
+							<form action="#" th:action="@{/saveserviceactivity-from}" method="post" th:object="${serviceActivityObject}">
+	  						   <div class="row">
+	  	                          <div class="form-group">
+  									<label for="taskSummary">Service Year Name</label>
+  	                      			<input type="text" class="form-control form-control-lg" th:field="*{serviceYearName}">
+	  	                    	</div>
+	  	                    	 <div class="form-group">
+  						    		<label for="taskSummary">Service Month Name</label>
+  	                      			<input type="text" class="form-control form-control-lg" th:field="*{serviceMonthName}">
+	  						  </div>
+	                        	</div>
+	  						  <button type="submit" class="btn btn-primary">Submit</button>
+	  						</form>              
+                        </div>                        
+                      </div>
+                    </div>
                   </div>
+                </div>
+              </div>
+            </div>           
           </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.html -->
           <div th:replace="fragments/footer :: footer"></div>
         </div>
       </div>

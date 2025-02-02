@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.org.pack.wd.application.entity.Applications;
 import com.org.pack.wd.application.repository.ApplicationsRepository;
+import com.org.pack.wd.exceptions.NoSuchRecordExistsException;
 import com.org.pack.wd.team.entiry.TeamMember;
 import com.org.pack.wd.team.entiry.TeamMemberAppraisal;
 import com.org.pack.wd.team.entiry.TeamMemberLeave;
@@ -138,8 +139,12 @@ public class TeamController {
 	@GetMapping("/member-appraisal-detail-edit/{memberappid}")
 	public String updateTeamMemberAppraisalForm(Model model,@PathVariable long memberappid) {
 		Optional<TeamMemberAppraisal> teamMember = teamMemberAppraisalRepository.findById(memberappid);
-		model.addAttribute("teamMemberAppraisalObject", teamMember.get());
-		return "team/member-appraisal-edit-form";
+		if(teamMember.isPresent()) {
+			model.addAttribute("teamMemberAppraisalObject", teamMember.get());
+			return "team/member-appraisal-edit-form";
+		} else throw new NoSuchRecordExistsException(
+                "Member does not exist!!");
+		
 	}
 	
 	@PostMapping("/member-appraisal-detail-update/{teammemapprid}")

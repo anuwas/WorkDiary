@@ -22,7 +22,7 @@
 	                    </div>
 						<ul class="timeline">
 	                      <li class="timeline-item" th:each="activeOperation : ${listAllOperation}">
-	                        <p class="timeline-content"><a th:href="'/operation/'+${activeOperation.operation_id}"  th:text="${activeOperation.operationName}">Ben Tossell</a> <span th:text="${activeOperation.operationName}"></span></p>
+	                        <p class="timeline-content"><a th:href="'/operation/'+${activeOperation.operation_id}"  th:text="${activeOperation.operationName}"></a> <!--<span th:text="${activeOperation.operationName}"></span>--></p>
 	                      </li>
 	                    </ul>                 
                       </div>

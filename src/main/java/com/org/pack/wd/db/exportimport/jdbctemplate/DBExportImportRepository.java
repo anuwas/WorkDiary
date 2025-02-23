@@ -27,5 +27,9 @@ public class DBExportImportRepository {
 			
 		return this.jdbcTemplate.query(ALL_TABLE_SELECT, new WorkaDiaryTableListRowMapper(), new Object[] {"TABLE"});
 	}
+	
+	public void insertToTableFromExcelImport(String query) {
+		this.jdbcTemplate.update(query);
+	}
 
 }

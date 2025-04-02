@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Update Team Member')"></div>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+
+			<form action="#" th:action="@{/update-wording/{id}(id=${wording.wordingId})}"  method="post" th:object="${wording}">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Update Wording</h4>
+                    <form class="form-sample">
+						<div class="row">
+	                        <div class="col-md-6">
+	                          <div class="form-group row">
+	                            <label class="col-sm-3 col-form-label">English Word</label>
+	                            <div class="col-sm-9">
+	                              <input type="text" class="form-control" th:field="*{engWord}" id="engWord" placeholder="English Word"/>
+	                            </div>
+	                          </div>
+	                        </div>
+	                        <div class="col-md-6">
+	                          <div class="form-group row">
+	                            <label class="col-sm-3 col-form-label">Bengali Word</label>
+	                            <div class="col-sm-9">
+	                              <input type="text" class="form-control" th:field="*{benWord}" id="benWord" placeholder="Bengali Word"/>
+	                            </div>
+	                          </div>
+	                        </div>
+	                      </div>
+                      
+						  <div class="row">
+	                        <div class="col-md-6">
+	                          <div class="form-group row">
+	                            <label class="col-sm-3 col-form-label">Synoname</label>
+								<div class="col-sm-9">
+	                              <input type="text" class="form-control" th:field="*{engSynoname}" id="engSynoname" placeholder="English Synoname"/>
+	                            </div>
+	                          </div>
+	                        </div>
+	                        <div class="col-md-6">
+	                          <div class="form-group row">
+	                            <label class="col-sm-3 col-form-label">Synoname</label>
+								<div class="col-sm-9">
+	                              <input type="text" class="form-control" th:field="*{benSynoname}" id="benSynoname" placeholder="Bengali Synoname"/>
+	                            </div>
+	                          </div>
+	                        </div>
+	                      </div>
+						  <div class="row">
+	                        <div class="col-md-6">
+	                          <div class="form-group row">
+	                            <label class="col-sm-3 col-form-label">Sound</label>
+								<div class="col-sm-9">
+	                              <input type="text" class="form-control" th:field="*{benSoudingEng}" id="benSoudingEng" placeholder="English Sound in Bengali"/>
+	                            </div>
+	                          </div>
+	                        </div>
+	                        <div class="col-md-6">
+	                          <div class="form-group row">
+	                            <label class="col-sm-3 col-form-label">Order</label>
+								<div class="col-sm-9">
+	                              <input type="text" class="form-control" th:field="*{seqOrder}" id="seqOrder" placeholder="Sqquence Order"/>
+	                            </div>
+	                          </div>
+	                        </div>
+	                      </div>
+						  <div class="form-group">
+	                          <label for="taskSummary">English Meaning</label>
+	                          <textarea class="form-control" th:field="*{engMeaning}" id="engMeaning" rows="1"></textarea>
+	                        </div>
+							<div class="form-group">
+	                          <label for="taskSummary">Sentance</label>
+	                          <textarea class="form-control" th:field="*{sentncExample}" id="sentncExample" rows="1"></textarea>
+	                        </div>
+							<div class="row">
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">Status</label>
+									<div class="col-sm-9">
+		                              <select class="form-control" th:field="*{status}" id="status">
+		                                <option th:each="p : ${statusList}" th:value="${p}" th:text="${p}" />
+		                              </select>
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">Memorised</label>
+									<div class="col-sm-9">
+		                              <select class="form-control" th:field="*{memorised}" id="memorised">
+		                                <option th:each="p : ${memorisedList}" th:value="${p}" th:text="${p}" />
+		                              </select>
+		                            </div>
+		                          </div>
+		                        </div>
+		                      </div>                     
+                      
+                      <div style="position:absolute;right: 100px;">
+						  <button type="submit" class="btn btn-success mr-2">Submit</button>
+                          <a class="btn btn-primary" href="/list-all-wording" role="button">Back</a>
+						  
+					  </div>
+					  <div>&nbsp;</div>                     
+                     
+                    </form>
+                  </div>
+                </div>
+              </div>
+              </form>      
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    $( function() {
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+      } );
+        </script>
+</html>

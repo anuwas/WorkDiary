@@ -3,12 +3,16 @@
  */
 package com.org.pack.wd.skillup;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,11 +29,11 @@ public class Wording {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "TWORDING_ID")
+	@Column(name = "WORDING_ID")
 	private long wordingId;
 	
-	@Column(name = "SEQ_ORDER")
-	private String seqOrder; 
+	@Column(name = "SEQ_ORDER",columnDefinition = "integer default 0")
+	private Integer seqOrder; 
 	
 	@Column(name = "ENG_WORD")
 	private String engWord; 
@@ -43,6 +47,12 @@ public class Wording {
 	@Column(name = "BEN_SYNONAME")
 	private String benSynoname;
 	
+	@Column(name = "BEN_SOUNDIN_ENG")
+	private String benSoudingEng;
+
+	@Column(name = "ENG_MEANING",columnDefinition = "TEXT")
+	private String engMeaning;
+	
 	@Column(name = "SENTNC_EXAMPLE",columnDefinition = "TEXT")
 	private String sentncExample;
 	
@@ -51,5 +61,15 @@ public class Wording {
 	
 	@Column(name = "STATUS")
 	private String status;
+	
+	@Column(name = "CORRECT_TIMES",columnDefinition = "integer default 0")
+	private Integer correctTimes;
+	
+	@Column(name = "WRONG_TIMES",columnDefinition = "integer default 0")
+	private Integer wrongTimes;
+	
+	@Column(name = "CREATED_DATE",insertable=true,updatable=false)
+	@CreationTimestamp
+	private Timestamp createdDate;
 
 }

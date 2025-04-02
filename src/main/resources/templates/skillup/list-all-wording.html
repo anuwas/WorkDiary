@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Skillup Wording')"></div>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-
   </head>
   <body>
 	  
@@ -47,37 +46,44 @@
                         </div>
                       </div>
                       <div class="row">
-						<div class="col-md-3">
+						<div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-9">
-                              <select class="form-control" th:name="memorised" id="memorisedDDL">
-								  <option value="All">--Memorised--</option>
+                              <select class="form-control"  th:name="memorised" id="memorisedDDL">
+								  <option value="">--Memorised--</option>
                                 <option th:each="p : ${memorisedList}" th:value="${p}" th:text="${p}"   th:selected="${p==memorised}"/>
                               </select>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-9">
-                              <select class="form-control" th:name="status" id="statusDDL">
-								  <option value="All">--Status--</option>
-                                <option th:each="p : ${memorisedList}" th:value="${p}" th:text="${p}"   th:selected="${p==status}"/>
+                              <select class="form-control"  th:name="status" id="statusDDL">
+								  <option value="">--Status--</option>
+                                <option th:each="p : ${statusList}" th:value="${p}" th:text="${p}"   th:selected="${p==status}"/>
                               </select>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
+						<div class="col-md-2">
                           <div class="form-group row">
-                            <div class="col-sm-9">
-                             <!-- <select class="form-control">
-                                <option>Male</option>
-                                <option>Female</option>
-                              </select>-->
+                            <div class="col-sm-12">
+                             <input type="text" class="form-control" th:name="benSoudingEng" th:value="${benSoudingEng}" placeholder="Bengali Sound in English"/>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
+						<div class="col-md-4">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <div style="float: right;">
+						  		<a href="/word-by-category?type=nonmemorised" role="button" class="btn btn-light">All Non Memorised</a>
+						  		<a href="/word-by-category?type=memorised" role="button" class="btn btn-success mr-2" >All Memorised</a>						  
+					  		</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
                           <div class="form-group row">
                             <div class="col-sm-12">
                               <div style="float: right;">
@@ -98,80 +104,186 @@
                       <thead>
                         <tr >
                           <th> # </th>
-                          <th> Ticket</th>
-                          <th> Ticket Type </th>
+                          <th> Eng Word</th>
+                          <th> Beng Word </th>
+                          <th> Eng Synoname </th>
+                          <th> Ben Synoname </th>
+                          <th> Memorised </th>
                           <th> Status </th>
-                          <th> P* </th>
-                          <th> Application </th>
-                          <th> ENV </th>
-                          <th> Created On </th>
-                          <th> <a class="btn btn-primary" href="/tickets/ticket-form" role="button">Add</a>
-                          <a class="btn btn-primary" href="/open-tickets" role="button">OT</a>
-                          <!--<span class="label pull-right">
-                    	<a href="#modal" data-toggle="modal" class="btn btn-xs btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
-                    </span>-->
-                                 </th>
+                          <th> 
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add</button>
+						</th>
                         </tr>
                       </thead>
                       <tbody>
-						  <th:block th:each="ticket : ${allTicketList}" >
-                        <tr th:class="'table-ticket-'+${ticket.ticketStatus}">
-                          <td th:text="${ticket.id}"></td>
-                          <td th:text="${ticket.ticketNumber}"></td>
-                          <td th:text="${ticket.ticketType}"></td>
-                          <td th:text="${ticket.ticketStatus}"></td>
-                          <td th:text="${ticket.ticketPriority}"></td>
-                          <td th:text="${ticket.applicaiton}"></td>
-                          <td th:text="${ticket.ticketEnvironment}"></td>
-                          <td th:text="${ticket.ticketCreatedDate}">  </td>
+						 
+                        <tr th:each="word : ${allwordingList}" th:class="'table-ticket-'+${word.memorised}">
+						<td th:text="${word.wordingId}">  </td>	
+                          <td th:text="${word.engWord}"></td>
+                          <td th:text="${word.benWord}"></td>
+                          <td th:text="${word.engSynoname}"></td>
+                          <td th:text="${word.benSynoname}"></td>
+                          <td th:text="${word.memorised}"></td>
+                          <td th:text="${word.status}"></td>
+                          
                           <td >
-						<a class="btn btn-primary" th:href="@{'tickets/ticket-form/'+ ${ticket.id}}" role="button">Edit</a>
-                          <a class="btn btn-primary" th:href="@{'tickets/ticket-audit-form/'+ ${ticket.id}}" role="button">Log</a>
+							<a th:href="@{'edit-form-wording/'+ ${word.wordingId}}" ><i class="fa fa-edit fa-lg"></i></a>&nbsp;&nbsp;
+                          	<a th:href="@{'deletewording/'+ ${word.wordingId}}" class="wordingDeleteClass"><i class="fa fa-times-circle fa-lg"></i></a>
                           </td>
-                        </tr>
-                        <tr>
-							<td th:text="${ticket.ticketSummary}" colspan="8"></td>
-							<td th:text="${ticket.ticketWorker}"></td>
-						</tr>
-                        </th:block>
-                        
-                       
+                        </tr>                      
                     
                         
                       </tbody>
                     </table>
                     <div style="margin-top: 2px;">Total Record : <span th:text="${totalItems}"></span>
                     <nav aria-label="Pagination" th:if="${totalPages > 0}">
-  <ul class="pagination justify-content-center">
-    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-      <a th:replace="fragments/paging :: paging(1, '<<', 'First Page')"></a>
-    </li>
-    <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
-      <a th:replace="fragments/paging :: paging(${currentPage - 1}, 'Prev', 'Previous Page')"></a>
-    </li>
-    <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
-      <a class="page-link" href="#">...</a>
-    </li>
-    <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
-      th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
-      <a th:replace="fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>
-    </li>
-    <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
-      <a class="page-link" href="#">...</a>
-    </li>
-    <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
-      <a th:replace="fragments/paging :: paging(${currentPage + 1},'Next', 'Next Page')"></a>
-    </li>
-    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
-      <a th:replace="fragments/paging :: paging(${totalPages}, '>>', 'Last Page')"></a>
-    </li>
-  </ul>
-</nav>
-</div>
+					  <ul class="pagination justify-content-center">
+					    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+					      <a th:replace="skillup/paigingallwordinglist :: paigingallwordinglist(1, '<<', 'First Page')"></a>
+					    </li>
+					    <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+					      <a th:replace="skillup/paigingallwordinglist :: paigingallwordinglist(${currentPage - 1}, 'Prev', 'Previous Page')"></a>
+					    </li>
+					    <li class="page-item disabled" th:if="${currentPage - 2 > 1}">
+					      <a class="page-link" href="#">...</a>
+					    </li>
+					    <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+					      th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+					      <a th:replace="skillup/paigingallwordinglist :: paigingallwordinglist(${page}, ${page}, 'Page ' + ${page})"></a>
+					    </li>
+					    <li class="page-item disabled" th:if="${currentPage + 2 < totalPages}">
+					      <a class="page-link" href="#">...</a>
+					    </li>
+					    <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+					      <a th:replace="skillup/paigingallwordinglist :: paigingallwordinglist(${currentPage + 1},'Next', 'Next Page')"></a>
+					    </li>
+					    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+					      <a th:replace="skillup/paigingallwordinglist :: paigingallwordinglist(${totalPages}, '>>', 'Last Page')"></a>
+					    </li>
+					  </ul>
+					</nav>
+					</div>
                   </div>
                 </div>
               </div> 
-              
+			  <div class="col-lg-12 grid-margin stretch-card">
+			                  <div class="card">
+
+								
+								<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Open modal for @fat</button>
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button>-->
+
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+						<form class="form-sample" th:action="@{/savewording}" method="post" th:object="${wordingOj}">
+						<div class="modal-dialog modal-xl">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h1 class="modal-title fs-5" id="exampleModalLabel">New Word</h1>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+							
+		                      <div class="row">
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">English Word</label>
+		                            <div class="col-sm-9">
+		                              <input type="text" class="form-control" th:field="*{engWord}" id="engWord" placeholder="English Word"/>
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">Bengali Word</label>
+		                            <div class="col-sm-9">
+		                              <input type="text" class="form-control" th:field="*{benWord}" id="benWord" placeholder="Bengali Word"/>
+		                            </div>
+		                          </div>
+		                        </div>
+		                      </div>
+		                      <div class="row">
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">Synoname</label>
+									<div class="col-sm-9">
+		                              <input type="text" class="form-control" th:field="*{engSynoname}" id="engSynoname" placeholder="English Synoname"/>
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">Synoname</label>
+									<div class="col-sm-9">
+		                              <input type="text" class="form-control" th:field="*{benSynoname}" id="benSynoname" placeholder="Bengali Synoname"/>
+		                            </div>
+		                          </div>
+		                        </div>
+		                      </div>
+		                      <div class="row">
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">Sound</label>
+									<div class="col-sm-9">
+		                              <input type="text" class="form-control" th:field="*{benSoudingEng}" id="benSoudingEng" placeholder="English Sound in Bengali"/>
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">Order</label>
+									<div class="col-sm-9">
+		                              <input type="text" class="form-control" th:field="*{seqOrder}" id="seqOrder" placeholder="Sqquence Order"/>
+		                            </div>
+		                          </div>
+		                        </div>
+		                      </div>
+		                      
+		                     
+							  <div class="form-group">
+		                          <label for="taskSummary">English Meaning</label>
+		                          <textarea class="form-control" th:field="*{engMeaning}" id="engMeaning" rows="1"></textarea>
+		                        </div>
+								<div class="form-group">
+		                          <label for="taskSummary">Sentance</label>
+		                          <textarea class="form-control" th:field="*{sentncExample}" id="sentncExample" rows="1"></textarea>
+		                        </div>
+		                      <div class="row">
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">Status</label>
+									<div class="col-sm-9">
+		                              <select class="form-control" th:field="*{status}" id="status">
+		                                <option th:each="p : ${statusList}" th:value="${p}" th:text="${p}" />
+		                              </select>
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <div class="col-md-6">
+		                          <div class="form-group row">
+		                            <label class="col-sm-3 col-form-label">Memorised</label>
+									<div class="col-sm-9">
+		                              <select class="form-control" th:field="*{memorised}" id="memorised">
+		                                <option th:each="p : ${memorisedList}" th:value="${p}" th:text="${p}" />
+		                              </select>
+		                            </div>
+		                          </div>
+		                        </div>
+		                      </div>
+		                      <div class="row">
+		                        
+		                      </div>
+		                    
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					        <button type="submit" class="btn btn-primary">Create New Wording</button>
+					      </div>
+					    </div>
+					  </div>
+					  </form>
+					</div>								
+								</div>
+								</div>
 
 
               
@@ -185,20 +297,46 @@
     </div>
   </body>
     <script type="text/javascript">
-    $( function() {
-		var currentDate = new Date();
-		
-         $( "#ticketCreatedFromDate" ).datepicker({
-    		dateFormat: "yy-mm-dd"
-		});
-        $( "#ticketCreatedToDate" ).datepicker({
-    		//changeMonth: true,
-    		//changeYear: true,
-    		dateFormat: "yy-mm-dd"
-		});
+		const exampleModal = document.getElementById('exampleModal')
+		if (exampleModal) {
+		  exampleModal.addEventListener('show.bs.modal', event => {
+		    // Button that triggered the modal
+		    const button = event.relatedTarget
+		    // Extract info from data-bs-* attributes
+		    const recipient = button.getAttribute('data-bs-whatever')
+		    // If necessary, you could initiate an Ajax request here
+		    // and then do the updating in a callback.
 
-        
-      } );
-      
+		    // Update the modal's content.
+		    const modalTitle = exampleModal.querySelector('.modal-title')
+		    const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+		    modalTitle.textContent = `New message to ${recipient}`
+		    modalBodyInput.value = recipient
+		  })
+		}
+		
+	
+		$(".wordingDeleteClass").on( "click", function() {
+			//e.preventDefault();
+			var confirmStatus = window.confirm("Sure want to delete this ?");
+		  	if(confirmStatus==true){
+				return true;
+			}else{
+				return false;
+			}
+		});
+		
         </script>
+		<!--<script>
+		        var modal1 = new bootstrap.Modal(document.getElementById('exampleModal'));
+		        function showhide() {
+		            // show Modal
+		            modal1.show();
+		            // hide the modal after 5 seconds
+		            setTimeout(() => {
+		                modal1.hide();
+		            }, 5000)
+		        }
+		    </script>-->
 </html>

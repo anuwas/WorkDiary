@@ -60,6 +60,9 @@ public class FileGenerateService {
 				Object exdata[] = new Object[resultColumnCount];
 				int i = 0;
 				for(Map.Entry<String, String> entry : queryMetadata.entrySet()) {
+					if("".equals(entry.getValue())) {
+						exdata[i] = rs.getString(entry.getKey());
+					}
 					if("INT".equals(entry.getValue())) {
 						exdata[i] = rs.getInt(entry.getKey());
 					}

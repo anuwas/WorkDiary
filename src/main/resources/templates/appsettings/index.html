@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>App Settings</title>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='App Settings')"></div>
     <link rel="stylesheet" href="css/shared/style.css">
     <link rel="stylesheet" href="css/demo_1/style.css">
   </head>
@@ -34,9 +34,8 @@
                       <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
                         <div class="d-flex">
                           <div class="wrapper">
-                            <h3 class="mb-0 font-weight-semibold">15,236</h3>
-                            <h5 class="mb-0 font-weight-medium text-primary">Impressions</h5>
-                            <p class="mb-0 text-muted">+138.97(+0.54%)</p>
+                            <h5 class="mb-0 font-weight-medium text-primary"><a href="/list-all-wording">Skillup Wordings</a></h5>
+                            <p class="mb-0 text-muted" th:text="${'Total '+wordCount+' Words'}"></p>
                           </div>
                           
                         </div>

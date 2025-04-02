@@ -31,7 +31,7 @@ public class WordingCriteriaHelper {
 	@Autowired
 	EntityManager em;
 	
-	public Page<Wording> retrivePageWordingBySearchandSort(String engWord, String benWord, String engSynoname, String benSynoname, String memorised,String status,Pageable pageable) throws ParseException{
+	public Page<Wording> retrivePageWordingBySearchandSort(String engWord, String benWord, String engSynoname, String benSynoname, String benSoudingEng, String memorised,String status,Pageable pageable) throws ParseException{
 		CriteriaBuilder builder =  em.getCriteriaBuilder();
 		CriteriaQuery<Wording> criteria = builder.createQuery(Wording.class);
 		Root<Wording> supportItemRoot = criteria.from(Wording.class);
@@ -51,12 +51,15 @@ public class WordingCriteriaHelper {
 		if (!benSynoname.equals("")) {
 			  predicates.add(builder.equal(supportItemRoot.get("benSynoname"),   benSynoname)); 
 		}
+		if (!benSynoname.equals("")) {
+			  predicates.add(builder.like(supportItemRoot.get("benSoudingEng"),   benSoudingEng+"%")); 
+		}
 		  
-		if (!memorised.equals("ALL")) {
+		if (!memorised.equals("")) {
 			  predicates.add(builder.equal(supportItemRoot.get("memorised"),   memorised)); 
 		}
-		if (!status.equals("ALL")) {
-			  predicates.add(builder.equal(supportItemRoot.get("memorised"),   status)); 
+		if (!status.equals("")) {
+			  predicates.add(builder.equal(supportItemRoot.get("status"),   status)); 
 		}
 		  /*
 		  if (!ticketCreatedDate.equals("")) {
@@ -64,7 +67,7 @@ public class WordingCriteriaHelper {
 			  SimpleDateFormat myformatter = new SimpleDateFormat("yyyy-MM-dd");
 			  java.util.Date date = myformatter.parse(ticketCreatedDate);
 			  
-			  predicates.add(builder.greaterThanOrEqualTo(supportItemRoot.get("ticketCreatedDate"), date));
+			  predicates.add(builder.greaterThanOrEqualTo(supportItemRoot.get("ticketCreatedDate"), date)); 
 		}*/
 		  
 			 
@@ -72,7 +75,7 @@ public class WordingCriteriaHelper {
 		 
 		 
 
-	        criteria.orderBy(builder.desc(supportItemRoot.get("seqOrder")));
+	        //criteria.orderBy(builder.desc(supportItemRoot.get("seqOrder")));
 	        List<Wording> result = em.createQuery(criteria).setFirstResult((int) pageable.getOffset()).setMaxResults(pageable.getPageSize()).getResultList();
 	        
 	        CriteriaQuery<Long> countQuery = builder.createQuery(Long.class);

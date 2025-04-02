@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='App Settings')"></div>
+    <link rel="stylesheet" href="css/shared/style.css">
+    <link rel="stylesheet" href="css/demo_1/style.css">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <!-- Page Title Header Starts-->
+
+            <!-- Page Title Header Ends-->
+           
+            
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row" th:each="word : ${allwordingList}">
+				<div class="col-md-2 grid-margin stretch-card"> </div>					                 
+                  <div class="col-md-4 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body pb-0">
+                        <h5 class="font-weight-medium mb-4" th:text="${word.engWord}">engWord</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body pb-0">
+						<div style="position: absolute;float: right;margin-left: 300px;"><a id="word_show_hide" href="Javascript:void(0)">Show</a></div>	
+                          <h5 id="beng_word" class="font-weight-medium" th:text="${word.benWord}" style="display: none;">benWord  </h5>
+                      </div>
+                    </div>
+                  </div>
+				  <div class="col-md-2 grid-margin stretch-card"> <a th:href="@{'edit-form-wording/'+ ${word.wordingId}}"><i class="fa fa-edit fa-lg"></i></a></div>
+				  <div class="col-md-2 grid-margin stretch-card"> </div>					                 
+				    <div class="col-md-4 grid-margin stretch-card">
+				      <div class="card">
+				        <div class="card-body pb-0">
+				          <span id="engSynoname" class="font-weight-medium mb-4" th:text="${word.engSynoname}" style="display: none;"></span>
+				        </div>
+				      </div>
+				    </div>
+				    <div class="col-md-4 grid-margin stretch-card">
+				      <div class="card">
+				        <div class="card-body pb-0">
+				            <span id="benSynoname" class="font-weight-medium" th:text="${word.benSynoname}" style="display: none;" > </span>
+				        </div>
+				      </div>
+				    </div>
+				    <div class="col-md-2 grid-margin stretch-card"> </div>
+	                <div class="col-md-12 grid-margin stretch-card">
+	                  <div class="card">
+	                    <div class="card-body"  >
+	                      <div class="d-flex flex-column flex-lg-row" >
+							<span th:text="${'Meaning : '+word.engMeaning}"  id="engmeaning" style="display: none;"></span>
+						  </div>	                      
+						  <div class="d-flex flex-column flex-lg-row" >
+							<span th:text="${'Example : '+word.sentncExample}" style="display: none;" id="sentexample"></span>
+						  </div>
+	                    </div>
+	                  </div>
+	                </div>
+                </div>
+              </div>
+              
+            </div>
+			
+            <div class="row">
+              <div class="col-md-3 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+					<div style="margin-top: 2px;">Total Record : <span th:text="${totalItems}"></span></div>
+                  </div>
+                </div>
+              </div>
+			  <input type="hidden" class="form-control" th:field="*{type}" id="type" />
+              <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+					<nav aria-label="Pagination" th:if="${totalPages > 0}">
+						  <ul class="pagination justify-content-center">
+						    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+						      <a th:replace="skillup/paigingwordbycategory :: paigingwordbycategory(1, '<<', 'First Page')"></a>
+						    </li>
+						    <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+						      <a th:replace="skillup/paigingwordbycategory :: paigingwordbycategory(${currentPage - 1}, 'Prev', 'Previous Page')"></a>
+						    </li>
+						    <li class="page-item disabled" th:if="${currentPage - 1 > 1}">
+						      <a class="page-link" href="#">...</a>
+						    </li>
+						    <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+						      th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 1 : 1, currentPage + 2 < totalPages ? currentPage + 1 : totalPages)}">
+						      <a th:replace="skillup/paigingwordbycategory :: paigingwordbycategory(${page}, ${page}, 'Page ' + ${page})"></a>
+						    </li>
+						    <li class="page-item disabled" th:if="${currentPage + 1 < totalPages}">
+						      <a class="page-link" href="#">...</a>
+						    </li>
+						    <li class="page-item font-weight-bold" th:classappend="${currentPage == totalPages} ? 'disabled'">
+						      <a th:replace="skillup/paigingwordbycategory :: paigingwordbycategory(${currentPage + 1},'Next', 'Next Page')"></a>
+						    </li>
+						    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+						      <a th:replace="skillup/paigingwordbycategory :: paigingwordbycategory(${totalPages}, '>>', 'Last Page')"></a>
+						    </li>
+						  </ul>
+						</nav>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+					<a href="/list-all-wording"  class="btn btn-success mr-2">List</a>
+					<a href="/word-by-category?type=memorised"  class="btn btn-success mr-2" >Memorised</a>
+					<a href="/word-by-category?type=nonmemorised"  class="btn btn-success mr-2" style="margin-top: 2px;">Non Memorised</a>
+										  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+  				
+  	
+  		$("#word_show_hide").on( "click", function() {
+  			//e.preventDefault();
+  			//$("#.beng_word").block();
+			
+			if($("#beng_word").css("display")=='none'){
+				$("#word_show_hide").text("Hide");
+				$('#beng_word').css('display','block');
+				$("#engmeaning").css('display','block');
+				$("#sentexample").css('display','block');
+				$("#engSynoname").css('display','block');
+				$("#benSynoname").css('display','block');
+			}else{
+				$("#word_show_hide").text("Show");
+				$('#beng_word').css('display','none');
+				$("#engmeaning").css('display','none');
+				$("#sentexample").css('display','none');
+				$("#engSynoname").css('display','none');
+				$("#benSynoname").css('display','none');
+			}
+			
+			
+  		});
+  		
+          </script>
+</html>

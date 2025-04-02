@@ -24,5 +24,10 @@ public class DBExportUtil {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return simpleDateFormat.format(date);
 	}
+	
+	public static String getCurrentTimestamp() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return simpleDateFormat.format(System.currentTimeMillis());
+	}
 
 }

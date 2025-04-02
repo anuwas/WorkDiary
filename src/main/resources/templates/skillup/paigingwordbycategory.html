@@ -1,0 +1,5 @@
+<a th:fragment="paigingwordbycategory(pageNum, label, tooltip)" class="page-link"
+   th:href="@{'/word-by-category?' + ${type!=null && type!=''? 'type=' + type + '&' : ''} + 'page=' + ${pageNum}}"
+  th:title="${tooltip}" rel="tooltip">
+  [[${label}]]
+</a>

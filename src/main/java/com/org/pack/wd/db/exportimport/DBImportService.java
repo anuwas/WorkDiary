@@ -61,7 +61,12 @@ public class DBImportService {
                 Cell currentCell = cellIterator.next();
                 if (currentCell.getCellType() == CellType.STRING) {
                     //System.out.print(currentCell.getStringCellValue() + "--");
-                	rowqueryString+="'"+currentCell.getStringCellValue()+"',";
+                	
+                	if(currentCell.getStringCellValue().equals("no-date")) {
+                		rowqueryString+="'"+DBExportUtil.getCurrentTimestamp()+"',";
+                	}else {
+                		rowqueryString+="'"+currentCell.getStringCellValue()+"',";
+                	}
                 } else if (currentCell.getCellType() == CellType.NUMERIC) {
                     //System.out.print(currentCell.getNumericCellValue() + "--");
                 	rowqueryString+=(int)currentCell.getNumericCellValue()+",";

@@ -111,7 +111,7 @@
                           <th> Memorised </th>
                           <th> Status </th>
                           <th> 
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add</button>
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="Word">Add</button>
 						</th>
                         </tr>
                       </thead>
@@ -311,8 +311,8 @@
 		    const modalTitle = exampleModal.querySelector('.modal-title')
 		    const modalBodyInput = exampleModal.querySelector('.modal-body input')
 
-		    modalTitle.textContent = `New message to ${recipient}`
-		    modalBodyInput.value = recipient
+		    modalTitle.textContent = `Add New ${recipient}`
+		   // modalBodyInput.value = recipient
 		  })
 		}
 		

@@ -33,7 +33,7 @@ public class Wording {
 	private long wordingId;
 	
 	@Column(name = "SEQ_ORDER",columnDefinition = "integer default 0")
-	private Integer seqOrder; 
+	private Integer seqOrder = 0; 
 	
 	@Column(name = "ENG_WORD")
 	private String engWord; 

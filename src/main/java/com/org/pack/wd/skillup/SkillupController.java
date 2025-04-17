@@ -83,7 +83,7 @@ public class SkillupController {
 	    }
 	    
 	    List<String> statusList = Arrays.asList("Active","Inactive");
-	    List<String> memorisedList = Arrays.asList("Yes","No");
+	    List<String> memorisedList = Arrays.asList("No","Yes");
 	      
 	    model.addAttribute("statusList", statusList);
 	    model.addAttribute("memorisedList", memorisedList);
@@ -151,7 +151,7 @@ public class SkillupController {
 		Page<Wording> pageWording = null;
 	    try {
 	       
-	      Pageable paging = PageRequest.of(page - 1, size,Sort.by("seqOrder").descending());
+	      Pageable paging = PageRequest.of(page - 1, size,Sort.by("wordingId").descending());
 	      
 	      switch(type) {
 	      	case "nonmemorised":

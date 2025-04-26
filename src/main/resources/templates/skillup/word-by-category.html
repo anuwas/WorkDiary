@@ -34,13 +34,21 @@
                   <div class="col-md-4 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body pb-0">
-						<div style="position: absolute;float: right;margin-left: 300px;"><a id="word_show_hide" href="Javascript:void(0)">Show</a></div>	
+						
                           <h5 id="beng_word" class="font-weight-medium" th:text="${word.benWord}" style="display: none;">benWord  </h5>
                       </div>
                     </div>
                   </div>
-				  <div class="col-md-2 grid-margin stretch-card"> <a th:href="@{'edit-form-wording/'+ ${word.wordingId}}"><i class="fa fa-edit fa-lg"></i></a></div>
-				  <div class="col-md-2 grid-margin stretch-card"> </div>					                 
+				  <div class="col-md-2 grid-margin stretch-card"> 
+					<div ><a id="word_show_hide" href="Javascript:void(0)"><i class="fa fa-eye fa-lg"></i></a></div>	
+					<div style="position: absolute;float: right;margin-left: 50px;"><a th:href="@{'edit-form-wording/'+ ${word.wordingId}}"><i class="fa fa-edit fa-lg"></i></a></div>
+					<div>&nbsp;</div>
+					
+				</div>
+					
+				  <div class="col-md-2 grid-margin stretch-card"> 
+					
+				  </div>					                 
 				    <div class="col-md-4 grid-margin stretch-card">
 				      <div class="card">
 				        <div class="card-body pb-0">

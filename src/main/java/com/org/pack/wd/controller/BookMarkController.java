@@ -17,7 +17,6 @@ import com.org.pack.wd.entity.BookMark;
 import com.org.pack.wd.entity.DiaryTask;
 import com.org.pack.wd.repository.BookMarkRepository;
 import com.org.pack.wd.service.BookMarkService;
-import com.org.pack.wd.util.ConstantProperties;
 
 @Controller
 public class BookMarkController {

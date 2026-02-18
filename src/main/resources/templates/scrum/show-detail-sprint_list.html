@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Sprint Detail List')"></div>
+    <script src="https://cdn.tiny.cloud/1/xb35xk73hgyckinp46g6ivh20vtxgb0soa2tn1e22n7cc4iu/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+
+              <!--<div class="col-lg-12 grid-margin stretch-card">   </div>-->
+              <div class="col-lg-12 grid-margin stretch-card" th:each="sprintObj : ${sprintList}">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title" th:text="${sprintObj.sprintName}+' &nbsp;&nbsp;&nbsp;&nbsp;('+${#dates.format(sprintObj.sprintStartDate, 'dd-MMM-yyyy')}+' - '+${#dates.format(sprintObj.sprintEndDate, 'dd-MMM-yyyy')}+') 
+					 &nbsp;&nbsp;&nbsp;&nbsp;- &nbsp;&nbsp;'+${sprintObj.sprintStatus}"></h4>
+                    <!-- <div class="row" th:text="${refinement.refinementMinutes}"></div> -->
+                    <div class="border">
+                    <div  class="wrapper d-flex flex-column flex-lg-row" th:remove="tag" th:utext="${sprintObj.sprintName}"></div>
+                    </div>
+                    <div style="float: right;padding-top: 4px;"><a class="btn btn-primary" th:href="@{'/view-sprint-activity/'+ ${sprintObj.id}}" role="button">Edit</a></div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <div th:replace="fragments/footer :: footer"></div>              
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

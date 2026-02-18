@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+	<div th:replace="fragments/headerfiles :: headerfiles(pageTitle='Sprint')"></div>
+	   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+		<div th:replace="fragments/_sidebar :: _sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">           
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">    
+                  <div class="col-md-12 grid-margin">
+                    <div class="card">
+                      <div class="card-body">
+						<div class="d-flex justify-content-between pb-3">
+	                      <h4 class="card-title mb-0">Sprints <span style="margin-left: 20px;"><a href="show-detail-sprint_list">Show Detail</a></span></h4>
+	                    </div>
+						<ul class="timeline">
+	                      <li class="timeline-item" th:each="sprintObj : ${sprintList}">
+	                        <p class="timeline-content"><a th:href="'/view-sprint-activity/'+${sprintObj.id}"  
+								th:text="${sprintObj.sprintName}">Ben Tossell</a> 
+								<span th:text="'(' + ${#dates.format(sprintObj.sprintStartDate, 'dd-MMM-yyyy')}+ ' - ' +${#dates.format(sprintObj.sprintEndDate, 'dd-MMM-yyyy')} + ')'"></span></p>
+	                      </li>
+	                    </ul>                  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12 grid-margin">
+                    <div class="card">
+                      <div class="card-body">
+                        <h1 class="card-title mb-4">Create New Sprint</h1>
+                        <div class="row">
+							<form action="#" th:action="@{/createnewsprint}" method="post" th:object="${sprintObject}">
+	  						   <div class="row">
+	  	                          <div class="form-group">
+  									<label for="taskSummary">Sprint Name</label>
+  	                      			<input type="text" class="form-control form-control-lg" th:field="*{sprintName}">
+	  	                    	</div>
+	  	                    	 <div class="form-group">
+									
+									<div class="col-md-6">
+			                          <div class="form-group row">
+			                            <label class="col-sm-6 col-form-label">Start Date</label>
+			                            <div class="col-sm-9">
+			                              <input class="form-control" id="datepicker" readonly="readonly" th:field="*{sprintStartDate}" placeholder="yyyy-mm-dd" />
+			                            </div>
+			                          </div>
+									</div>
+									<div class="col-md-6">
+				                          <div class="form-group row">
+				                            <label class="col-sm-6 col-form-label">End Date</label>
+				                            <div class="col-sm-9">
+				                              <input class="form-control" id="datepicker2" readonly="readonly" th:field="*{sprintEndDate}" placeholder="yyyy-mm-dd" />
+				                            </div>
+				                          </div>
+										</div>
+	  						  </div>
+	                        	</div>
+	  						  <button type="submit" class="btn btn-primary">Submit</button>
+	  						</form>              
+                        </div>                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>           
+          </div>
+          <div th:replace="fragments/footer :: footer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    $( function() {
+        $( "#datepicker" ).datepicker();
+        $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+		$( "#datepicker2" ).datepicker();
+		$( "#datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+      } );
+        </script>
+</html>

@@ -18,11 +18,18 @@
               <div class="col-lg-12 grid-margin stretch-card" th:each="sprintObj : ${sprintList}">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title" th:text="${sprintObj.sprintName}+' &nbsp;&nbsp;&nbsp;&nbsp;('+${#dates.format(sprintObj.sprintStartDate, 'dd-MMM-yyyy')}+' - '+${#dates.format(sprintObj.sprintEndDate, 'dd-MMM-yyyy')}+') 
-					 &nbsp;&nbsp;&nbsp;&nbsp;- &nbsp;&nbsp;'+${sprintObj.sprintStatus}"></h4>
+                     <h4 class="card-title">
+					   <span style="color: #007bff;" th:text="${sprintObj.sprintName}"></span>
+					   <span>&nbsp;&nbsp;&nbsp;&nbsp;(</span>
+					   <span style="color: #dc3545;" th:text="${#dates.format(sprintObj.sprintStartDate, 'dd-MMM-yyyy')}"></span>
+					   <span> - </span>
+					   <span style="color: #dc3545;" th:text="${#dates.format(sprintObj.sprintEndDate, 'dd-MMM-yyyy')}"></span>
+					   <span>)&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;</span>
+					   <span style="color: #28a745;" th:text="${sprintObj.sprintStatus}"></span>
+					 </h4>
                     <!-- <div class="row" th:text="${refinement.refinementMinutes}"></div> -->
-                    <div class="border">
-                    <div  class="wrapper d-flex flex-column flex-lg-row" th:remove="tag" th:utext="${sprintObj.sprintName}"></div>
+                    <div class="border" style="padding: 10px; margin-top: 10px; margin-bottom: 10px;">
+                    <div  class="wrapper d-flex flex-column flex-lg-row" th:remove="tag" th:utext="${sprintObj.sprintActivity}"></div>
                     </div>
                     <div style="float: right;padding-top: 4px;"><a class="btn btn-primary" th:href="@{'/view-sprint-activity/'+ ${sprintObj.id}}" role="button">Edit</a></div>
                   </div>

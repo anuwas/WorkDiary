@@ -42,10 +42,10 @@ public class Sprint {
     @Column(name = "sprint_activity", columnDefinition = "TEXT")
     private String sprintActivity;
     
-    @Column(name = "sprint_start_date", columnDefinition = "TEXT")
+    @Column(name = "sprint_start_date")
     private Date sprintStartDate;
     
-    @Column(name = "sprint_end_date", columnDefinition = "TEXT")
+    @Column(name = "sprint_end_date")
     private Date sprintEndDate;
     
     @Column(name = "sprint_status")

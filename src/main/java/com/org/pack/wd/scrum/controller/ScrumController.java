@@ -66,13 +66,13 @@ public class ScrumController {
 		return "scrum/show-detail-sprint_list";
 	}
 	
-	@GetMapping("/all-sprints")
-	public String allServiceActivities(Model model) {
+	@GetMapping("/sprints-dashboard")
+	public String sprintDashboardService(Model model) {
 		List<Sprint> sprintList = scrumService.findAllByOrderByCreatedDateDesc();
 		model.addAttribute("sprintList", sprintList);
 		Sprint sprintObject = new Sprint();
 		model.addAttribute("sprintObject", sprintObject);
-		return "scrum/all-sprints";
+		return "scrum/sprints-dashboard";
 	}
 	
 }
